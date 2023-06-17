@@ -22,7 +22,6 @@ app.get('/', function (request, response, next) {
 })
 
 // MIDDLEWARE REGISTRATIONS
-// app.use(callback1, callback2, callback3)
 const bodyParser = require("body-parser");
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 
@@ -36,3 +35,7 @@ app.use(session({
     resave: false
     
 }));
+
+// ROUTE REGISTRATIONS
+const userRouter = require("./controllers/user.routes");
+app.use("/api/users", userRouter);
