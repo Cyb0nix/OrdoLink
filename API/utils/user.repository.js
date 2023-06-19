@@ -75,7 +75,7 @@ module.exports = {
     },
     async areValidCredentials(username, password) {
         const query = {
-            text: 'SELECT * FROM users WHERE username = $1 AND userPassword COLLATE utf8mb4_general_ci  = sha2(concat(userCreated, $2), 224) COLLATE utf8mb4_general_ci ',
+            text: 'SELECT * FROM "user" WHERE "userEmail" = $1 AND "userPassword" COLLATE utf8mb4_general_ci = sha2(concat("userCreated", $2), 224) COLLATE utf8mb4_general_ci',
             values: [username, password]
         }
         try {
