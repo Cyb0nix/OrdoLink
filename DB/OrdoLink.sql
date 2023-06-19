@@ -1,5 +1,5 @@
 CREATE TABLE Patient(
-   id INT not null AUTO_INCREMENT,
+   id uuid DEFAULT gen_random_uuid(),
    num_secu INT NOT NULL,
    lastname VARCHAR(50) NOT NULL,
    surname VARCHAR(50) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE Patient(
 );
 
 CREATE TABLE Pharmatien(
-   id int not null auto_increment,
+   id uuid DEFAULT gen_random_uuid(),
    lastname VARCHAR(50) NOT NULL,
    firstname VARCHAR(50) NOT NULL,
    rpps INT NOT NULL,
@@ -16,14 +16,14 @@ CREATE TABLE Pharmatien(
 );
 
 CREATE TABLE MedecinType(
-   id int not null auto_increment,
+   id uuid DEFAULT gen_random_uuid(),
    medecin_type VARCHAR(50) NOT NULL,
    PRIMARY KEY(id),
    UNIQUE(medecin_type)
 );
 
 CREATE TABLE Medecin(
-   id int not null auto_increment,
+   id uuid DEFAULT gen_random_uuid(),
    rpps VARCHAR(12) NOT NULL,
    phone_number VARCHAR(50) NOT NULL,
    lastname VARCHAR(50) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE Medecin(
 );
 
 CREATE TABLE Ordonnance(
-   id int not null auto_increment,
+   id uuid DEFAULT gen_random_uuid(),
    prescription_date DATE NOT NULL,
    medecin_id INT NOT NULL,
    PRIMARY KEY(id),
@@ -47,7 +47,7 @@ CREATE TABLE Ordonnance(
 );
 
 CREATE TABLE Prescription(
-   id int not null auto_increment,
+   id uuid DEFAULT gen_random_uuid(),
    medecine VARCHAR(50) NOT NULL,
    presciption VARCHAR(50) NOT NULL,
    renewale INT NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE Prescription(
 );
 
 CREATE TABLE User_client(
-   id int not null auto_increment,
+   id uuid DEFAULT gen_random_uuid(),
    mail VARCHAR(50) NOT NULL,
    Password VARCHAR(50) NOT NULL,
    pwd_is_tmp BOOLEAN NOT NULL,
@@ -82,6 +82,22 @@ CREATE TABLE Liste_Medecin_Patient(
    PRIMARY KEY(medecin_id, patient_id),
    FOREIGN KEY(medecin_id) REFERENCES Medecin(id),
    FOREIGN KEY(patient_id) REFERENCES Patient(id)
+);
+
+create table account_type
+(
+    user_id uuid not null
+        constraint account_type_users_id_fk
+            references users,
+    type_id uuid not null
+        constraint type
+            references medecin
+        constraint type2
+            references patient
+        constraint type3
+            references pharmatien,
+    constraint id
+        primary key (user_id, type_id)
 );
 
 CREATE TABLE Ordonnance_Consultable(
