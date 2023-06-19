@@ -3,6 +3,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - API/**
+
+defaults:
+  run:
+    working-directory: API
+    
 jobs:
   deploy:
     name: Deploy app
