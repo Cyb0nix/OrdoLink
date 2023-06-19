@@ -76,6 +76,7 @@ CREATE TABLE User_client(
    FOREIGN KEY(medecin_id) REFERENCES Medecin(id)
 );
 
+-- edit
 CREATE TABLE Liste_Medecin_Patient(
    medecin_id INT,
    patient_id INT,
