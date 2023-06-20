@@ -1,11 +1,23 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  test
+  <HomePagePharmanotlog  />
 </template>
 
-<style scoped>
+<script>
 
+import HomePagePharmanotlog from "./views/HomePagePharmanotlog.vue";
+import HomePageMednotlog from "./views/HomePageMednotlog.vue";
+import HomePageOrdonotlog from "./views/HomePageOrdonotlog.vue";
+import HomePageNotifnotlog from "./views/HomePageNotifnotlog.vue";
+export default {
+  name: "App",
+  components: {
+    HomePagePharmanotlog: HomePagePharmanotlog,
+    HomePageMednotlog: HomePageMednotlog,
+    HomePageOrdonotlog: HomePageOrdonotlog,
+    HomePageNotifnotlog: HomePageNotifnotlog,
+},
+};
+</script>
+
+<style>
 </style>
