@@ -76,6 +76,7 @@ CREATE TABLE User_client(
    FOREIGN KEY(medecin_id) REFERENCES Medecin(id)
 );
 
+-- edit
 CREATE TABLE Liste_Medecin_Patient(
    medecin_id INT,
    patient_id INT,
@@ -98,4 +99,12 @@ create table account_type
             references pharmatien,
     constraint id
         primary key (user_id, type_id)
+);
+
+CREATE TABLE Ordonnance_Consultable(
+   patient_id INT,
+   ordennance_id INT,
+   PRIMARY KEY(patient_id, ordennance_id),
+   FOREIGN KEY(patient_id) REFERENCES Patient(id),
+   FOREIGN KEY(ordennance_id) REFERENCES Ordonnance(id)
 );
