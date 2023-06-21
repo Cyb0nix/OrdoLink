@@ -174,13 +174,13 @@
       </div>
 
       <div class="nav-button">
-        <div class="notification">Notification</div>
+        <router-link to="/notifnotlog"><div class="notification">Notification</div></router-link>
 
-        <div class="mes-ordonnaces">Mes Ordonnaces</div>
+        <router-link to="/ordonotlog"><div class="mes-ordonnaces">Mes Ordonnaces</div></router-link>
 
-        <div class="espace-m-decin">Espace Médecin</div>
+        <router-link to="/"><div class="espace-m-decin">Espace Médecin</div></router-link>
 
-        <div class="espace-pharmacien">Espace Pharmacien</div>
+        <router-link to="/pharmanotlog"><div class="espace-pharmacien">Espace Pharmacien</div></router-link>
       </div>
     </div>
 
@@ -408,7 +408,7 @@
 
 
 export default {
-  name: "PageAccueil",
+  name: "HomePageNotifnotlog",
   components: {},
   props: {},
   data() {

@@ -1,5 +1,6 @@
 <template>
-  <HomePagePharmanotlog  />
+
+<router-view></router-view>
 </template>
 
 <script>
@@ -11,10 +12,10 @@ import HomePageNotifnotlog from "./views/HomePageNotifnotlog.vue";
 export default {
   name: "App",
   components: {
-    HomePagePharmanotlog: HomePagePharmanotlog,
-    HomePageMednotlog: HomePageMednotlog,
-    HomePageOrdonotlog: HomePageOrdonotlog,
-    HomePageNotifnotlog: HomePageNotifnotlog,
+    HomePagePharmanotlog,
+    HomePageMednotlog,
+    HomePageOrdonotlog,
+    HomePageNotifnotlog
 },
 };
 </script>

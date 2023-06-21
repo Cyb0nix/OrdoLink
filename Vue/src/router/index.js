@@ -3,30 +3,32 @@ import HomePagePharmanotlog from '../views/HomePagePharmanotlog.vue'
 import HomePageMednotlog from '../views/HomePageMednotlog.vue'
 import HomePageOrdonotlog from "../views/HomePageOrdonotlog.vue";
 import HomePageNotifnotlog from "../views/HomePageNotifnotlog.vue";
+const routes = [
+  {
+    path: '/ordonotlog',
+    name: 'HomePageOrdonotlog',
+    component: HomePageOrdonotlog
+  },
+  {
+    path: '/',
+    name: 'HomePageMednotlog',
+    component: HomePageMednotlog
+  },
+  {
+    path: '/notifnotlog',
+    name: 'HomePageNotifnotlog',
+    component: HomePageNotifnotlog
+  },
+  {
+    path: '/pharmanotlog',
+    name: 'HomePagePharmanotlog',
+    component: HomePagePharmanotlog
+  }
+]
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'HomePagePharmanotlog',
-      component: HomePagePharmanotlog
-    },
-    {
-      path: '/',
-      name: 'HomePageMednotlog',
-      component: HomePageMednotlog
-    },
-    {
-      path: '/',
-      name: 'HomePageNotifnotlog',
-      component: HomePageNotifnotlog
-    },
-    {
-      path: '/',
-      name: 'HomePageOrdonotlog',
-      component: HomePageOrdonotlog
-    },
-  ]
+  history: createWebHistory(),
+  routes
 })
 
 export default router
