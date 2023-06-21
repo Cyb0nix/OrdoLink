@@ -1,6 +1,6 @@
 <template>
-    <footer class="bg-gray-100">
-        <div class="absolute inset-x-0 bottom-0 mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <footer>
+        <div class="inset-x-0 bottom-0 px-4 py-8 sm:px-6 lg:px-8 bg-slate-100 W-screen">
             <div class="flex justify-center text-teal-600">
                 <div class="flex items-center justify-start">
                     <img

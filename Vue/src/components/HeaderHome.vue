@@ -17,7 +17,7 @@
                         OrdoLink
                     </h2>
                 </div>
-  
+
                 <div class="flex items-center">
                     <div class="flex-grow"></div> <!-- Ajout d'une div vide qui occupe tout l'espace disponible -->
                         <button
@@ -31,4 +31,3 @@
         </div>
     </header>
 </template>
-  
