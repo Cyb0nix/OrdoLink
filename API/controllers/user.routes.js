@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userRepo = require('../utils/user.repository');
+const pharmacienRepo = require('../utils/pharmacien.repository');
+
 
 // ROUTE REGISTRATIONS
 router.get('/:email', getUser);
