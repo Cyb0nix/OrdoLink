@@ -39,10 +39,10 @@
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Mot de passe</label>
               </div>
             </div>
-            <div class="mt-4">
+            <div class="flex justify-center">
               <button
                 type="submit"
-                class="inline-block w-full rounded-lg bg-sky-500 px-5 py-3 font-medium text-white sm:w-auto"
+                class="inline-block w-full rounded-lg bg-sky-500 px-5 py-3 font-medium text-white sm:w-auto mt-8"
               >
                 Se connecter
               </button>

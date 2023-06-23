@@ -1,5 +1,7 @@
 <template>
     <header class="">
+
+        <router-link to="/">
         <div class="max-w-full px-4 py-2 sm:px-6 sm:py-4 lg:px-8">
             <p class="back">Back</p>
             <img
@@ -16,6 +18,7 @@
                 />
             </div>
         </div>
+        </router-link>
     </header>
 </template>
 
