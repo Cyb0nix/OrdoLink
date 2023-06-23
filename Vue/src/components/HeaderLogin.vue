@@ -8,7 +8,7 @@
                 <img
                     src="@/assets/Img/Arrow.svg"
                     alt="fleche retour"
-                    class="h-16 w-16 mt-[-20px]"
+                    class="h-20 w-20 mt-[-20px] ml-[-3px]"
                 />
             </router-link>
             
