@@ -37,5 +37,5 @@ app.use(session({
 }));
 
 // ROUTE REGISTRATIONS
-const userRouter = require("./controllers/users.routes");
+const userRouter = require("./controllers/user.routes");
 app.use("/api/users", userRouter);
