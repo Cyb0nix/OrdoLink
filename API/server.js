@@ -6,8 +6,9 @@ var cors = require('cors')
 const app = express();
 
 var corsOptions = {
-    origin: process.env.FRONT_URL,
-    credentials: true
+    origin: '*',
+    credentials: true,
+    
     
   }
 
@@ -24,17 +25,6 @@ app.get('/', function (request, response, next) {
 // MIDDLEWARE REGISTRATIONS
 const bodyParser = require("body-parser");
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
-
-const session = require("express-session");
-app.use(session({
-    secret: "SecretRandomStringDskghadslkghdlkghdghaksdghdksh",
-    saveUninitialized: true,
-    cookie: { 
-        sameSite: 'none',
-        maxAge: 1000 * 60 * 60 * 24}, // 1 day in msec
-    resave: false
-    
-}));
 
 // ROUTE REGISTRATIONS
 const userRouter = require("./controllers/user.routes");
