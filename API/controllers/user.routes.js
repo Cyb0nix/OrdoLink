@@ -36,6 +36,7 @@ async function createUserAction(request, response) {
     }
 }
 
+
 async function loginUserAction(request, response) {
     const user = await userRepo.getUserByEmail(request.body.email);
     if (user != null && compareSync(request.body.password, user.password)) {
