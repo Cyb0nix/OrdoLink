@@ -6,7 +6,7 @@
             <router-link to="/">
                 <p class="text-2xl font-poppins text-sky-500 pl-2">Back</p>
                 <img
-                    src="@/assets/Img/Arrow 1.svg"
+                    src="@/assets/Img/Arrow.svg"
                     alt="fleche retour"
                     class="h-16 w-16 mt-[-20px]"
                 />
