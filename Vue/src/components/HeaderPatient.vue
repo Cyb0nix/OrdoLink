@@ -15,21 +15,17 @@
                 <div class="hidden md:block">
                     <nav aria-label="Global">
                     <ul class="flex items-center gap-16 text-xl">
-                        <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecins')">
-                                Dashboard
-                            </a>
-                        </li>
+                        <router-link to="/">
+                            <li>
+                                <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecins')">
+                                    Accueil
+                                </a>
+                            </li>
+                        </router-link>
 
                         <li>
                             <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecin/patient')">
-                                Patient
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('ordonnance')">
-                                Ordonnance
+                                Mes ordonnances
                             </a>
                         </li>
                     </ul>

@@ -17,9 +17,9 @@
                         OrdoLink
                     </h2>
                 </div>
-
+                <router-link to="/Login">
                 <div class="flex items-center">
-                    <div class="flex-grow"></div> <!-- Ajout d'une div vide qui occupe tout l'espace disponible -->
+                    <div class="flex-grow"></div> 
                         <button
                         class="block rounded-lg bg-sky-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                         type="button"
@@ -27,6 +27,7 @@
                         Sign in
                         </button>
                 </div>
+                </router-link>
             </div>
         </div>
     </header>
