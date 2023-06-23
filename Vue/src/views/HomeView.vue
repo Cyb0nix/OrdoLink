@@ -42,12 +42,10 @@
     <section class="bg-gray-900 text-white flex flex-col items-center justify-center" id="AboutUs">
       <div class="max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
         <div class="max-w-xl">
-          <h2 class="text-3xl font-bold sm:text-4xl">What makes us special</h2>
+          <h2 class="text-3xl font-bold sm:text-4xl">Qu'est ce qui nous rend spécial !</h2>
 
           <p class="mt-4 text-gray-300">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat
-            dolores iure fugit totam iste obcaecati. Consequatur ipsa quod ipsum
-            sequi culpa delectus, cumque id tenetur quibusdam, quos fuga minima.
+            Voici les fonctionnalités principales qui montre que notre site web est LE site de numérisation d'ordonnance n°1 sur le marché !
           </p>
         </div>
 
@@ -77,12 +75,10 @@
             </span>
 
             <div>
-              <h2 class="text-lg font-bold">Lorem, ipsum dolor.</h2>
+              <h2 class="text-lg font-bold">Facilité d'utilisation et gain de temps </h2>
 
               <p class="mt-1 text-sm text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                cumque tempore est ab possimus quisquam reiciendis tempora animi!
-                Quaerat, saepe?
+                Notre plateforme a été conçue pour simplifier le processus de création d'ordonnances médicales. Grâce à notre interface conviviale et intuitive, vous pouvez générer rapidement des ordonnances personnalisées en quelques clics, vous permettant ainsi de gagner du temps précieux dans votre pratique médicale.
               </p>
             </div>
           </div>
@@ -110,12 +106,10 @@
             </span>
 
             <div>
-              <h2 class="text-lg font-bold">Lorem, ipsum dolor.</h2>
+              <h2 class="text-lg font-bold">Ordonnances sécurisées et conformes</h2>
 
               <p class="mt-1 text-sm text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                cumque tempore est ab possimus quisquam reiciendis tempora animi!
-                Quaerat, saepe?
+                Nous accordons une grande importance à la sécurité et à la conformité des ordonnances médicales. Nos prescriptions sont générées de manière sécurisée et respectent les réglementations et les normes de confidentialité en vigueur. Vous pouvez avoir l'assurance que vos ordonnances sont sécurisées et conformes aux exigences légales.
               </p>
             </div>
           </div>
@@ -143,12 +137,10 @@
             </span>
 
             <div>
-              <h2 class="text-lg font-bold">Lorem, ipsum dolor.</h2>
+              <h2 class="text-lg font-bold">Intégration transparente avec les pharmacies</h2>
 
               <p class="mt-1 text-sm text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                cumque tempore est ab possimus quisquam reiciendis tempora animi!
-                Quaerat, saepe?
+                Notre plateforme facilite l'envoi électronique des ordonnances aux pharmacies de votre choix. Vous pouvez sélectionner la pharmacie préférée de votre patient et envoyer directement les détails de la prescription. Cela permet une communication fluide et efficace entre vous, le médecin, et la pharmacie, garantissant une gestion pratique et rapide des médicaments.
               </p>
             </div>
           </div>
@@ -176,12 +168,10 @@
             </span>
 
             <div>
-              <h2 class="text-lg font-bold">Lorem, ipsum dolor.</h2>
+              <h2 class="text-lg font-bold">Partage facile avec les patients</h2>
 
               <p class="mt-1 text-sm text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                cumque tempore est ab possimus quisquam reiciendis tempora animi!
-                Quaerat, saepe?
+                Vous pouvez partager les ordonnances directement avec vos patients de manière simple et sécurisée. Notre plateforme offre des fonctionnalités de partage intégrées, vous permettant de communiquer facilement les détails de la prescription à vos patients. Ils peuvent recevoir les informations de l'ordonnance et des notifications pour les rappeler de prendre leurs médicaments.
               </p>
             </div>
           </div>
@@ -209,12 +199,10 @@
             </span>
 
             <div>
-              <h2 class="text-lg font-bold">Lorem, ipsum dolor.</h2>
+              <h2 class="text-lg font-bold">Notifications et suivi des médicaments</h2>
 
               <p class="mt-1 text-sm text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                cumque tempore est ab possimus quisquam reiciendis tempora animi!
-                Quaerat, saepe?
+                Notre plateforme offre des fonctionnalités de notification pour les patients, ce qui les aide à suivre leur traitement de manière plus précise. Les patients recevront des rappels pour prendre leurs médicaments aux heures appropriées, ce qui favorise l'observance thérapeutique et améliore les résultats de santé.
               </p>
             </div>
           </div>
@@ -242,12 +230,10 @@
             </span>
 
             <div>
-              <h2 class="text-lg font-bold">Lorem, ipsum dolor.</h2>
+              <h2 class="text-lg font-bold">Personnalisation avancée des ordonnances</h2>
 
               <p class="mt-1 text-sm text-gray-300">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-                cumque tempore est ab possimus quisquam reiciendis tempora animi!
-                Quaerat, saepe?
+                Notre plateforme vous permet de personnaliser les ordonnances selon les besoins spécifiques de vos patients. Vous pouvez ajouter des instructions personnalisées, ajuster les dosages et les durées de traitement, et spécifier les médicaments génériques ou de marque. Cela vous donne un contrôle total sur le contenu des ordonnances pour répondre aux besoins individuels de chaque patient.
               </p>
             </div>
           </div>
@@ -268,7 +254,7 @@
           class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-sky-100 p-4 text-gray-900"
         >
           <h2 class="font-medium">
-            Lorem ipsum dolor sit amet consectetur adipisicing?
+            Comment puis-je créer une ordonnance médicale sur votre plateforme ?
           </h2>
 
           <svg
@@ -288,10 +274,7 @@
         </summary>
 
         <p class="mt-4 px-4 leading-relaxed text-gray-700">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis
-          molestias culpa in, recusandae laboriosam neque aliquid libero nesciunt
-          voluptate dicta quo officiis explicabo consequuntur distinctio corporis
-          earum similique!
+          Notre plateforme simplifie le processus de création d'ordonnances médicales. Il vous suffit de vous connecter avec vos identifiants que l'admin vous aura donné si vous êtes un médecin, puis de suivre les étapes simples pour générer une ordonnance personnalisée. Vous pourrez spécifier les médicaments, les dosages et les instructions appropriées. Une fois terminée, vous pouvez l'envoyer électroniquement à la pharmacie choisie et la partager avec votre patient.
         </p>
       </details>
 
@@ -300,7 +283,7 @@
           class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-sky-100 p-4 text-gray-900"
         >
           <h2 class="font-medium">
-            Lorem ipsum dolor sit amet consectetur adipisicing?
+            Est-ce que mes ordonnances générées sur votre plateforme sont sécurisées ?
           </h2>
 
           <svg
@@ -320,10 +303,7 @@
         </summary>
 
         <p class="mt-4 px-4 leading-relaxed text-gray-700">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis
-          molestias culpa in, recusandae laboriosam neque aliquid libero nesciunt
-          voluptate dicta quo officiis explicabo consequuntur distinctio corporis
-          earum similique!
+          Oui, la sécurité de vos ordonnances médicales est notre priorité. Notre plateforme utilise des protocoles de sécurité avancés pour protéger vos données sensibles. Toutes les informations médicales et les détails des prescriptions sont cryptés et stockés de manière sécurisée. De plus, nous nous conformons aux réglementations et normes de confidentialité en vigueur pour garantir la protection de vos données.
         </p>
       </details>
 
@@ -332,7 +312,7 @@
           class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-sky-100 p-4 text-gray-900"
         >
           <h2 class="font-medium">
-            Lorem ipsum dolor sit amet consectetur adipisicing?
+            Est-ce que mes patients peuvent recevoir des notifications pour les médicaments à prendre ?
           </h2>
 
           <svg
@@ -352,10 +332,7 @@
         </summary>
 
         <p class="mt-4 px-4 leading-relaxed text-gray-700">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis
-          molestias culpa in, recusandae laboriosam neque aliquid libero nesciunt
-          voluptate dicta quo officiis explicabo consequuntur distinctio corporis
-          earum similique!
+          Oui, notre plateforme offre la fonctionnalité de notification pour les patients. Une fois que vous avez créé une ordonnance et partagé les détails avec votre patient, celui-ci recevra des notifications pour lui rappeler de prendre les médicaments prescrits aux heures appropriées. Cela facilite la prise en charge des traitements et aide à améliorer l'observance thérapeutique.
         </p>
       </details>
     </div>

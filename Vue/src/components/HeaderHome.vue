@@ -17,7 +17,7 @@
                         OrdoLink
                     </h2>
                 </div>
-
+                <router-link to="/Login">
                 <div class="flex items-center">
                     <div class="flex-grow"></div> 
                         <button
@@ -27,6 +27,7 @@
                         Sign in
                         </button>
                 </div>
+                </router-link>
             </div>
         </div>
     </header>
