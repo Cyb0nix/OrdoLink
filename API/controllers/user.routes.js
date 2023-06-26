@@ -148,7 +148,7 @@ async function getUserStateAction(request, response) {
     if (id != null) {
         const user = await userRepo.getUserById(id);
         if (user != null) {
-            console.log('[',request.ip,'] FETCHED User : ', id);
+            console.log('[',request.ip,'] FETCHED User State : ', id);
             response.status(200).json(user);
         }
         else {
