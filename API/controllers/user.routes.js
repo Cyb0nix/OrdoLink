@@ -19,10 +19,8 @@ router.get('/state', getUserStateAction);
 
 async function createUserAction(request, response) {
     if (!await userRepo.checkExistsUser(request.body.email)) {
-        console.log(request.body, 'mail');
         const hashed_password = hashSync(request.body.password, 10);
         const id = await userRepo.createUser(request.body.email, hashed_password, true, new Date(Date.now() + 1000 * 3600 * 24).toUTCString());
-        console.log(id, 'id');
         if (id != null) {
             console.log('[',request.ip,'] CREATED User : ', id);
             response.status(200).json({info: "user created successfully", created_user: await userRepo.getUserById(id)});
@@ -56,8 +54,7 @@ async function loginUserAction(request, response) {
 
 async function logoutUserAction(request, response) {
     const token = request.get("Authorization");
-    console.log(request);
-    console.log(token);
+    console.log(token,'Token');
     const id = await tokenRepo.validateToken(token);
     if (id != null) {
         if (await tokenRepo.deleteToken(token) != null) {
