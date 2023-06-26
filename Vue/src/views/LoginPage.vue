@@ -79,7 +79,6 @@ export default defineComponent({
   },
   methods: {
     async login() {
-      console.log("test login");
       let response = await fetch('https://ordolink.fly.dev/api/users/login', {
         method: 'POST',
         headers: {
@@ -88,13 +87,9 @@ export default defineComponent({
         body: JSON.stringify({email: this.user.email, password: this.user.password, }),
       });
 
-      console.log("test login 2");
-
       const data = await response.json();
       console.log("data = ", data);
-      console.log("token = ", data.token);
-      console.log("message = ", data.message);
-
+      console.log("token login = ", data.token);
 
       if (data.token) {
         localStorage.setItem('token', data.token);

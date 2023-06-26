@@ -28,7 +28,7 @@
                         </li>
 
                         <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('ordonnance')">
+                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecin/ordonnance')">
                                 Ordonnance
                             </a>
                         </li>
@@ -36,7 +36,18 @@
                     </nav>
                 </div>
                 
-                <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex-grow"></div> 
+                        <button
+                        class="block rounded-lg bg-sky-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-sky-900 focus:outline-none focus:ring"
+                        type="button"
+                        @click="logout"
+                        >
+                        Logout
+                        </button>
+                </div>
+
+                <!-- <div class="flex items-center justify-between">
                     <div class="flex items-center">
                         <a href="#" class="block shrink-0">
                             <img
@@ -47,7 +58,8 @@
                             <span class="text-sky-500">Profile</span>
                         </a>
                     </div>
-
+                    
+                    
                     <div class="block md:hidden ml-4">
                         <button
                             class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75"
@@ -68,7 +80,7 @@
                             </svg>
                         </button>
                     </div>
-                </div>
+                </div> -->
                 
             </div>
         </div>
@@ -86,7 +98,7 @@
         methods: {
             rooter: function (path) {
                 console.log('path = ' + path);
-                this.$router.push('/medecin/' + path);
+                this.$router.push(path);
             },
         },
     });

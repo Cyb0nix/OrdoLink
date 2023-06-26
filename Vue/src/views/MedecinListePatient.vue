@@ -6,10 +6,14 @@
 <template>
   <main  class="h-full bg-white">
     <HeaderMedecin />
+    
     <section class="grid grid-cols-2 max-w-screen-lg px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
+
+      <!-- Formulaire de création d'un patient -->
+      <!-- TODO: le faire responsive -->
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-4/5 col-start-1 ml-10">
         <div class="border-2 rounded-xl border-sky-200 lg:p-12">
-           <form action="" class="space-y-4">
+          <form action="" class="space-y-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <p class="text-sky-500 text-center text-3xl font-inter mb-10">Créer un patient</p>
               <div class="relative">
@@ -66,11 +70,15 @@
           </form>
         </div>
       </div>
+      
+
+      <!-- Liste des patients -->
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2 ml-20">
         <div class="border-2 rounded-xl border-sky-200 lg:p-12">
            <form action="" class="space-y-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <div class="flex">
+                <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-10">Liste des patients</p>
                 <div class="relative flex-grow mr-20">
                   <input
                     class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
@@ -80,9 +88,10 @@
                   />
                   <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Recherche un patient</label>
                 </div>
-                <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-10">Liste des patients</p>
               </div>
             </div>
+
+            <!-- En faire un component -->
             <div class="patient"><h3 class="nom">Name</h3><button class="histo">Historique des ordonnances</button><button class="create">Créer une ordonnance</button></div>
           </form>
         </div>

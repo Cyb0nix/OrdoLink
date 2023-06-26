@@ -39,7 +39,7 @@
 
     <!-- ##################### section 2 ##################### -->
     
-    <section class="bg-gray-900 text-white flex flex-col items-center justify-center" id="AboutUs">
+    <section class="bg-sky-950 text-white flex flex-col items-center justify-center" id="AboutUs">
       <div class="max-w-screen-xl px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
         <div class="max-w-xl">
           <h2 class="text-3xl font-bold sm:text-4xl">Qu'est ce qui nous rend spécial !</h2>
@@ -307,7 +307,7 @@
         </p>
       </details>
 
-      <details class="group [&_summary::-webkit-details-marker]:hidden" open>
+      <details class="group [&_summary::-webkit-details-marker]:hidden">
         <summary
           class="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-sky-100 p-4 text-gray-900"
         >
