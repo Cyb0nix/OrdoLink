@@ -6,7 +6,7 @@ var cors = require('cors')
 const app = express();
 
 app.use(cors({
-  "origin": "https://cyb0nix.github.io",
+  "origin": "*",
   "methods": "GET,PATCH,POST,PUT,DELETE,OPTIONS",
   "allowedHeaders": "X-Requested-With,Content-Type,Authorization"
 }))
