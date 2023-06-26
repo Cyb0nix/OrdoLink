@@ -118,7 +118,7 @@
                     placeholder="Numéro de téléphone"
                     type="tel"
                     id="phone"
-                    v-model="user.phone"
+                    v-model="user.phone_number"
                     />
                     <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2 " for="phone">Numéro de téléphone</label>
                 </div>
@@ -131,7 +131,7 @@
                     placeholder="Adresse"
                     type="text"
                     id="adress"
-                    v-model="user.adress"
+                    v-model="user.adresse"
                     />
                     <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="adress">Adresse</label>
                 </div>
@@ -142,7 +142,7 @@
                     placeholder="Nom cabinet médical"
                     type="text"
                     id="cabinet"
-                    v-model="user.cabinet"
+                    v-model="user.name"
                     />
                     <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="cabinet">Nom cabinet médical</label>
                 </div>
@@ -202,10 +202,9 @@
                 console.log('user.medtype = ' + this.user.medtype);
                 console.log('user.rpps = ' + this.user.rpps);
                 console.log('user.email = ' + this.user.email);
-                console.log('user.phone = ' + this.user.phone);
-                console.log('Medecin = ' + this.Medecin);
-                console.log('user.adress = ' + this.user.adress);
-                console.log('user.cabinet = ' + this.user.cabinet);
+                console.log('user.phone = ' + this.user.phone_number);
+                console.log('user.adress = ' + this.user.adresse);
+                console.log('user.cabinet = ' + this.user.name);
 
             },
         },
