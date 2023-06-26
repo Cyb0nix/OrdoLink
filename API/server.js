@@ -5,14 +5,11 @@ const express = require('express');
 var cors = require('cors')
 const app = express();
 
-var corsOptions = {
-    origin: '*',
-    credentials: true,
-    
-    
-  }
-
-app.use(cors(corsOptions))
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,PATCH,POST,PUT,DELETE,OPTIONS",
+  "allowedHeaders": "X-Requested-With,Content-Type,Authorization"
+}))
 
 app.listen(process.env.WEB_PORT, function () {
     console.log('CORS-enabled web server listening on port ',process.env.WEB_PORT);
