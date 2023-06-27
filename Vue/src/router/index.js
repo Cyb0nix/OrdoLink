@@ -5,6 +5,7 @@ import PatientHome from '../views/Patient.vue'
 import MedecinOrdonnance from '../views/MedecinCreerOrdonnance.vue'
 import MedecinListePatient from '../views/MedecinListePatient.vue'
 import AdminCreerCompte from '../views/AdminCreerCompte.vue'
+import MedecinListeOrdonnance from '../views/MedecinListeOrdonnance.vue'
 
 async function routGard(to, from, next) {
   if (localStorage.getItem('token') != null) {
@@ -50,6 +51,11 @@ const router = createRouter({
       name: 'patient',
       component: PatientHome,
       beforeEnter: routGard
+    },
+    {
+      path: '/medecin/liste-ordonnance',
+      name: 'medecin-liste-ordonnance',
+      component: MedecinListeOrdonnance,
     },
     {
       path: '/medecin/liste-patient',
