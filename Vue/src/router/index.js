@@ -60,13 +60,13 @@ const router = createRouter({
       path: '/medecin/ordonnance',
       name: 'medecin-ordonnance',
       component: MedecinOrdonnance,
-      beforeEnter: routGard
+      // beforeEnter: routGard
     },
     {
       path: '/admin/creer-compte',
       name: 'admin-creer-compte',
       component: AdminCreerCompte,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     }
   ]
 })
