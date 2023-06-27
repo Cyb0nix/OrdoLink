@@ -1,0 +1,12 @@
+# fly.toml app configuration file generated for ordolink on 2023-06-19T11:18:21+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "ordolink"
+primary_region = "cdg"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  min_machines_running = 0
