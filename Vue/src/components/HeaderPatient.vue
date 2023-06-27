@@ -15,21 +15,17 @@
                 <div class="hidden md:block">
                     <nav aria-label="Global">
                     <ul class="flex items-center gap-16 text-xl">
-                        <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecins')">
-                                Dashboard
-                            </a>
-                        </li>
+                        <router-link to="/">
+                            <li>
+                                <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecins')">
+                                    Accueil
+                                </a>
+                            </li>
+                        </router-link>
 
                         <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecin/patient')">
-                                Patient
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecin/ordonnance')">
-                                Ordonnance
+                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/Ordonnance')">
+                                Mes ordonnances
                             </a>
                         </li>
                     </ul>
@@ -58,7 +54,6 @@
                             <span class="text-sky-500">Profile</span>
                         </a>
                     </div>
-                    
                     
                     <div class="block md:hidden ml-4">
                         <button
@@ -99,6 +94,18 @@
             rooter: function (path) {
                 console.log('path = ' + path);
                 this.$router.push(path);
+            },
+            async logout() {
+                const token = localStorage.getItem('token');
+
+                await fetch('https://ordolink.fly.dev/api/users/logout', {
+                    method: "POST",
+                    headers: {
+                    "Authorization": token
+                    }
+                });
+                    localStorage.removeItem('token');
+                    this.$router.push('/');
             },
         },
     });

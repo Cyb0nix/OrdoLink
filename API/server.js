@@ -5,13 +5,11 @@ const express = require('express');
 var cors = require('cors')
 const app = express();
 
-var corsOptions = {
-    origin: process.env.FRONT_URL,
-    credentials: true
-    
-  }
-
-app.use(cors(corsOptions))
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,PATCH,POST,PUT,DELETE,OPTIONS",
+  "allowedHeaders": "X-Requested-With,Content-Type,Authorization"
+}))
 
 app.listen(process.env.WEB_PORT, function () {
     console.log('CORS-enabled web server listening on port ',process.env.WEB_PORT);
@@ -24,17 +22,6 @@ app.get('/', function (request, response, next) {
 // MIDDLEWARE REGISTRATIONS
 const bodyParser = require("body-parser");
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
-
-const session = require("express-session");
-app.use(session({
-    secret: "SecretRandomStringDskghadslkghdlkghdghaksdghdksh",
-    saveUninitialized: true,
-    cookie: { 
-        sameSite: 'none',
-        maxAge: 1000 * 60 * 60 * 24}, // 1 day in msec
-    resave: false
-    
-}));
 
 // ROUTE REGISTRATIONS
 const userRouter = require("./controllers/user.routes");
