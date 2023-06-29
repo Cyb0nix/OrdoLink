@@ -5,7 +5,7 @@ const { checkAuth } = require('../utils/user.auth');
 
 
 // ROUTE REGISTRATIONS
-router.post('/register',checkAuth("medecin"), userController.createUserAction);
+router.post('/register',checkAuth("admin"), userController.createUserAction);
 router.post('/login', userController.loginUserAction);
 router.post('/logout', userController.logoutUserAction);
 router.delete('/delete/:id', checkAuth("all"), userController.deleteUserByIdAction);
