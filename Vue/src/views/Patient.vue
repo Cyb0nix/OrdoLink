@@ -9,9 +9,21 @@
         <section class="grid grid-cols-1 max-w-screen-lg px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2">
                 <div class="lg:p-12 -ml-20"> 
-                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 ">
-                        <p class="text-sky-500 text-4xl font-inter mb-10 -mt-[20px]">Vos ordonnaces en cours</p>
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
+                        <div class="flex items-center">
+                            <p class="text-sky-500 text-4xl font-inter mb-10 -mt-[20px]">Vos ordonnaces en cours</p>
+                            <div class="relative flex-grow ml-10 -mt-[50px]">
+                                <input
+                                    class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
+                                    placeholder="Search"
+                                    type="Search"
+                                    id="Search"
+                                />
+                                <label class="absolute left-3 -top-3 bg-white text-sky-500 font-bold text-lg px-2" for="name">Rechercher une ordonnace</label>
+                            </div>
+                        </div>
                     </div>
+
                     <table class="border-collapse">
                         <thead>
                             <tr>
