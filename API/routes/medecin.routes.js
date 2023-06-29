@@ -11,5 +11,7 @@ router.put('/update', checkAuth("all"), medecinController.updateMedecinAction);
 router.get('/get/:id', checkAuth('all'), medecinController.getMedecinByIdAction);
 router.get('/all', checkAuth('admin'), medecinController.getMedecinsAction);
 
+module.exports = router;
+
 
 

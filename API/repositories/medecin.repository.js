@@ -77,7 +77,7 @@ module.exports = {
         }
     },
 
-    async getMedecinsActions() {
+    async getMedecins() {
         const query = {
             text: 'SELECT * FROM medecin',
         };

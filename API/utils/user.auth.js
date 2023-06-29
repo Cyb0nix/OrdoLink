@@ -1,6 +1,6 @@
 //Auth check middleware
 const tokenRepo = require('../repositories/tokens.repository');
-const userRepo = require('../repositories/users.repository');
+const userRepo = require('../repositories/user.repository');
 
 
 module.exports = {

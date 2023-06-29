@@ -1,8 +1,9 @@
-import medecinRepo from '../repositories/medecin.repository.js';
-import { hashSync, compareSync } from 'bcrypt';
-import { v4 as uuidv4 } from 'uuid';
-import userRepo from '../repositories/users.repository.js';
-import account_typeRepo from '../repositories/account_type.repository.js';
+const medecinRepo = require('../repositories/medecin.repository.js');
+const userRepo = require('../repositories/user.repository.js');
+const account_typeRepo = require('../repositories/account_type.repository.js');
+const { hashSync } = require('bcrypt');
+
+
 
 
 
@@ -46,7 +47,7 @@ async function getMedecinByIdAction(request, response){
     }
 }
 
-async function getMedecins(request, response){
+async function getMedecinsAction(request, response){
     try{
         const result = await medecinRepo.getMedecins();
         if(result != null){
@@ -94,7 +95,7 @@ async function deleteMedecinAction(request, response){
 module.exports = {
     createMedecinAction,
     getMedecinByIdAction,
-    getMedecins,
+    getMedecinsAction,
     updateMedecinAction,
     deleteMedecinAction
 }
