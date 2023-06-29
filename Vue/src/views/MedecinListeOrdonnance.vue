@@ -10,7 +10,6 @@
     <section class="grid grid-cols-2 max-w-screen-lg px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
 
       <!-- Formulaire de création d'un patient -->
-      <!-- TODO: le faire responsive -->
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-4/5 col-start-1 ml-10">
         <div class="border-2 rounded-xl border-sky-200 lg:p-12">
           <form action="" class="space-y-4">

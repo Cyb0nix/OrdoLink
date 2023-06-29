@@ -15,20 +15,20 @@
                 <div class="hidden md:block">
                     <nav aria-label="Global">
                     <ul class="flex items-center gap-16 text-xl">
-                        <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecins')">
+                        <li :class="{ 'border-b-2 border-sky-500': activePage === 'medecin' }">
+                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecin')">
                                 Dashboard
                             </a>
                         </li>
 
-                        <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecin/patient')">
+                        <li :class="{ 'border-b-2 border-sky-500': activePage === 'patient' }">
+                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecin/liste-patient')">
                                 Patient
                             </a>
                         </li>
 
-                        <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/medecin/ordonnance')">
+                        <li :class="{ 'border-b-2 border-sky-500': activePage === 'medecin-ordonnance' }" @click="rooter('/medecin/ordonnance')">
+                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/">
                                 Ordonnance
                             </a>
                         </li>
@@ -92,6 +92,11 @@
 
     export default defineComponent({
         name: 'HeaderMedecin',
+        data () {
+            return {
+                activePage: null,
+            };
+        },
         props: {
             msg: String,
         },
@@ -100,6 +105,10 @@
                 console.log('path = ' + path);
                 this.$router.push(path);
             },
+        },
+        mounted() {
+            this.activePage = this.$route.name;
+            console.log("route name = " + this.activePage);
         },
     });
 </script>

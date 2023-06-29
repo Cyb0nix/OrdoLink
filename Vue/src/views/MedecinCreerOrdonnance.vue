@@ -35,6 +35,7 @@ function addMedicationRow() {
                   placeholder="Nom patient"
                   type="text"
                   id="firstname"
+                  v-model="user.firstname"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Nom patient</label>
               </div>
@@ -45,6 +46,7 @@ function addMedicationRow() {
                   placeholder="Prénom patient"
                   type="text"
                   id="lastname"
+                  v-model="user.lastname"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Prénom patient</label>
               </div>
@@ -57,6 +59,7 @@ function addMedicationRow() {
                   placeholder="Numéro de sécurité sociale"
                   type="text"
                   id="NumSecu"
+                  v-model="user.NumSecu"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="date">Numéro de sécurité sociale</label>
               </div>
@@ -68,45 +71,76 @@ function addMedicationRow() {
               <div  class="relative">
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
-                  placeholder="Nom médicament"
+                  placeholder="Nom médicament 0"
                   type="text"
-                  id="medcicine"
+                  id="medcicine-0"
+                  v-model="user.medcicine"
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Medicament</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Medicament 0</label>
               </div>
 
               <div class="relative">
                 <input
                   class="w-screen-md rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="Quantité"
-                  type="text"
-                  id="quantity"
+                  type="number"
+                  id="quantity-0"
+                  v-model="user.quantity"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Quantité</label>
               </div>
             </div>
+            
+            <div>
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                  placeholder="Posologie médicament 0"
+                  type="text"
+                  id="posologie-0"
+                  v-model="user.posologie"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Posologie</label>
+              </div>
+            </div>
+            
 
             <!-- Ads medication Rows -->
             <div v-for="(medication, index) in medications" :key="index">
-              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div class="relative">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 ">
+                <div class="relative lg:mt-4">
                   <input
                     class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
                     :placeholder="`Nom médicament ${index + 1}`"
                     type="text"
                     :id="`medcicine-${index+1}`"
+                    v-model="user.medcicine"
                   />
                   <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" :for="`medcicine-${index+1}`">Medicament {{ index + 1 }}</label>
                 </div>
 
-                <div class="relative">
+                <div class="relative lg:mt-4">
                   <input
                     class="w-screen-md rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                     placeholder="Quantité"
-                    type="text"
+                    type="number"
                     :id="`quantity-${index+1}`"
+                    v-model="user.quantity"
                   />
                   <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" :for="`quantity-${index+1}`">Quantité</label>
+                </div>
+              </div>
+
+              <div class="lg:mt-4 lg:mb-4">
+                <div  class="relative">
+                  <input
+                    class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                    :placeholder="`Posologie médicament ${index + 1}`"
+                    type="text"
+                    :id="`posologie-${index+1}`"
+                    v-model="user.posologie"
+                  />
+                  <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Posologie</label>
                 </div>
               </div>
             </div>
@@ -115,7 +149,7 @@ function addMedicationRow() {
             <div class="flex justify-end">
               <button
                 type="button"
-                class="inline-flex items-center -mt-4 mb-4 px-4 py-2 font-medium text-white bg-sky-500 rounded-lg hover:bg-sky-600 focus:outline-none focus:bg-sky-600"
+                class="inline-flex items-center -mt-2 mb-2 px-4 py-2 font-medium text-white bg-sky-400 rounded-lg hover:bg-sky-600 focus:outline-none focus:bg-sky-600"
                 @click="addMedicationRow"
               >
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -124,22 +158,11 @@ function addMedicationRow() {
               </button>
             </div>
 
-            <div>
-              <label class="sr-only" for="message">Message</label>
-
-              <textarea
-                class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm resize-none"
-                placeholder="Message"
-                rows="3"
-                id="message"
-              ></textarea>
-            </div>
-
             <div class="mt-4">
               <button
                 type="submit"
-                class="inline-block w-full rounded-lg bg-sky-500 px-5 py-3 font-medium text-white sm:w-auto"
-                @click.prevent="imprimer"
+                class="inline-block w-full rounded-lg bg-sky-600 px-5 py-3 font-medium text-white sm:w-auto"
+                @click="addPrescription"
               >
                 Ajouter une ordonnance
               </button>
@@ -152,3 +175,39 @@ function addMedicationRow() {
    <FooterHome />
   </main>
 </template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  name: 'MedecinCreerOrdonnance',
+  data() {
+    return {
+      user: {
+        firstname: '',
+        lastname: '',
+        NumSecu: '',
+      },
+      prescriptions: {
+        medcicine: '',
+        quantity: '',
+        posologie: '',
+        renewale: '',
+        // actual date
+        given: '',
+      },
+      activePage: null,
+    };
+  },
+  methods: {
+    addMedicationRow() {
+      medications.value.push({});
+    },
+    addPrescription() {
+      console.log('addPrescription');
+      console.log('user = ' + this.user);
+      console.log('prescriptions = ' + this.prescriptions);
+    },
+  },
+};
+</script>
