@@ -79,18 +79,25 @@ export default defineComponent({
   },
   methods: {
     async login() {
-      let loginResponse = await this.$http.post('https://ordolink.fly.dev/api/users/login', this.user);
+      let response = await fetch('https://ordolink.fly.dev/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({email: this.user.email, password: this.user.password, }),
+      });
 
-      this.rep = loginResponse.data;
-      if (loginResponse.data.token === null) {
-        console.log(this.rep.message);
-      }
-      else{
-        localStorage.setItem('token', loginResponse.data.token);
+      const data = await response.json();
+      console.log("data = ", data);
+      console.log("token login = ", data.token);
+
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        // localStorage.setItem('user', JSON.stringify(data.user));
         this.$router.push('/patient');
+      } else {
+        this.rep = data.message;
       }
-      
-      console.log(this.rep);
     },
   },
 });
