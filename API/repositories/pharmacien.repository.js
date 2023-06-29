@@ -1,4 +1,4 @@
-pool = require('./db').pool;
+pool = require('../utils/db').pool;
 
 module.exports = {
   async createPharmacien(pharmacien) {
