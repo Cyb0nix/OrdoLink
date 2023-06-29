@@ -1,4 +1,4 @@
-pool = require('./db').pool
+pool = require('../utils/db').pool
 
 async function checkExistsUser(email) {
     try {
@@ -16,7 +16,7 @@ async function getUserByEmail(email) {
     catch {return null}
 }
 
-async function getUserById(id) {
+async function getUserByToken(id) {
     try {
     const query = await pool.query('SELECT user_id FROM tokens WHERE id = $1', [id]);
     return query.rows[0] ?? null;
@@ -57,6 +57,24 @@ async function isAdminUser(id) {
     catch {return false}
 }
 
+async function getUserById(id) {
+    try {
+        const query = await pool.query('SELECT email, pwd_is_tmp, tmp_pwd_creation_date FROM users WHERE id = $1', [id]);
+        return query.rows[0] ?? null;
+    }
+    catch {return null}
+}
+
+
+
+async function getUserType(user_id) {
+    try {
+        const query = await pool.query('SELECT type FROM account_type WHERE user_id = $1', [user_id]);
+        return query.rows[0]?.type ?? null;
+    }
+    catch {return null}
+}
+
 module.exports = {
     checkExistsUser,
     getUserByEmail,
@@ -64,5 +82,7 @@ module.exports = {
     createUser,
     validateUserPassword,
     deleteUser,
-    isAdminUser
+    isAdminUser,
+    getUserType,
+    getUserByToken
 }
