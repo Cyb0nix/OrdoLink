@@ -85,7 +85,7 @@
     import { defineComponent } from 'vue';
 
     export default defineComponent({
-        name: 'HeaderMedecin',
+        name: 'HeaderPharmacien',
         data () {
             return {
                 activePage: null,
