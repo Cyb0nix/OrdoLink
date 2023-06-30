@@ -88,10 +88,27 @@ async function deletePatientAction(request, response) {
   }
 }
 
+async function getPatientOrdonnances(request, response) {
+  try {
+    const result = await patientRepo.getPatientOrdonnances(request.params.id);
+
+    if (result != null) {
+      response.status(200).json({ info: "Patient ordonnances found successfully", ordonnances: result });
+    } else {
+      response.status(400).json({ error: "Invalid request" });
+    }
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
+
 module.exports = {
   createPatientAction,
   getPatientByIdAction,
   getPatientsAction,
   updatePatientAction,
-  deletePatientAction
+  deletePatientAction,
+  getPatientOrdonnances
 };

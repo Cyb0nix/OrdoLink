@@ -10,6 +10,7 @@ router.delete('/delete/:id', checkAuth("all"), patientController.deletePatientAc
 router.put('/update/:id', checkAuth("all"), patientController.updatePatientAction);
 router.get('/get/:id', checkAuth('all'), patientController.getPatientByIdAction);
 router.get('/all', checkAuth('admin'), patientController.getPatientsAction);
+router.get('/ordonnances/:id', checkAuth('patient'), patientController.getPatientOrdonnances);
 
 module.exports = router;
 
