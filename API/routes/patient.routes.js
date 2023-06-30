@@ -5,7 +5,7 @@ const { checkAuth } = require('../utils/user.auth');
 
 
 // ROUTE REGISTRATIONS
-router.post('/register',checkAuth("admin"), patientController.createPatientAction);
+router.post('/register',checkAuth("medecin"), patientController.createPatientAction);
 router.delete('/delete/:id', checkAuth("all"), patientController.deletePatientAction);
 router.put('/update/:id', checkAuth("all"), patientController.updatePatientAction);
 router.get('/get/:id', checkAuth('all'), patientController.getPatientByIdAction);
