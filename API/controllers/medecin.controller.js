@@ -4,9 +4,6 @@ const account_typeRepo = require('../repositories/account_type.repository.js');
 const { hashSync } = require('bcrypt');
 
 
-
-
-
 async function createMedecinAction(request, response){
     try{
         const hashed_password = hashSync(request.boby.password, 10);

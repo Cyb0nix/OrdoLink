@@ -1,6 +1,14 @@
 <script setup>
- import HeaderMedecin from '../components/HeaderMedecin.vue';
- import FooterHome from '../components/FooterHome.vue';
+import { ref } from 'vue';
+import HeaderMedecin from '../components/HeaderMedecin.vue';
+import FooterHome from '../components/FooterHome.vue';
+
+const medications = ref([]); // Reactive array to store medication rows
+
+function addMedicationRow() {
+  medications.value.push({});
+}
+
 </script>
 
 <template>
@@ -21,14 +29,15 @@
         <div class="border-2 rounded-xl border-sky-200 lg:col-span-3 lg:p-12">
            <form action="" class="space-y-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
-                <label class="absolute left-3 -top-3 bg-white text-slate-600 font-bold text-lg px-2" for="firstname">Nom patient</label>
+              <div  class="relative">
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
                   placeholder="Nom patient"
                   type="text"
                   id="firstname"
+                  v-model="user.firstname"
                 />
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Nom patient</label>
               </div>
 
               <div class="relative">
@@ -37,127 +46,168 @@
                   placeholder="Prénom patient"
                   type="text"
                   id="lastname"
+                  v-model="user.lastname"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Prénom patient</label>
               </div>
             </div>
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
+              <div class="relative">
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-400"
-                  placeholder="Date de naissance"
-                  type="date"
-                  id="date"
+                  placeholder="Numéro de sécurité sociale"
+                  type="text"
+                  id="NumSecu"
+                  v-model="user.NumSecu"
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="date">Date de naissance</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="date">Numéro de sécurité sociale</label>
               </div>
             </div>
-
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2"></div>
+            
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
-                <label class="sr-only" for="email">Email</label>
+              <div  class="relative">
                 <input
-                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                  placeholder="Email address"
-                  type="email"
-                  id="email"
+                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                  placeholder="Nom médicament 0"
+                  type="text"
+                  id="medcicine-0"
+                  v-model="user.medcicine"
                 />
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Medicament 0</label>
               </div>
 
-              <div>
-                <label class="sr-only" for="phone">Phone</label>
+              <div class="relative">
                 <input
-                  class="w-full rounded-lg border-gray-200 p-3 text-sm"
-                  placeholder="Phone Number"
-                  type="tel"
-                  id="phone"
+                  class="w-screen-md rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
+                  placeholder="Quantité"
+                  type="number"
+                  id="quantity-0"
+                  v-model="user.quantity"
                 />
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-              <div>
-                <input
-                  class="peer sr-only"
-                  id="option1"
-                  type="radio"
-                  tabindex="-1"
-                  name="option"
-                />
-
-                <label
-                  for="option1"
-                  class="block w-full rounded-lg border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                  tabindex="0"
-                >
-                  <span class="text-sm font-medium"> Option 1 </span>
-                </label>
-              </div>
-
-              <div>
-                <input
-                  class="peer sr-only"
-                  id="option2"
-                  type="radio"
-                  tabindex="-1"
-                  name="option"
-                />
-
-                <label
-                  for="option2"
-                  class="block w-full rounded-lg border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                  tabindex="0"
-                >
-                  <span class="text-sm font-medium"> Option 2 </span>
-                </label>
-              </div>
-
-              <div>
-                <input
-                  class="peer sr-only"
-                  id="option3"
-                  type="radio"
-                  tabindex="-1"
-                  name="option"
-                />
-
-                <label
-                  for="option3"
-                  class="block w-full rounded-lg border border-gray-200 p-3 hover:border-black peer-checked:border-black peer-checked:bg-black peer-checked:text-white"
-                  tabindex="0"
-                >
-                  <span class="text-sm font-medium"> Option 3 </span>
-                </label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Quantité</label>
               </div>
             </div>
-
+            
             <div>
-              <label class="sr-only" for="message">Message</label>
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                  placeholder="Posologie médicament 0"
+                  type="text"
+                  id="posologie-0"
+                  v-model="user.posologie"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Posologie</label>
+              </div>
+            </div>
+            
 
-              <textarea
-                class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm resize-none"
-                placeholder="Message"
-                rows="3"
-                id="message"
-              ></textarea>
+            <!-- Ads medication Rows -->
+            <div v-for="(medication, index) in medications" :key="index">
+              <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 ">
+                <div class="relative lg:mt-4">
+                  <input
+                    class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                    :placeholder="`Nom médicament ${index + 1}`"
+                    type="text"
+                    :id="`medcicine-${index+1}`"
+                    v-model="user.medcicine"
+                  />
+                  <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" :for="`medcicine-${index+1}`">Medicament {{ index + 1 }}</label>
+                </div>
+
+                <div class="relative lg:mt-4">
+                  <input
+                    class="w-screen-md rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
+                    placeholder="Quantité"
+                    type="number"
+                    :id="`quantity-${index+1}`"
+                    v-model="user.quantity"
+                  />
+                  <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" :for="`quantity-${index+1}`">Quantité</label>
+                </div>
+              </div>
+
+              <div class="lg:mt-4 lg:mb-4">
+                <div  class="relative">
+                  <input
+                    class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                    :placeholder="`Posologie médicament ${index + 1}`"
+                    type="text"
+                    :id="`posologie-${index+1}`"
+                    v-model="user.posologie"
+                  />
+                  <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Posologie</label>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Add Medication Button -->
+            <div class="flex justify-end">
+              <button
+                type="button"
+                class="inline-flex items-center -mt-2 mb-2 px-4 py-2 font-medium text-white bg-sky-400 rounded-lg hover:bg-sky-600 focus:outline-none focus:bg-sky-600"
+                @click="addMedicationRow"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+              </button>
             </div>
 
             <div class="mt-4">
               <button
                 type="submit"
-                class="inline-block w-full rounded-lg bg-sky-500 px-5 py-3 font-medium text-white sm:w-auto"
+                class="inline-block w-full rounded-lg bg-sky-600 px-5 py-3 font-medium text-white sm:w-auto"
+                @click="addPrescription"
               >
                 Ajouter une ordonnance
               </button>
             </div>
           </form>
+          
         </div>
       </div>
     </section>
-    
-
-    <FooterHome />
+   <FooterHome />
   </main>
 </template>
 
+<script>
+import { ref } from 'vue';
+
+export default {
+  name: 'MedecinCreerOrdonnance',
+  data() {
+    return {
+      user: {
+        firstname: '',
+        lastname: '',
+        NumSecu: '',
+      },
+      prescriptions: {
+        medcicine: '',
+        quantity: '',
+        posologie: '',
+        renewale: '',
+        // actual date
+        given: '',
+      },
+      activePage: null,
+    };
+  },
+  methods: {
+    addMedicationRow() {
+      medications.value.push({});
+    },
+    addPrescription() {
+      console.log('addPrescription');
+      console.log('user = ' + this.user);
+      console.log('prescriptions = ' + this.prescriptions);
+    },
+  },
+};
+</script>
