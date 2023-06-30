@@ -27,7 +27,7 @@
                             </a>
                         </li>
 
-                        <li :class="{ 'border-b-2 border-sky-500': activePage === 'medecin-ordonnance' }" @click="rooter('/medecin/ordonnance')">
+                        <li :class="{ 'border-b-2 border-sky-500': activePage === 'medecin-ordonnance' }" @click="rooter('/medecin/ordonnance')"> <!-- TODO: Fix car renvoe vers /-->
                             <a class="text-sky-500 transition hover:text-sky-500/30" href="/">
                                 Ordonnance
                             </a>

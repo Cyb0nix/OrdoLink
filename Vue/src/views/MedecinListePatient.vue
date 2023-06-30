@@ -1,6 +1,7 @@
 <script setup>
  import HeaderMedecin from '../components/HeaderMedecin.vue';
  import FooterHome from '../components/FooterHome.vue';
+ import LignePatient from '../components/LignePatient.vue';
 </script>
 
 <template>
@@ -73,10 +74,9 @@
       
 
       <!-- Liste des patients -->
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2 ml-20">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-screen max-w-screen-lg col-start-2 ml-20">
         <div class="border-2 rounded-xl border-sky-200 lg:p-12">
            <form action="" class="space-y-4">
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <div class="flex">
                 <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-10">Liste des patients</p>
                 <div class="relative flex-grow mr-20">
@@ -88,11 +88,15 @@
                   />
                   <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Recherche un patient</label>
                 </div>
-              </div>
             </div>
 
-            <!-- En faire un component -->
-            <div class="patient"><h3 class="nom">Name</h3><button class="histo">Historique des ordonnances</button><button class="create">Créer une ordonnance</button></div>
+            <LignePatient 
+            v-for="patient in patientsList"
+            :key="patient.id"
+            :firstame="patient.firstname"
+            :lastname="patient.lastname"
+            />
+
           </form>
         </div>
       </div>
@@ -103,44 +107,27 @@
   </main>
 </template>
 
-<style>
-.patient{
-width: 800px;
-height: 46px;
-margin: auto;
-display: flex;
-flex-direction: row;
-border-radius: 10px;
-border: 1px solid #B2E2F9;
-background: #FFF;
-}
-.nom{
-  color: #000;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 2%;
-}
-.histo{
-width: 244px;
-height: 46px;
-flex-shrink: 0;
-border: 1px solid #B2E2F9;
-background: rgba(78, 102, 142, 0.00);
-margin-left: 31.7%;
-margin-top: -1px;
-color: black;
-}
-.create{
-width: 244px;
-height: 46px;
-flex-shrink: 0;
-border: 1px solid #B2E2F9;
-background: rgba(78, 102, 142, 0.00);
-margin-left: 0%;
-margin-top: -1px;
-color: black;
-border-radius: 0 10px 10px 0;
-}
-</style>
+
+<script>
+import { defineProps } from 'vue';
+
+export default {
+  props: {
+    patientsList: Array,
+  },
+  computed: {
+    async patientsList() {
+      let response = await fetch('https://ordolink.fly.dev/api/users/get', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      let data = await response.json();
+      return data;
+    },
+  },
+};
+
+</script>
