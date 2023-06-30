@@ -10,6 +10,8 @@ router.delete('/delete/:id', checkAuth("all"), medecinController.deleteMedecinAc
 router.put('/update/:id', checkAuth("all"), medecinController.updateMedecinAction);
 router.get('/get/:id', checkAuth('all'), medecinController.getMedecinByIdAction);
 router.get('/all', checkAuth('admin'), medecinController.getMedecinsAction);
+router.get('/patients/:id', checkAuth('medecin'), medecinController.getMedecinPatientsAction);
+router.get('/ordonnaces/:id', checkAuth('medecin'), medecinController.getMedecinOrdonnacesAction);
 
 module.exports = router;
 

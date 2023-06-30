@@ -27,3 +27,6 @@ app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/users", require("./routes/user.routes"));
 app.use("/api/medecins", require("./routes/medecin.routes"));
+app.use("/api/patients", require("./routes/patient.routes"));
+app.use("/api/ordonnances", require("./routes/ordonnance.routes"));
+

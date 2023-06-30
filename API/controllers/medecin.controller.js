@@ -89,11 +89,46 @@ async function deleteMedecinAction(request, response){
     }
 }
 
+async function getMedecinPatientsAction(request, response){
+    try{
+        const result = await medecinRepo.getMedecinPatients(request.params.id);
+        if(result != null){
+            response.status(200).json({ info: "medecin patients found successfully", patients: result });
+        }else{
+            response.status(400).json({ error: "invalid request" });
+        }
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+
+}
+
+async function getMedecinOrdonnacesAction(request, response){
+    try{
+        const result = await medecinRepo.getMedecinOrdonnances(request.params.id);
+        if(result != null){
+            response.status(200).json({ info: "medecin ordonnaces found successfully", ordonnaces: result });
+        }else{
+            response.status(400).json({ error: "invalid request" });
+        }
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+
+}
+
+
 module.exports = {
     createMedecinAction,
     getMedecinByIdAction,
     getMedecinsAction,
     updateMedecinAction,
-    deleteMedecinAction
+    deleteMedecinAction,
+    getMedecinPatientsAction,
+    getMedecinOrdonnacesAction
 }
 

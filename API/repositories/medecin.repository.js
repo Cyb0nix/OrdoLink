@@ -89,7 +89,38 @@ module.exports = {
             console.log(err);
             throw err;
         }
+    },
+
+    async getMedecinOrdonnances(id) {
+        const query = {
+            text: 'SELECT * FROM ordonnance INNER JOIN prescription ON ordonnance.id = prescription.ordonnance_id WHERE medecin_id = $1',
+            values: [id],
+        };
+        try {
+            const result = await pool.query(query);
+            return result.rows;
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
+    async getMedecinPatients(id) {
+        const query = {
+            text: 'SELECT * FROM patient INNER JOIN liste_medecin_patient ON liste_medecin_patient.patient_id = patient.id WHERE liste_medecin_patient.medecin_id = $1',
+            values: [id],
+        };
+        try {
+            const result = await pool.query(query);
+            return result.rows;
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
+
 
 }
     
