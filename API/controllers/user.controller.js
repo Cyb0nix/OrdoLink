@@ -103,13 +103,13 @@ async function getAllUsersAction(request, response) {
 
 async function getUserStateAction(request, response) {
     const token = request.get("Authorization");
-    const id = await tokenRepo.validateToken(token);
-    if (id != null) {
-        const user = await userRepo.getUserByToken(id);
-        if (user != null) {
-            console.log('[', request.ip, '] FETCHED User State : ', id);
-            const user_type = await userRepo.getUserType(id);
-            response.status(200).json({ type: user_type, id: id });
+    const token_id = await tokenRepo.validateToken(token);
+    if (token_id != null) {
+        const user_id = await userRepo.getUserByToken(token_id);
+        if (user_id != null) {
+            console.log('[', request.ip, '] FETCHED User State : ', user_id);
+            const user_type = await userRepo.getUserType(user_id);
+            response.status(200).json({ type: user_type, id: user_id });
         }
         else {
             response.status(400).json({ error: "invalid request" });

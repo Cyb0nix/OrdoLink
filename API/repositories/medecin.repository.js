@@ -17,6 +17,21 @@ module.exports = {
         }
     },
 
+    async getTypes() {
+        const query = {
+            text: 'SELECT * FROM medecintype',
+        };
+        try {
+            const result = await pool.query(query);
+            return result.rows;
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
+
     async getMedecinByRpps(rpps) {
         const query = {
             text: 'SELECT * FROM medecin WHERE rpps = $1',
