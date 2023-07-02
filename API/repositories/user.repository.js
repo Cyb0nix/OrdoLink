@@ -21,7 +21,9 @@ async function getUserByToken(id) {
     const query = await pool.query('SELECT user_id FROM tokens WHERE id = $1', [id]);
     return query.rows[0]?.user_id ?? null;
     }
-    catch {return null}
+    catch (err) {
+        console.log(err);
+        return null}
 }
 
 async function createUser(email, password, pwd_is_tmp, tmp_pwd_creation_date) {
