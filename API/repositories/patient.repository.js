@@ -1,11 +1,11 @@
-pool = require('./db').pool;
+pool = require('../utils/db').pool;
 
 module.exports = {
-  async createPharmacien(pharmacien) {
-    const { lastname, firstname, rpps } = pharmacien;
+  async createPatient(patient) {
+    const { num_secu, lastname, surname } = patient;
     const query = {
-      text: 'INSERT INTO pharmaciens(lastname, firstname, rpps) VALUES($1, $2, $3) RETURNING *',
-      values: [lastname, firstname, rpps]
+      text: 'INSERT INTO patient(num_secu, lastname, surname) VALUES($1, $2, $3) RETURNING *',
+      values: [num_secu, lastname, surname],
     };
     try {
       const result = await pool.query(query);
@@ -15,11 +15,10 @@ module.exports = {
       throw err;
     }
   },
-
-  async getPharmacienByEmail(email) {
+  async getPatientByNumSecu(num_secu) {
     const query = {
-      text: 'SELECT * FROM pharmaciens WHERE email = $1',
-      values: [email]
+      text: 'SELECT * FROM patient WHERE num_secu = $1',
+      values: [num_secu],
     };
     try {
       const result = await pool.query(query);
@@ -29,11 +28,10 @@ module.exports = {
       throw err;
     }
   },
-
-  async getPharmacienById(id) {
+  async getPatientById(id) {
     const query = {
-      text: 'SELECT * FROM pharmaciens WHERE id = $1',
-      values: [id]
+      text: 'SELECT * FROM patient WHERE id = $1',
+      values: [id],
     };
     try {
       const result = await pool.query(query);
@@ -43,12 +41,11 @@ module.exports = {
       throw err;
     }
   },
-
-  async updatePharmacien(pharmacien) {
-    const { id, lastname, firstname, rpps } = pharmacien;
+  async updatePatient(patient) {
+    const { id, num_secu, lastname, surname } = patient;
     const query = {
-      text: 'UPDATE pharmaciens SET lastname = $1, firstname = $2, rpps = $3 WHERE id = $4 RETURNING *',
-      values: [lastname, firstname, rpps, id]
+      text: 'UPDATE patient SET num_secu = $1, lastname = $2, surname = $3 WHERE id = $4 RETURNING *',
+      values: [num_secu, lastname, surname, id],
     };
     try {
       const result = await pool.query(query);
@@ -58,11 +55,10 @@ module.exports = {
       throw err;
     }
   },
-
-  async deletePharmacien(id) {
+  async deletePatient(id) {
     const query = {
-      text: 'DELETE FROM pharmaciens WHERE id = $1',
-      values: [id]
+      text: 'DELETE FROM patient WHERE id = $1',
+      values: [id],
     };
     try {
       const result = await pool.query(query);
@@ -72,10 +68,10 @@ module.exports = {
       throw err;
     }
   },
-  async searchPharmaciensByNom(nom) {
+  async getPatientOrdonnances(id) {
     const query = {
-      text: 'SELECT * FROM pharmaciens WHERE lastname ILIKE $1',
-      values: [`%${nom}%`],
+      text: 'SELECT * FROM ordonnance_consultable INNER JOIN ordonnance ON ordonnance_consultable.ordonnance_id = ordonnance.id WHERE patient_id = $1',
+      values: [id],
     };
     try {
       const result = await pool.query(query);

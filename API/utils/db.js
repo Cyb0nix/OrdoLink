@@ -1,4 +1,4 @@
-
+// Desc: Database connection
 const { Pool} = require('pg')
 require('dotenv').config();
 

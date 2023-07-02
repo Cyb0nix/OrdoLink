@@ -5,14 +5,11 @@ const express = require('express');
 var cors = require('cors')
 const app = express();
 
-var corsOptions = {
-    origin: '*',
-    credentials: true,
-    
-    
-  }
-
-app.use(cors(corsOptions))
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,PATCH,POST,PUT,DELETE,OPTIONS",
+  "allowedHeaders": "X-Requested-With,Content-Type,Authorization"
+}))
 
 app.listen(process.env.WEB_PORT, function () {
     console.log('CORS-enabled web server listening on port ',process.env.WEB_PORT);
@@ -27,5 +24,9 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json(), bodyParser.urlencoded({ extended: true }));
 
 // ROUTE REGISTRATIONS
-const userRouter = require("./controllers/user.routes");
-app.use("/api/users", userRouter);
+
+app.use("/api/users", require("./routes/user.routes"));
+app.use("/api/medecins", require("./routes/medecin.routes"));
+app.use("/api/patients", require("./routes/patient.routes"));
+app.use("/api/ordonnances", require("./routes/ordonnance.routes"));
+
