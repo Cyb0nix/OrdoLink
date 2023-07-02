@@ -3,7 +3,7 @@ pool = require('../utils/db').pool
 async function checkExistsUser(email) {
     try {
         const query = await pool.query('SELECT count(*) FROM users WHERE email = $1', [email]);
-        return query.rows[0] > 0;
+        return query.rows[0].count > 0;
     }
     catch {return false}
 }

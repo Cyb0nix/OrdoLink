@@ -1,9 +1,7 @@
-
 const { v4: uuidv4 } = require('uuid');
 const { hashSync, compareSync } = require('bcrypt');
 const userRepo = require('../repositories/user.repository');
 const tokenRepo = require('../repositories/tokens.repository');
-const { stringify } = require('querystring');
 
 
 
