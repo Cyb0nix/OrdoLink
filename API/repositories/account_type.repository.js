@@ -1,11 +1,11 @@
 const { pool } = require("../utils/db");
 
 module.exports = {
-    async createAccountType(accountType,user_id,type_id){
+    async createAccountType(user_id,type_id,type){
         
         const query = {
-            text: 'INSERT INTO account_type(accountType,user_id,type_id) VALUES($1, $2, $3) RETURNING id',
-            values: [accountType,user_id,type_id],
+            text: 'INSERT INTO account_type(user_id,type_id,type) VALUES($1, $2, $3) RETURNING *',
+            values: [user_id,type_id,type],
         };
         try {
             const result = await pool.query(query);
@@ -14,7 +14,7 @@ module.exports = {
         }
         catch (err) {
             console.log(err);
-            throw err;
+            return null;
 
         }
     },
@@ -30,7 +30,7 @@ module.exports = {
         }
         catch (err) {
             console.log(err);
-            throw err;
+            return null;
 
         }
     }

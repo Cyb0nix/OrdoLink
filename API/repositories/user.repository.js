@@ -3,7 +3,7 @@ pool = require('../utils/db').pool
 async function checkExistsUser(email) {
     try {
         const query = await pool.query('SELECT count(*) FROM users WHERE email = $1', [email]);
-        return query.rows[0] > 0;
+        return query.rows[0].count > 0;
     }
     catch {return false}
 }
@@ -21,7 +21,9 @@ async function getUserByToken(id) {
     const query = await pool.query('SELECT user_id FROM tokens WHERE id = $1', [id]);
     return query.rows[0]?.user_id ?? null;
     }
-    catch {return null}
+    catch (err) {
+        console.log(err);
+        return null}
 }
 
 async function createUser(email, password, pwd_is_tmp, tmp_pwd_creation_date) {

@@ -12,6 +12,7 @@ router.get('/get/:id', checkAuth('all'), medecinController.getMedecinByIdAction)
 router.get('/all', checkAuth('admin'), medecinController.getMedecinsAction);
 router.get('/patients/:id', checkAuth('medecin'), medecinController.getMedecinPatientsAction);
 router.get('/ordonnaces/:id', checkAuth('medecin'), medecinController.getMedecinOrdonnacesAction);
+router.get('/types', checkAuth('admin'), medecinController.getTypesAction);
 
 module.exports = router;
 

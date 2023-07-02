@@ -1,9 +1,7 @@
-
 const { v4: uuidv4 } = require('uuid');
 const { hashSync, compareSync } = require('bcrypt');
 const userRepo = require('../repositories/user.repository');
 const tokenRepo = require('../repositories/tokens.repository');
-const { stringify } = require('querystring');
 
 
 
@@ -44,9 +42,14 @@ async function loginUserAction(request, response) {
 }
 
 async function logoutUserAction(request, response) {
-    if (await tokenRepo.deleteToken(token) != null) {
-        console.log('[', request.ip, '] LOGGED OUT User : ', id);
-        response.status(200).json({ info: "user logged out successfully", user_id: id });
+    const token = request.get("Authorization");
+    const id = await tokenRepo.validateToken(token);
+    if (id != null) {
+        const user_id = await userRepo.getUserByToken(id);
+        if (await tokenRepo.deleteToken(token) != null) {
+            console.log('[', request.ip, '] LOGGED OUT User : ', user_id);
+            response.status(200).json({ info: "user logged out successfully", user_id: user_id });
+        }
     }
     else {
         response.status(400).json({ error: "invalid request" });
