@@ -4,8 +4,8 @@ module.exports = {
     async createMedecin(medecin) {
 
         const query = {
-            text: 'INSERT INTO medecin(rpps, phone_number, lastname, firstname,adresse, email, password, rpps_expiration_date,type_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id',
-            values: [medecin.rpps, medecin.phone_number, medecin.lastname, medecin.firstname, medecin.email, medecin.password, medecin.rpps_expiration_date, medecin.type_id],
+            text: 'INSERT INTO medecin(rpps, phone_number, lastname, firstname,adresse, email, password, rpps_expiration,type_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id',
+            values: [medecin.rpps, medecin.phone_number, medecin.lastname, medecin.firstname, medecin.email, medecin.password, medecin.rpps_expiration, medecin.type_id],
         };
         try {
             const result = await pool.query(query);

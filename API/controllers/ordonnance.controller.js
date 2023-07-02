@@ -28,7 +28,7 @@ async function getOrdonnanceByIdAction(request, response) {
     try {
         const ordonnance = await ordonnanceRepo.getOrdonnanceById(request.params.id);
 
-        if (result != null) {
+        if (ordonnance != null) {
             const prescriptions = await ordonnanceRepo.getPrescriptionsByOrdonnanceId(ordonnance.id);
 
             if (prescriptions != null) {
