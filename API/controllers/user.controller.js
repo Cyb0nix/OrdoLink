@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const { hashSync, compareSync } = require('bcrypt');
 const userRepo = require('../repositories/user.repository');
 const tokenRepo = require('../repositories/tokens.repository');
+const { stringify } = require('querystring');
 
 
 
@@ -105,11 +106,11 @@ async function getUserStateAction(request, response) {
     const token = request.get("Authorization");
     const token_id = await tokenRepo.validateToken(token);
     if (token_id != null) {
-        const user_id = await userRepo.getUserByToken(token_id);
-        if (user_id != null) {
-            console.log('[', request.ip, '] FETCHED User State : ', user_id);
-            const user_type = await userRepo.getUserType(user_id);
-            response.status(200).json({ type: user_type, id: user_id });
+        const user = await userRepo.getUserByToken(token_id);
+        if (user != null) {
+            console.log('[', request.ip, '] FETCHED User State : ', user.user_id);
+            const user_type = await userRepo.getUserType(user.user_id);
+            response.status(200).json({ type: user_type, user_id : user.user_id });
         }
         else {
             response.status(400).json({ error: "invalid request" });
