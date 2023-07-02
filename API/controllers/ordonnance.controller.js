@@ -2,12 +2,11 @@ const ordonnanceRepo = require('../repositories/ordonnance.repository');
 
 async function createOrdonnanceAction(request, response) {
     try {
-        const ordonnance_id = await ordonnanceRepo.createOrdonnance(request.body.patient_id, request.body.medecin_id, Date.now());
+        const ordonnance_id = await ordonnanceRepo.createOrdonnance(request.body.patient_id, request.body.medecin_id, new Date(Date.now() + 1000 * 3600 * 24).toUTCString());
         if (ordonnance_id != null) {
-            
-            for (element in request.body.prescriptions){
-                
-                const prescription_id = await ordonnanceRepo.createPrescription(ordonnance_id, element.medecine, element.posologie, element.renewale, element.given, element.ordonnance_id);
+            for (const element of request.body.prescriptions){
+
+                const prescription_id = await ordonnanceRepo.createPrescription(element.medecine, element.posologie, element.renewale, element.given, ordonnance_id);
                 if (prescription_id != null) {
                     console.log('[', request.ip, '] CREATED Prescription : ', prescription_id);
                 }else{
@@ -23,6 +22,22 @@ async function createOrdonnanceAction(request, response) {
         throw err;
     }
 }
+
+async function getOrdonnancesAction(request, response) {
+    try {
+        const ordonnances = await ordonnanceRepo.getOrdonnances();
+
+        if (ordonnances != null) {
+            response.status(200).json({ info: "ordonnances found successfully", ordonnances: ordonnances });
+        } else {
+            response.status(400).json({ error: "invalid request" });
+        }
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+}
+
 
 async function getOrdonnanceByIdAction(request, response) {
     try {
@@ -95,7 +110,8 @@ module.exports = {
     getOrdonnanceByIdAction,
     updatePrescriptionAction,
     deletePrescriptionAction,
-    deleteOrdonnanceAction
+    deleteOrdonnanceAction,
+    getOrdonnancesAction
 }
 
 
