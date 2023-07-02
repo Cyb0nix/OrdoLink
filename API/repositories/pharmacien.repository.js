@@ -2,14 +2,14 @@ pool = require('../utils/db').pool;
 
 module.exports = {
   async createPharmacien(pharmacien) {
-    const { lastname, firstname, rpps } = pharmacien;
+    const { lastname, firstname, rpps, rpps_expiration } = pharmacien;
     const query = {
-      text: 'INSERT INTO pharmaciens(lastname, firstname, rpps) VALUES($1, $2, $3) RETURNING *',
-      values: [lastname, firstname, rpps]
+      text: 'INSERT INTO pharmacien(lastname, firstname, rpps, rpps_expiration) VALUES($1, $2, $3, $4) RETURNING id',
+      values: [lastname, firstname, rpps, rpps_expiration]
     };
     try {
       const result = await pool.query(query);
-      return result.rows[0];
+      return result.rows[0].id;
     } catch (err) {
       console.log(err);
       throw err;
@@ -18,7 +18,7 @@ module.exports = {
 
   async getPharmacienByEmail(email) {
     const query = {
-      text: 'SELECT * FROM pharmaciens WHERE email = $1',
+      text: 'SELECT * FROM pharmacien WHERE email = $1',
       values: [email]
     };
     try {
@@ -32,7 +32,7 @@ module.exports = {
 
   async getPharmacienById(id) {
     const query = {
-      text: 'SELECT * FROM pharmaciens WHERE id = $1',
+      text: 'SELECT * FROM pharmacien WHERE id = $1',
       values: [id]
     };
     try {
@@ -47,7 +47,7 @@ module.exports = {
   async updatePharmacien(pharmacien) {
     const { id, lastname, firstname, rpps } = pharmacien;
     const query = {
-      text: 'UPDATE pharmaciens SET lastname = $1, firstname = $2, rpps = $3 WHERE id = $4 RETURNING *',
+      text: 'UPDATE pharmacien SET lastname = $1, firstname = $2, rpps = $3 WHERE id = $4 RETURNING *',
       values: [lastname, firstname, rpps, id]
     };
     try {
@@ -61,7 +61,7 @@ module.exports = {
 
   async deletePharmacien(id) {
     const query = {
-      text: 'DELETE FROM pharmaciens WHERE id = $1',
+      text: 'DELETE FROM pharmacien WHERE id = $1',
       values: [id]
     };
     try {
@@ -74,7 +74,7 @@ module.exports = {
   },
   async searchPharmaciensByNom(nom) {
     const query = {
-      text: 'SELECT * FROM pharmaciens WHERE lastname ILIKE $1',
+      text: 'SELECT * FROM pharmacien WHERE lastname ILIKE $1',
       values: [`%${nom}%`],
     };
     try {
