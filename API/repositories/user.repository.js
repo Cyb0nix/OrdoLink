@@ -19,7 +19,7 @@ async function getUserByEmail(email) {
 async function getUserByToken(id) {
     try {
     const query = await pool.query('SELECT user_id FROM tokens WHERE id = $1', [id]);
-    return query.rows[0] ?? null;
+    return query.rows[0]?.user_id ?? null;
     }
     catch {return null}
 }
@@ -51,7 +51,7 @@ async function deleteUser(id) {
 
 async function isAdminUser(id) {
     try {
-        await pool.query('SELECT admin FROM users WHERE id = $1', [id]);
+        const query = await pool.query('SELECT admin FROM users WHERE id = $1', [id]);
         return !!query.rows[0]?.admin;    
     }
     catch {return false}
