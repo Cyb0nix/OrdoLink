@@ -11,7 +11,7 @@ async function createMedecinAction(request, response){
         if (user_id != null) {
             console.log('[', request.ip, '] CREATED User : ', id);
             const medecin_id = await medecinRepo.createMedecin(request.body);
-            if(result != null){
+            if(medecin_id != null){
                 const result = await account_typeRepo.addAccountType(user_id, medecin_id, "medecin");
                 if(result != null){
                     console.log('[', request.ip, '] CREATED Medecin : ', medecin_id);
@@ -110,6 +110,22 @@ async function getMedecinOrdonnacesAction(request, response){
         const result = await medecinRepo.getMedecinOrdonnances(request.params.id);
         if(result != null){
             response.status(200).json({ info: "medecin ordonnaces found successfully", ordonnaces: result });
+        }else{
+            response.status(400).json({ error: "invalid request" });
+        }
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+
+}
+
+async function getTypesAction(request, response){
+    try{
+        const result = await medecinRepo.getTypes();
+        if(result != null){
+            response.status(200).json({ info: "types found successfully", types: result });
         }else{
             response.status(400).json({ error: "invalid request" });
         }
