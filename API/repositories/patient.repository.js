@@ -1,6 +1,20 @@
-pool = require('../utils/db').pool;
+const { pool } = require('../utils/db');
 
 module.exports = {
+  async getPatients() {
+    const query = {
+      text: 'SELECT * FROM patient',
+    };
+    try {
+      const result = await pool.query(query);
+      return result.rows;
+    }
+    catch (err) {
+      console.log(err);
+      throw err;
+    }
+  },
+
   async createPatient(patient) {
     const { num_secu, lastname, surname } = patient;
     const query = {

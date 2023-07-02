@@ -145,6 +145,7 @@ module.exports = {
     updateMedecinAction,
     deleteMedecinAction,
     getMedecinPatientsAction,
-    getMedecinOrdonnacesAction
+    getMedecinOrdonnacesAction,
+    getTypesAction
 }
 
