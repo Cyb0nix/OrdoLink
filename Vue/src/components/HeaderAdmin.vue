@@ -59,6 +59,18 @@
                 console.log('path = ' + path);
                 this.$router.push(path);
             },
+            async logout() {
+                const token = localStorage.getItem('token');
+
+                await fetch('https://ordolink.fly.dev/api/users/logout', {
+                    method: "POST",
+                    headers: {
+                    "Authorization": token
+                    }
+                });
+                    localStorage.removeItem('token');
+                    this.$router.push('/');
+            },
         },
     });
 </script>

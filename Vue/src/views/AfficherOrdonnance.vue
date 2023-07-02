@@ -9,7 +9,7 @@
       
       <div class="flex flex-col items-left justify-center lg:ml-96">
         <h1 class="text-3xl font-bold font-poppins text-sky-500 mt-6 lg:pl-14 lg:mb-4">
-          Ordonnance du 14/01/2025
+          Ordonnance du <!-- {{prescription.date}} -->
         </h1>
       </div>
       
@@ -19,7 +19,7 @@
             <div class="relative bg-white">
               <div class="grid grid-cols-2 lg:grid-cols-2 ml-4">
                 <div class="relative">
-                  <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[24px] font-normal">Will SMITH</div>
+                  <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[24px] font-normal"> {{ medecin.firstName + ' ' +  medecin.lastName }}</div>
                   <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal ">Docteur</div>
                   <div class="w-[261px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal -mt-4">Médecine Générale</div>
                   <div class="w-[443px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal ">Diplomé de la faculté de Villejuif</div>
@@ -32,13 +32,15 @@
                 
                 <div class="relative ml-28">
                   <div class="w-[343px] h-[77px]">
-                    <div class= "w-[343px] h-[49px] left-0 top-0 absolute text-cyan-600 text-[22px] font-normal">30-32 Avenue de la République</div>
-                    <div class="w-[343px] h-[49px] left-0 top-[28px] absolute text-cyan-600 text-[22px] font-normal">94 800, Villejuif</div>
+                    <div class= "w-[343px] h-[49px] left-0 top-0 absolute text-cyan-600 text-[22px] font-normal"> {{ medecin.addresse }} </div>
                   </div>
 
-                  <div class="w-[353px] h-[49px text-cyan-600 text-[24px] font-normal mt-4">Tél. Cabinet : 00 00 06 90 00<br/>doctor.will.smith@gmail.com</div>
+                  <div class="w-[353px] h-[49px text-cyan-600 text-[24px] font-normal mt-4">
+                    Tél. Cabinet : {{ medecin.phone_number }}
+                    <br/> {{ medecin.email }} 
+                  </div>
       
-                  <div class="w-[353px] h-[49px]absolute text-cyan-600 text-[24px] font-normal mt-28">Villejuif, 14 janvier 2025</div>
+                  <div class="w-[353px] h-[49px]absolute text-cyan-600 text-[24px] font-normal mt-28">Villejuif, <!-- {{prescription.date}}--> </div> 
                 </div>
               </div>
               
@@ -103,9 +105,9 @@ export default defineComponent({
         firstName: 'Will',
         lastName: 'Smith',
         type: 'Docteur',
-        addresse: '30-32 Avenue de la République',
+        addresse: '30-32 Avenue de la République, 94800 Villejuif',
         phone_number: '00 00 06 90 00',
-        email: '',
+        email: 'docteur.smith@gmail.com',
       },
       patient: {
           firstName: 'Cédric',
@@ -153,7 +155,7 @@ export default defineComponent({
           description: 'Prendre par voie orale, 1 comprimé toutes les 6 heures, si fièvre et douleur',
           quantity: '1/2',
         }
-      ]
+      ],
     }
   },
 })
