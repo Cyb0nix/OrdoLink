@@ -9,7 +9,7 @@ async function createPatientAction(request, response) {
         const user_id = await userRepo.createUser(request.body.email, hashed_password, true, new Date(Date.now() + 1000 * 3600 * 24).toUTCString());
     if (user_id != null) {
       console.log('[', request.ip, '] CREATED User:', user_id);
-      const patient_id = await patientRepo.createPatient(request.body.num_secu, request.body.lastname, request.body.surname);
+      const patient_id = await patientRepo.createPatient(request.body.num_secu, request.body.lastname, request.body.firstname);
 
       if (patient_id != null) {
         const result = await accountTypeRepo.addAccountType(user_id, patient_id, "patient");
