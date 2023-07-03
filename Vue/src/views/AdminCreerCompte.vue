@@ -135,17 +135,30 @@
             
             <div v-if="MedecinSelected">
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:my-6 ">
-                <div class="relative">
-                  <select
-                    name="MedecinType"
-                    id="MedecinType"
-                    class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-400"
-                    v-model="Medecin.type_id"
-                  >
-                    <option value="">Please select</option>
-                    <option v-for="typeMed in medecinTypes" :value="typeMed.id" :key="typeMed.id"> {{ typeMed.medecin_type }} </option>                    
-                  </select>
-                  <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="HeadlineAct">Type de médecin</label>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div class="relative">
+                    <select
+                      name="MedecinType"
+                      id="MedecinType"
+                      class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-400"
+                      v-model="Medecin.type_id"
+                    >
+                      <option value="">Please select</option>
+                      <option v-for="typeMed in medecinTypes" :value="typeMed.id" :key="typeMed.id"> {{ typeMed.medecin_type }} </option>                    
+                    </select>
+                    <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="HeadlineAct">Type de médecin</label>
+                  </div>
+
+                  <div class="relative">
+                      <input
+                      class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-400"
+                      placeholder="Nom du cabinet"
+                      type="text"
+                      id="cabinet"
+                      v-model="Medecin.name"
+                      />
+                      <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2 " for="phone">Nom du cabinet</label>
+                  </div>
                 </div>
                 <div class="relative">
                     <input
@@ -246,7 +259,8 @@
                 firstname: '',
                 email: '',
                 password: '',
-                adress: '',
+                adresse: '',
+                name: '',
                 rpps_expiration: '',
                 type_id: '',
               },
@@ -256,12 +270,11 @@
         },
         methods: {
           updateAddress() {
-            this.Medecin.adress = `${this.adresse}, ${this.codePostal} ${this.ville}`;
+            this.Medecin.adresse = `${this.adresse}, ${this.codePostal} ${this.ville}`;
           },
           async getMedcinType() {
             const token = localStorage.getItem('token');
-
-            let response = fetch('https://ordolink.fly.dev/api/medecins/types', {
+            let response = fetch('http://ordolink.fly.dev/api/medecins/types', {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -285,10 +298,10 @@
             this.Medecin.email = this.user.email
             this.Medecin.password = this.user.password
             this.Medecin.rpps_expiration = this.user.rpps_expiration
-            console.log("medecin.type_id : ", this.Medecin.type_id)
+            
             const token = localStorage.getItem('token');
 
-            let response = fetch('http://localhost:3000/api/medecins/register', {
+            let response = fetch('http://ordolink.fly.dev/api/medecins/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -297,6 +310,7 @@
               body: JSON.stringify(this.Medecin)
             });
 
+            console.log("Ca log ouuuuuuuu ? ")
             const data = await (await response).json();
             console.log("data Medecin : ", data)
 
@@ -308,9 +322,9 @@
           },
           async creerComptePharmacien() {
             console.log("user : ", this.user)
-            
+
             const token = localStorage.getItem('token');
-            let response = fetch('http://localhost:3000/api/pharmaciens/register', {
+            let response = fetch('http://ordolink.fly.dev/api/pharmaciens/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

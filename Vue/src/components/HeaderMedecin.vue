@@ -27,11 +27,11 @@
                             </a>
                         </li>
 
-                        <li :class="{ 'border-b-2 border-sky-500': activePage === 'medecin-ordonnance' }" @click="rooter('/medecin/ordonnance')"> <!-- TODO: Fix car renvoe vers /-->
+                        <!-- <li :class="{ 'border-b-2 border-sky-500': activePage === 'medecin-ordonnance' }" @click="rooter('/medecin/ordonnance')"> 
                             <a class="text-sky-500 transition hover:text-sky-500/30" href="/">
                                 Ordonnance
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                     </nav>
                 </div>
@@ -102,7 +102,6 @@
         },
         methods: {
             rooter: function (path) {
-                console.log('path = ' + path);
                 this.$router.push(path);
             },
             async logout() {
@@ -120,7 +119,6 @@
         },
         mounted() {
             this.activePage = this.$route.name;
-            console.log("route name = " + this.activePage);
         },
     });
 </script>

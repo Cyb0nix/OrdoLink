@@ -21,8 +21,9 @@
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="Name"
-                  type="name"
+                  type="lname"
                   id="lastname"
+                  v-model="patient.lastname"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Nom</label>
               </div>
@@ -32,19 +33,35 @@
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="First Name"
-                  type="firstname"
+                  type="fname"
                   id="firstname"
+                  v-model="patient.firstname"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Prénom</label>
               </div>
             </div>
+            
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <div class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
+                  placeholder="N° Sécurité social"
+                  type="num"
+                  id="numSecu"
+                  v-model="patient.num_secu"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Numéro de sécurité social</label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 ">
+              <div class="relative mt-4">
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="Email"
                   type="email"
                   id="email"
+                  v-model="patient.email"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Email</label>
               </div>
@@ -53,17 +70,20 @@
               <div class="relative">
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
-                  placeholder="N° Sécurité social"
+                  placeholder="Mot de passe"
                   type="password"
                   id="password"
+                  v-model="patient.password"
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Numéro de sécurité social</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Mot de passe</label>
               </div>
             </div>
+
             <div class="flex justify-center">
               <button
                 type="submit"
-                class="inline-block w-full rounded-lg bg-sky-500 px-5 py-3 font-medium text-white sm:w-auto mt-8"
+                class="inline-block w-full rounded-lg bg-sky-500 px-5 py-3 font-medium text-white sm:w-auto mt-6"
+                @click="createPatient"
               >
                 Ajouter
               </button>
@@ -81,20 +101,20 @@
                 <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-10">Liste des patients</p>
                 <div class="relative flex-grow mr-20">
                   <input
-                    class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
-                    placeholder="Name"
+                    class="w-3/4 rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
+                    placeholder="Nom ou Numéro de sécurité social"
                     type="name"
-                    id="lastname"
+                    id="Recherche"
                   />
                   <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Recherche un patient</label>
                 </div>
             </div>
 
             <LignePatient 
-            v-for="patient in patientsList"
-            :key="patient.id"
-            :firstame="patient.firstname"
-            :lastname="patient.lastname"
+            v-for="p in patientsList"
+            :key="p.id"
+            :firstname="p.firstname"
+            :lastname="p.lastname"
             />
 
           </form>
@@ -112,21 +132,58 @@
 import { defineProps } from 'vue';
 
 export default {
-  props: {
-    patientsList: Array,
+  data() {
+    return {
+      patientsList: [],
+      patient: {
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        num_secu: '',
+      },
+    };
   },
-  computed: {
-    async patientsList() {
-      let response = await fetch('https://ordolink.fly.dev/api/users/get', {
+  methods: {
+    // async getMedecinId(){
+    //   let token = localStorage.getItem('token');
+
+    // },
+    async getPatientsList() {
+      let token = localStorage.getItem('token');
+
+      let response = await fetch('https://ordolink.fly.dev/api/medecins/patients/c4854e71-8012-4a16-b151-14634bbe72f7', { //mettre l'id du medecin
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          "Authorization": token
         },
       });
-
-      let data = await response.json();
-      return data;
+      const data = await response.json();
+      console.log(data);
+      this.patientsList = data.patients;
     },
+    async createPatient() {
+      let token = localStorage.getItem('token');
+      console.log("patient : ", this.patient);
+      
+      let response =  await fetch('https://ordolink.fly.dev/api/patients/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": token
+        },
+        body: JSON.stringify(this.patient),
+      });
+
+      const data = await response.json();
+      console.log(data);
+    }
+  },
+  mounted() {
+    this.getPatientsList();
+
+    // this.getMedecinId();
   },
 };
 
