@@ -16,8 +16,8 @@
                     <nav aria-label="Global">
                     <ul class="flex items-center gap-16 text-xl">
                         <li>
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/amdin')">
-                                Dashboard
+                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/" @click="rooter('/admin/liste-user')">
+                                Utilisateur
                             </a>
                         </li>
 
@@ -72,5 +72,16 @@
                     this.$router.push('/');
             },
         },
+        async logout() {
+          const token = localStorage.getItem('water_warrior_token');
+          await fetch(this.$api_url + "users/logout", {
+            method: "DELETE",
+            headers: {
+              "Authorization": token
+            }
+          });
+          localStorage.removeItem('water_warrior_token');
+          this.$router.push('/');
+        }
     });
 </script>
