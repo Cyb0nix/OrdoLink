@@ -84,7 +84,7 @@ module.exports = {
   },
   async getPatientOrdonnances(id) {
     const query = {
-      text: 'SELECT * FROM ordonnance_consultable INNER JOIN ordonnance ON ordonnance_consultable.ordonnance_id = ordonnance.id WHERE patient_id = $1',
+      text: 'SELECT ordonnance_id FROM ordonnance WHERE patient_id = $1',
       values: [id],
     };
     try {
