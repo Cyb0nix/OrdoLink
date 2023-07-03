@@ -8,5 +8,6 @@ const { checkAuth } = require('../utils/user.auth');
 router.post('/create',checkAuth("medecin"), ordonnanceController.createOrdonnanceAction);
 router.get('/get/:id', ordonnanceController.getOrdonnanceByIdAction);
 router.put('/update/:id', ordonnanceController.updatePrescriptionAction);
+router.get('/all', ordonnanceController.getOrdonnancesAction);
 
 module.exports = router;

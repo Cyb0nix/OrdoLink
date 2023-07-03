@@ -4,12 +4,12 @@ const { pool } = require("../utils/db");
 module.exports = {
     async createOrdonnance(patient_id, medecin_id, prescription_date) {
         const query = {
-            text: 'INSERT INTO ordonnance(patient_id, medecin_id, prescription_date) VALUES($1, $2, $3, $4) RETURNING id',
-            values: [patient_id, medecin_id, date, prescription_date],
+            text: 'INSERT INTO ordonnance(patient_id, medecin_id, prescription_date) VALUES($1, $2, $3) RETURNING id',
+            values: [patient_id, medecin_id, prescription_date],
         };
         try {
             const result = await pool.query(query);
-            return result.rows[0];
+            return result.rows[0].id;
         }
         catch (err) {
             console.log(err);
@@ -24,7 +24,7 @@ module.exports = {
         };
         try {
             const result = await pool.query(query);
-            return result.rows[0];
+            return result.rows[0].id;
         }
         catch (err) {
             console.log(err);
@@ -60,6 +60,20 @@ module.exports = {
         catch (err) {
             console.log(err);
             throw err;
+        }
+    },
+
+    async getOrdonnances(){
+        const query = {
+            text: 'SELECT * FROM ordonnance',
+        };
+        try {
+            const result = await pool.query(query);
+            return result.rows;
+        }
+        catch (err) {
+            console.log(err);
+            return null;
         }
     },
 
