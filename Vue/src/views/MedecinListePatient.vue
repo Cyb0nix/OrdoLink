@@ -71,7 +71,7 @@
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="Mot de passe"
-                  type="password"
+                  type="text"
                   id="password"
                   v-model="patient.password"
                 />

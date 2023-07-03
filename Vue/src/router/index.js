@@ -7,6 +7,8 @@ import MedecinListePatient from '../views/MedecinListePatient.vue'
 import AdminCreerCompte from '../views/AdminCreerCompte.vue'
 import MedecinListeOrdonnance from '../views/MedecinListeOrdonnance.vue'
 import AfficherOrdonnance from '../views/AfficherOrdonnance.vue'
+import Pharmacien from '../views/PharmacienPatientOrdo.vue'
+
 
 async function routGard(to, from, next) {
   if (localStorage.getItem('token') != null) {
@@ -78,9 +80,15 @@ const router = createRouter({
       // beforeEnter: routGard
     },
     {
-      path: '/ordonnance', // remplacer par /ordonnance/:id
+      path: '/ordonnance/:id',
       name: 'afficher-ordonnance',
       component: AfficherOrdonnance,
+      // beforeEnter: routGard
+    },
+    {
+      path: '/pharmacien',
+      name: 'pharmacien',
+      component: Pharmacien,
       // beforeEnter: routGard
     }
   ]
