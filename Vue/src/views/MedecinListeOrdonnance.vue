@@ -1,6 +1,7 @@
 <script setup>
  import HeaderMedecin from '../components/HeaderMedecin.vue';
  import FooterHome from '../components/FooterHome.vue';
+
 </script>
 
 <template>
@@ -46,17 +47,13 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 ">
               <p class="text-sky-500 text-4xl font-inter flex items-center justify-center -mt-[20px]">Ordonnance valable de "Nom/Prénom"</p>
             </div>
-
-            <!-- En faire un component -->
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            
+            <LigneOrdonnance 
+            v-for="ordonnance in ordonnancesList"
+            v-if="!ordonnance.given"
+            :key="ordonnance.id"
+            :prescription_date="ordonnance.prescription_date"
+            :medecin_id="ordonnance.medecin_id"
+            />
           </form>
         </div>
       </div>
@@ -66,13 +63,14 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 ">
               <p class="text-sky-500 text-4xl font-inter flex items-center justify-center -mt-[20px]">Historique des ordonnaces de "Nom/Prénom"</p>
             </div>
-
-            <!-- En faire un component -->
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-            <div class="patient"><h3 class="nom">Ordonnance du 20 Mai 2023 / "Nom/Prénom"</h3><img src="@/assets/Img/pdfdl.png" class="pdfimg"></div>
-          </form>
+            <LigneOrdonnance 
+            v-for="ordonnance in ordonnancesList"
+            v-if="ordonnance.given"
+            :key="ordonnance.id"
+            :prescription_date="ordonnance.prescription_date"
+            :medecin_id="ordonnance.medecin_id"
+            />
+            </form>
         </div>
       </div>
     </section>
@@ -81,6 +79,8 @@
     <FooterHome />
   </main>
 </template>
+
+
 
 <style>
 .patient{

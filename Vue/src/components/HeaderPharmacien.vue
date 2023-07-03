@@ -26,12 +26,6 @@
                                 Patient
                             </a>
                         </li>
-
-                        <!-- <li :class="{ 'border-b-2 border-sky-500': activePage === 'medecin-ordonnance' }" @click="rooter('/medecin/ordonnance')"> 
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="/">
-                                Ordonnance
-                            </a>
-                        </li> -->
                     </ul>
                     </nav>
                 </div>
@@ -91,7 +85,7 @@
     import { defineComponent } from 'vue';
 
     export default defineComponent({
-        name: 'HeaderMedecin',
+        name: 'HeaderPharmacien',
         data () {
             return {
                 activePage: null,
@@ -102,23 +96,13 @@
         },
         methods: {
             rooter: function (path) {
+                console.log('path = ' + path);
                 this.$router.push(path);
-            },
-            async logout() {
-                const token = localStorage.getItem('token');
-
-                await fetch('https://ordolink.fly.dev/api/users/logout', {
-                    method: "POST",
-                    headers: {
-                    "Authorization": token
-                    }
-                });
-                    localStorage.removeItem('token');
-                    this.$router.push('/');
             },
         },
         mounted() {
             this.activePage = this.$route.name;
+            console.log("route name = " + this.activePage);
         },
     });
 </script>
