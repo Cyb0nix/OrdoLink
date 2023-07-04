@@ -49,7 +49,7 @@ module.exports = {
 
     async getMedecinById(id) {
         const query = {
-            text: 'SELECT * FROM medecin WHERE id = $1',
+            text: 'SELECT * FROM medecin INNER JOIN medecintype ON medecin.type_id = medecintype.id WHERE medecin.id = $1',
             values: [id],
         };
         try {
@@ -129,6 +129,21 @@ module.exports = {
         try {
             const result = await pool.query(query);
             return result.rows;
+        }
+        catch (err) {
+            console.log(err);
+            return null;
+        }
+    },
+
+    async addMedecinPatients(patient_id,medecin_id) {
+        const query = {
+            text: 'INSERT INTO liste_medecin_patient(medecin_id, patient_id) VALUES($1, $2) RETURNING *',
+            values: [medecin_id, patient_id],
+        };
+        try {
+            const result = await pool.query(query);
+            return result.rows[0];
         }
         catch (err) {
             console.log(err);
