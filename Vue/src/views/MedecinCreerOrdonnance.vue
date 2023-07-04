@@ -91,7 +91,7 @@ async function createOrdonnance(id) {
               <div  class="relative">
                 <input
                   class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
-                  placeholder="Nom patient"
+                  :placeholder="`${ patient.firstname }`"
                   type="text"
                   id="firstname"
                   v-model="patient.firstname"
@@ -103,7 +103,7 @@ async function createOrdonnance(id) {
               <div class="relative">
                 <input
                   class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
-                  placeholder="Prénom patient"
+                  :placeholder="`${ patient.lastname }`"
                   type="text"
                   id="lastname"
                   v-model="patient.lastname"
@@ -267,6 +267,7 @@ export default {
         },
       });
       const data = await response.json();
+      console.log("data patient: " + data);
       this.patient = data.patient;
     }
   },

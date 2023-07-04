@@ -2,14 +2,11 @@
   import FooterHome from '../components/FooterHome.vue';
   import HeaderAfficherOrdonnance from '../components/HeaderAfficherOrdonnance.vue';
   
-  defineProps({
-    // ordonnanceID: String,
-    firstname: String,
-    lastname: String,
-  });
-  // console.log("ordonnanceID: " + ordonnanceID);
-  // console.log("firstname: " + firstname);
-  // console.log("lastname: " + lastname);
+  // defineProps({
+  //   // ordonnanceID: String,
+  //   firstname: String,
+  //   lastname: String,
+  // });
   </script>
 
   <template>
@@ -27,9 +24,9 @@
             <div class="relative bg-white">
               <div class="grid grid-cols-2 lg:grid-cols-2 ml-4">
                 <div class="relative">
-                  <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[24px] font-normal"> {{ medecin.firstName + ' ' +  medecin.lastName }}</div>
+                  <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[24px] font-normal"> {{ medecin.firstname + ' ' +  medecin.lastname }}</div>
                   <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal ">Médecin</div>
-                  <div class="w-[261px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal -mt-4"> <!-- {{ medecin.speciality }} --> </div>
+                  <div class="w-[261px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal -mt-4"> {{ medecin.type }} </div>
                   <div class="w-[443px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal ">Diplomé de la faculté de Paris</div>
                   <div class="grid grid-cols-2 lg:grid-cols-2 mt-20">
                     <img class="w-[146px] h-[51px]" src="../assets/QRcode1.png" />
@@ -40,7 +37,7 @@
                 
                 <div class="relative ml-28">
                   <div class="w-[343px] h-[77px]">
-                    <div class= "w-[343px] h-[49px] left-0 top-0 absolute text-cyan-600 text-[22px] font-normal"> {{ medecin.addresse }} </div>
+                    <div class= "w-[343px] h-[49px] left-0 top-0 absolute text-cyan-600 text-[22px] font-normal"> {{ medecin.adresse }} </div>
                   </div>
 
                   <div class="w-[353px] h-[49px text-cyan-600 text-[24px] font-normal mt-4">
@@ -52,7 +49,7 @@
                 </div>
               </div>
               
-              <div class="w-[561px] h-[49px] text-black text-[28px] font-normal ml-4 mt-28 mb-16"><!-- {{ firstName + ' ' + lastName }} --> Cdric</div>
+              <div class="w-[561px] h-[49px] text-black text-[28px] font-medium ml-4 mt-28 mb-16">Patient : {{ patient.firstname + ' ' + patient.lastname }}</div>
                 
               <div>
                 <div class="grid grid-cols-3 lg:grid-cols-3 ml-6">
@@ -114,13 +111,23 @@ export default defineComponent({
   name: 'AfficherOrdonnance',
   data() {
     return {
-      ordonnanceId: 'ff1c2dd7-1a5f-4e4a-affc-293d52f4ed70',
+      ordonnanceId: '',
+      ordonnance: [],
       medecin: [],
       prescription: [],
       prescription_date: '',
+      patient: [],
     }
   },
   methods: {
+    ordonnanceid() {
+      if (this.$route.params.id) {
+        this.ordonnanceId = this.$route.params.id;
+      }
+      else {
+        this.ordonnanceId = 'ff1c2dd7-1a5f-4e4a-affc-293d52f4ed70';
+      }
+    },
     converDate(date) {
       // convertire la date au format 2023-07-03T00:00:00.000Z en 03/07/2023
       let dateArray = date.split('T');
@@ -128,25 +135,41 @@ export default defineComponent({
       let dateFinal = dateArray2[2] + '/' + dateArray2[1] + '/' + dateArray2[0];
       return dateFinal;
     },
-    async getMedecin(medecinID){
+    async getState() {
       let token = localStorage.getItem('token');
 
-      let response = await fetch('https://ordolink.fly.dev/api/medecins/get/' + medecinID, {
+      let response = await fetch('https://ordolink.fly.dev/api/users/state', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": token
+          'Authorization': token,
         },
       });
 
       const data = await response.json();
-      console.log("data Medecin : ", data);
-      return data
+      
+      if (data.type == 'medecin') {
+        this.getPatientInfo();
+      }
+    },
+    async getPatientInfo() {
+      let token = localStorage.getItem('token');
+
+      let response = await fetch('https://ordolink.fly.dev/api/medecins/patients/' + this.medecin.id, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": token
+      },
+      });
+      const data = await response.json();
+      this.patient = data.patients.find(p => p.id == this.ordonnance.patient_id);
+
     },
     async getOrdonnance() {
       let token = localStorage.getItem('token');
 
-      let response = await fetch('https://ordolink.fly.dev/api/ordonnances/get/de2cc5d8-609f-4bde-be5d-54c7a42c1576', { 
+      let response = await fetch('https://ordolink.fly.dev/api/ordonnances/get/' + this.ordonnanceId, { 
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -155,15 +178,18 @@ export default defineComponent({
       });
 
       const data = await response.json();
-      console.log("data : ", data);
 
+      this.ordonnance = data.ordonnance;
       this.prescription = data.prescriptions;
       this.prescription_date = this.converDate(data.ordonnance.prescription_date);
-      // this.medecin = data.medecin; //attendre que Cédric ait fini le back pour récupérer les infos du médecin
+      this.medecin = data.medecin; //attendre que Cédric ait fini le back pour récupérer les infos du médecin
     }
   },
   mounted() {
+    this.ordonnanceid();
     this.getOrdonnance();
+    this.getState();
+    
   }
 })
   
