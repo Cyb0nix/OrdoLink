@@ -3,71 +3,6 @@ import { ref } from 'vue';
 import HeaderMedecin from '../components/HeaderMedecin.vue';
 import FooterHome from '../components/FooterHome.vue';
 
-
-const medications = ref([]); // Reactive array to store medication rows
-
-const prescriptions = ref([{
-  medicine: null,
-  quantity: null,
-  posologie: null,
-  renewale: null,
-  given: null,
-}]);
-
-
-
-const user = ref( {
-        firstname: null,
-        lastname: null,
-        num_secu: null,
-      });
-
-const prescription_date = null;
-const medecin_id = null;
-const patient_id = null;
-
-function addMedicationRow() {
-  medications.value.push({});
-  prescriptions.value.push({
-    medicine: null,
-    quantity: null,
-    posologie: null,
-    renewale: null,
-    given: null,
-  });
-}
-
-async function createOrdonnance(id) {
-  let token = localStorage.getItem('token');
-      const patient_id = id;
-      const prescription_date = new Date();
-      const pres = JSON.stringify(prescriptions.value);
-
-      console.log({prescription_date : prescription_date,
-          medecin_id : medecin_id,
-          patient_id : patient_id,
-          prescriptions : pres,});
-
-      
-      let response =  await fetch('http://localhost:3000/api/patients/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          "Authorization": token
-        },
-        body: {
-          prescription_date : prescription_date,
-          medecin_id : medecin_id,
-          patient_id : patient_id,
-          prescriptions : pres,
-        },
-      });
-
-      const data = await response.json();
-      console.log(data);
-  
-}
-
 </script>
 
 <template>
@@ -136,7 +71,7 @@ async function createOrdonnance(id) {
                   placeholder="Nom médicament 0"
                   type="text"
                   id="medcicine-0"
-                  v-model="prescriptions[0].medcicine"
+                  v-model="prescriptions[0].medecine"
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Medicament 0</label>
               </div>
@@ -165,9 +100,167 @@ async function createOrdonnance(id) {
                 <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Posologie</label>
               </div>
             </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2"></div>
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Nom médicament 1"
+                  type="text"
+                  id="medcicine-1"
+                  v-model="prescriptions[1].medecine"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Medicament 0</label>
+              </div>
+
+              <div class="relative">
+                <input
+                  class="w-screen-md rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Quantité"
+                  type="number"
+                  id="quantity-1"
+                  v-model="prescriptions[1].quantity"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="lastname">Quantité</label>
+              </div>
+            </div>
+            
+            <div>
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Posologie médicament 1"
+                  type="text"
+                  id="posologie-1"
+                  v-model="prescriptions[1].posologie"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Posologie</label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2"></div>
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Nom médicament 2"
+                  type="text"
+                  id="medcicine-2"
+                  v-model="prescriptions[2].medecine"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Medicament 0</label>
+              </div>
+
+              <div class="relative">
+                <input
+                  class="w-screen-md rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Quantité"
+                  type="number"
+                  id="quantity-2"
+                  v-model="prescriptions[2].quantity"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="lastname">Quantité</label>
+              </div>
+            </div>
+            
+            <div>
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Posologie médicament 2"
+                  type="text"
+                  id="posologie-2"
+                  v-model="prescriptions[2].posologie"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Posologie</label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2"></div>
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Nom médicament 3"
+                  type="text"
+                  id="medcicine-3"
+                  v-model="prescriptions[3].medecine"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Medicament 0</label>
+              </div>
+
+              <div class="relative">
+                <input
+                  class="w-screen-md rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Quantité"
+                  type="number"
+                  id="quantity-3"
+                  v-model="prescriptions[3].quantity"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="lastname">Quantité</label>
+              </div>
+            </div>
+            
+            <div>
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Posologie médicament 3"
+                  type="text"
+                  id="posologie-3"
+                  v-model="prescriptions[3].posologie"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Posologie</label>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2"></div>
+            
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Nom médicament 4"
+                  type="text"
+                  id="medcicine-4"
+                  v-model="prescriptions[4].medecine"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Medicament 0</label>
+              </div>
+
+              <div class="relative">
+                <input
+                  class="w-screen-md rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Quantité"
+                  type="number"
+                  id="quantity-4"
+                  v-model="prescriptions[4].quantity"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="lastname">Quantité</label>
+              </div>
+            </div>
+            
+            <div>
+              <div  class="relative">
+                <input
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
+                  placeholder="Posologie médicament 4"
+                  type="text"
+                  id="posologie-4"
+                  v-model="prescriptions[4].posologie"
+                />
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Posologie</label>
+              </div>
+            </div>
+
+
             
 
-            <!-- Ads medication Rows -->
+            <!-- Ads medication Rows
             <div v-for="(medication, index) in medications" :key="index">
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 ">
                 <div class="relative lg:mt-4">
@@ -207,7 +300,7 @@ async function createOrdonnance(id) {
               </div>
             </div>
             
-            <!-- Add Medication Button -->
+            Add Medication Button
             <div class="flex justify-end">
               <button
                 type="button"
@@ -218,7 +311,7 @@ async function createOrdonnance(id) {
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>
               </button>
-            </div>
+            </div> -->
 
             <div class="mt-4">
               <button
@@ -250,6 +343,44 @@ export default {
         lastname: null,
         num_secu: null,
       },
+
+      prescriptions: [
+        {
+          medecine: null,
+          quantity: null,
+          posologie: null,
+          renewale: "0",
+          given: false,
+        },
+        {
+          medecine: null,
+          quantity: null,
+          posologie: null,
+          renewale: "0",
+          given: false,
+        },
+        {
+          medecine: null,
+          quantity: null,
+          posologie: null,
+          renewale: "0",
+          given: false,
+        },
+        {
+          medecine: null,
+          quantity: null,
+          posologie: null,
+          renewale: "0",
+          given: false,
+        },
+        { 
+          medecine: null,
+          quantity: null,
+          posologie: null,
+          renewale: "0",
+          given: false,
+        }
+      ],
         
       
       activePage: null,
@@ -267,12 +398,47 @@ export default {
         },
       });
       const data = await response.json();
-      console.log("data patient: " + data);
+      console.log(JSON.stringify(data));
       this.patient = data.patient;
-    }
+    },
+
+  async createOrdonnance(id) {
+  let token = localStorage.getItem('token');
+
+  let type_id = localStorage.getItem('type_id');
+
+  const patient_id = id;
+
+  const prescription_date = new Date(Date.now() + 1000 * 3600 * 24).toUTCString();
+
+  this.prescriptions = this.prescriptions.filter(element => element.medecine !== null);
+
+  try {
+    let response = await fetch('http://localhost:3000/api/ordonnances/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      },
+      body: 
+        JSON.stringify({
+        patient_id : patient_id,
+        medecin_id: type_id,
+        prescription_date: prescription_date,
+        prescriptions: this.prescriptions,
+        }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
   },
   created() {
     this.getPatientInfo();
   },
+  
 };
 </script>
