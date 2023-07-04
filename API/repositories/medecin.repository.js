@@ -49,7 +49,7 @@ module.exports = {
 
     async getMedecinById(id) {
         const query = {
-            text: 'SELECT * FROM medecin WHERE id = $1',
+            text: 'SELECT * FROM medecin INNER JOIN medecintype ON medecin.type_id = medecintype.id WHERE medecin.id = $1',
             values: [id],
         };
         try {
