@@ -119,6 +119,7 @@ export default defineComponent({
         localStorage.setItem('token', data.token);
         localStorage.setItem('type', JSON.stringify(data.type_id));
         localStorage.setItem('user', JSON.stringify(data.user_id));
+        localStorage.setItem('type_id', data.type_id);
         this.routeNext(data.user_id);
       } else {
         this.rep = data.message;

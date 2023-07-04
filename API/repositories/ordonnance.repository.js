@@ -17,10 +17,10 @@ module.exports = {
         }
     },
 
-    async createPrescription(medecine,posologie,renewale,given,ordonnance_id) {
+    async createPrescription(medecine,posologie,renewale,given,ordonnance_id,quantity) {
         const query = {
-            text: 'INSERT INTO prescription(medecine,posologie,renewale,given,ordonnance_id) VALUES($1, $2, $3, $4, $5) RETURNING id',
-            values: [medecine,posologie,renewale,given,ordonnance_id],
+            text: 'INSERT INTO prescription(medecine,posologie,renewale,given,ordonnance_id, quantity) VALUES($1, $2, $3, $4, $5,$6) RETURNING id',
+            values: [medecine,posologie,renewale,given,ordonnance_id, quantity],
         };
         try {
             const result = await pool.query(query);
