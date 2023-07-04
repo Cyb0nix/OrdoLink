@@ -20,6 +20,7 @@ async function createPatientAction(request, response) {
           if (addpatient != null) {
             console.log('[', request.ip, '] CREATED Patient:', patient_id);
             response.status(200).json({ info: "Patient created successfully", patient_id: patient_id });
+          }
         }
         
       }
