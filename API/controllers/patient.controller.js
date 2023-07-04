@@ -60,7 +60,7 @@ async function getPatientsAction(request, response) {
 
 async function updatePatientAction(request, response) {
   try {
-    const result = await patientRepo.updatePatient(request.params.id, request.body.num_secu, request.body.lastname, request.body.surname);
+    const result = await patientRepo.updatePatient(request.params.id, request.body.num_secu, request.body.lastname, request.body.firstname);
 
     if (result != null) {
       response.status(200).json({ info: "Patient updated successfully", patient: result });

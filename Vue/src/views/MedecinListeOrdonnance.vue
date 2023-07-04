@@ -90,8 +90,6 @@
 </template>
 
 <script>
-// this.$route.params.id
-
 export default {
   name: 'MedecinListeOrdonnance',
   data() {

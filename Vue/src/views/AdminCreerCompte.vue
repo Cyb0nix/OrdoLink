@@ -310,7 +310,6 @@
               body: JSON.stringify(this.Medecin)
             });
 
-            console.log("Ca log ouuuuuuuu ? ")
             const data = await (await response).json();
             console.log("data Medecin : ", data)
 

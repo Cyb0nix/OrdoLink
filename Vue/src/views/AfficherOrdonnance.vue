@@ -25,8 +25,8 @@
               <div class="grid grid-cols-2 lg:grid-cols-2 ml-4">
                 <div class="relative">
                   <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[24px] font-normal"> {{ medecin.firstname + ' ' +  medecin.lastname }}</div>
-                  <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal ">Médecin</div>
-                  <div class="w-[261px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal -mt-4"> {{ medecin.type }} </div>
+                  <div class="w-[170px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal  ">Médecin</div>
+                   <div class="w-[261px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal -mt-4"> Généraliste <!--{{ medecin.type }} --> </div>
                   <div class="w-[443px] h-[49px] text-cyan-600 text-[24px] text-[22px] font-normal ">Diplomé de la faculté de Paris</div>
                   <div class="grid grid-cols-2 lg:grid-cols-2 mt-20">
                     <img class="w-[146px] h-[51px]" src="../assets/QRcode1.png" />
@@ -37,15 +37,14 @@
                 
                 <div class="relative ml-28">
                   <div class="w-[343px] h-[77px]">
-                    <div class= "w-[343px] h-[49px] left-0 top-0 absolute text-cyan-600 text-[22px] font-normal"> {{ medecin.adresse }} </div>
+                    <div class= "w-[343px] h-[49px] left-0 top-0 absolute text-cyan-600 text-[24px] font-normal"> {{ medecin.adresse }} </div>
                   </div>
 
-                  <div class="w-[353px] h-[49px text-cyan-600 text-[24px] font-normal mt-4">
+                  <div class="w-[353px] h-[49px] text-cyan-600 text-[24px] font-normal -mt-8 mb-4">
                     Tél. Cabinet : {{ medecin.phone_number }}
-                    <br/> {{ medecin.email }} 
                   </div>
       
-                  <div class="w-[353px] h-[49px]absolute text-cyan-600 text-[24px] font-normal mt-28">Villejuif, {{ prescription_date }} </div> 
+                  <div class="w-[353px] h-[49px]absolute text-cyan-600 text-[24px] font-normal mt-44">Villejuif, {{ prescription_date }} </div> 
                 </div>
               </div>
               
@@ -74,12 +73,16 @@
                       </div>
                     </div>
 
-                    <div></div>
+                    <div>
+                      <div class="relative mt-4">
+                        <div class="w-full h-[31px] text-black text-[24px] font-normal text-right">{{medicine.number}} boites</div>
+                      </div>
+                    </div>
 
                     <div class="relative mt-6 -ml-4">
                       <div 
                       class="ml-40 w-[50px] h-[50px] text-center text-neutral-500 text-[24px] font-medium" 
-                      :class="{ 'text-green-500': medicine.renewale > 0, 'text-red-500': medicine.renewale  === 0 }">
+                      :class="{ 'text-green-600': medicine.renewale > 0, 'text-red-500': medicine.renewale  === 0 }">
                         {{medicine.renewale}}
                       </div>
                     </div>
@@ -99,7 +102,6 @@
         </div>
       </section>
 
-      <!-- <FooterHome /> -->
     </main>
   </template>
 
@@ -135,37 +137,6 @@ export default defineComponent({
       let dateFinal = dateArray2[2] + '/' + dateArray2[1] + '/' + dateArray2[0];
       return dateFinal;
     },
-    async getState() {
-      let token = localStorage.getItem('token');
-
-      let response = await fetch('https://ordolink.fly.dev/api/users/state', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token,
-        },
-      });
-
-      const data = await response.json();
-      
-      if (data.type == 'medecin') {
-        this.getPatientInfo();
-      }
-    },
-    async getPatientInfo() {
-      let token = localStorage.getItem('token');
-
-      let response = await fetch('https://ordolink.fly.dev/api/medecins/patients/' + this.medecin.id, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        "Authorization": token
-      },
-      });
-      const data = await response.json();
-      this.patient = data.patients.find(p => p.id == this.ordonnance.patient_id);
-
-    },
     async getOrdonnance() {
       let token = localStorage.getItem('token');
 
@@ -178,17 +149,18 @@ export default defineComponent({
       });
 
       const data = await response.json();
+      console.log("data getOrdonnance : ", data);
 
       this.ordonnance = data.ordonnance;
       this.prescription = data.prescriptions;
       this.prescription_date = this.converDate(data.ordonnance.prescription_date);
-      this.medecin = data.medecin; //attendre que Cédric ait fini le back pour récupérer les infos du médecin
+      this.medecin = data.medecin;
+      this.patient = data.patient;
     }
   },
   mounted() {
     this.ordonnanceid();
     this.getOrdonnance();
-    this.getState();
     
   }
 })
