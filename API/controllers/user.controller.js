@@ -29,8 +29,9 @@ async function loginUserAction(request, response) {
     if (user != null && compareSync(request.body.password, user.password)) {
         await tokenRepo.deleteExpiredTokens();
         if ((token = await tokenRepo.addUserToken(user.id, uuidv4(), new Date(Date.now() + 1000 * 3600 * 24).toUTCString())) != null) {
+            type_id = await userRepo.getUserTypeId(user.id);
             console.log('[', request.ip, '] LOGGED IN User : ', user.id);
-            response.status(200).json({ info: "user logged in successfully", token: token, user_id: user.id });
+            response.status(200).json({ info: "user logged in successfully", token: token, user_id: user.id, type_id: type_id });
         }
         else {
             response.status(400).json({ error: "invalid request" });
@@ -105,6 +106,18 @@ async function getAllUsersAction(request, response) {
 
 }
 
+async function getUserTypeIdAction(request, response) {
+    const user = await userRepo.getUserTypeId(request.params.id);
+    if (user != null) {
+        console.log('[', request.ip, '] FETCHED User : ', request.params.id);
+        response.status(200).json(user);
+    }
+    else {
+        response.status(400).json({ error: "invalid request" });
+    }
+}
+
+
 async function getUserStateAction(request, response) {
     const token = request.get("Authorization");
     const token_id = await tokenRepo.validateToken(token);
@@ -113,7 +126,8 @@ async function getUserStateAction(request, response) {
         if (user_id != null) {
             console.log('[', request.ip, '] FETCHED User State : ', user_id);
             const user_type = await userRepo.getUserType(user_id);
-            response.status(200).json({ type: user_type, user_id : user_id });
+            const type_id = await userRepo.getUserTypeId(user_id);
+            response.status(200).json({ type: user_type, user_id : user_id, type_id : type_id });
         }
         else {
             response.status(400).json({ error: "invalid request" });
@@ -132,5 +146,6 @@ module.exports = {
     updateUserByIdAction,
     getUserByIdAction,
     getAllUsersAction,
-    getUserStateAction
+    getUserStateAction,
+    getUserTypeIdAction
 }

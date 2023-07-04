@@ -77,6 +77,16 @@ async function getUserType(user_id) {
     catch {return null}
 }
 
+async function getUserTypeId(user_id) {
+    try {
+        const query = await pool.query('SELECT type_id FROM account_type WHERE user_id = $1', [user_id]);
+
+        return query.rows[0]?.type_id ?? null;
+    }
+    catch {return null}
+}
+
+
 module.exports = {
     checkExistsUser,
     getUserByEmail,
@@ -86,5 +96,6 @@ module.exports = {
     deleteUser,
     isAdminUser,
     getUserType,
-    getUserByToken
+    getUserByToken,
+    getUserTypeId
 }

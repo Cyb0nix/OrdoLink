@@ -13,8 +13,9 @@ module.exports = {
                 if (id != null) {
                     const user_id = await userRepo.getUserByToken(id);
                     const user_type = await userRepo.getUserType(user_id);
+                    const user_type_id = await userRepo.getUserTypeId(user_id);
                     if (user_type == role || await userRepo.isAdminUser(user_id) 
-                    || (role == "all" && user_id == request.params.id) || (role == "admin" && await userRepo.isAdminUser(user_id))){
+                    || (role == "all" &&(( user_id == request.params.id)||(user_type_id == request.params.id))) || (role == "admin" && await userRepo.isAdminUser(user_id))){
                         return next();
                     }else{
                         response.status(401).json({error: "Unautorized (bad user level)"});

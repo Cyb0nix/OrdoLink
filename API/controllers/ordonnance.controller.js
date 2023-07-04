@@ -1,4 +1,6 @@
 const ordonnanceRepo = require('../repositories/ordonnance.repository');
+const medecinRepo = require('../repositories/medecin.repository');
+const patientRepo = require('../repositories/patient.repository');
 
 async function createOrdonnanceAction(request, response) {
     try {
@@ -45,9 +47,12 @@ async function getOrdonnanceByIdAction(request, response) {
 
         if (ordonnance != null) {
             const prescriptions = await ordonnanceRepo.getPrescriptionsByOrdonnanceId(ordonnance.id);
+            const medecin = await medecinRepo.getMedecinById(ordonnance.medecin_id);
+            const patient = await patientRepo.getPatientById(ordonnance.patient_id);
 
             if (prescriptions != null) {
-                response.status(200).json({ info: "ordonnance found successfully", ordonnance: ordonnance, prescriptions: prescriptions });
+
+                response.status(200).json({ info: "ordonnance found successfully", ordonnance: ordonnance, prescriptions: prescriptions, medecin: medecin, patient: patient});
             }else{
                 response.status(400).json({ error: "invalid request" });
             }
