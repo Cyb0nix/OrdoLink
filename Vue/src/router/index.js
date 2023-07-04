@@ -2,11 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginPage from '../views/LoginPage.vue'
 import PatientHome from '../views/Patient.vue'
-import MedecinOrdonnance from '../views/MedecinCreerOrdonnance.vue'
+import MedecinCreerOrdonnance from '../views/MedecinCreerOrdonnance.vue'
 import MedecinListePatient from '../views/MedecinListePatient.vue'
 import AdminCreerCompte from '../views/AdminCreerCompte.vue'
 import MedecinListeOrdonnance from '../views/MedecinListeOrdonnance.vue'
 import AfficherOrdonnance from '../views/AfficherOrdonnance.vue'
+import Pharmacien from '../views/PharmacienPatientOrdo.vue'
+import AdminListUser from '../views/AdminListUser.vue'
+
 
 async function routGard(to, from, next) {
   if (localStorage.getItem('token') != null) {
@@ -54,7 +57,7 @@ const router = createRouter({
       // beforeEnter: routGard
     },
     {
-      path: '/medecin/liste-ordonnance',
+      path: '/medecin/liste-ordonnance/:id',
       name: 'medecin-liste-ordonnance',
       component: MedecinListeOrdonnance,
       // beforeEnter: routGard
@@ -66,9 +69,9 @@ const router = createRouter({
       // beforeEnter: routGard
     },
     {
-      path: '/medecin/ordonnance',
+      path: '/medecin/ordonnance/:id',
       name: 'medecin-ordonnance',
-      component: MedecinOrdonnance,
+      component: MedecinCreerOrdonnance,
       // beforeEnter: routGard
     },
     {
@@ -78,11 +81,23 @@ const router = createRouter({
       // beforeEnter: routGard
     },
     {
-      path: '/ordonnance', // remplacer par /ordonnance/:id
+      path: '/ordonnance/:id',
       name: 'afficher-ordonnance',
       component: AfficherOrdonnance,
       // beforeEnter: routGard
-    }
+    },
+    {
+      path: '/pharmacien',
+      name: 'pharmacien',
+      component: Pharmacien,
+      // beforeEnter: routGard
+    },
+    {
+      path: '/admin',
+      name: 'admin-liste-user',
+      component: AdminListUser,
+      // beforeEnter: routGard
+    },
   ]
 })
 

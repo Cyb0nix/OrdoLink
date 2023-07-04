@@ -1,45 +1,52 @@
 <script setup>
  import FooterHome from '../components/FooterHome.vue';
  import HeaderPharmacien from '../components/HeaderPharmacien.vue';
- import { pdf } from 'vue-pdf';
-
+ import AfficherOrdonnance from './AfficherOrdonnance.vue';
 </script>
 
 <template>
   <main  class="h-full bg-white">
     <HeaderPharmacien />
-    <section class="grid grid-cols-2 max-w-screen-lg px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2 ml-10">
-        <p class="text-sky-500 text-4xl font-inter -mb-[30px]">Rechercher un patient</p>
-        <div class="flex flex-row">
-          <div class="relative flex-grow mr-20">
+    <section class="flex flex-col items-left justify-center lg:ml-96 mt-12">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2 ml-14">
+        <p class="text-sky-500 text-4xl font-inter -mb-[30px] font-bold">Rechercher une ordonnance</p>
+        <div class="flex flex-row mb-10">
+          <div class="relative flex-grow mr-10">
             <input
               class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
               placeholder="Nom"
               type="text"
               id="lastname"
+              v-model="lastnamePatient"
             />
             <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-s px-2" for="lastname">Nom du Patient</label>
           </div>
-          <div class="relative flex-grow mr-20">
+          <div class="relative flex-grow mr-10">
             <input
               class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
               placeholder="Prénom"
               type="text"
               id="firstname"
+              v-model="firstnamePatient"
             />
             <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-s px-2" for="firstname">Prénom du patient</label>
           </div>
-          <div class="relative flex-grow mr-20">
+          <div class="relative flex-grow mr-10">
             <input
               class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
               placeholder="Numéro d'ordonnance"
               type="text"
               id="order-number"
+              v-model="ordonnanceId"
             />
             <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-s px-2" for="order-number">Numéro de l'ordonnance</label>
           </div>
-          <button class="flex items-center justify-center bg-sky-500 rounded-lg w-10 h-10 text-white mt-[5px]">
+
+          <button 
+          type="button"
+          class="flex items-center justify-center bg-sky-500 rounded-lg w-10 h-10 text-white mt-[5px]"
+          @click="getOrdonnance()"
+          >
             <img
               src="@/assets/Img/loupe.png"
               alt="loupe"
@@ -47,12 +54,41 @@
             />
           </button>
         </div>
-        <pdf src="@/assets/Img/Ordonnance.pdf"></pdf>        
       </div>
     </section>
+
+    <AfficherOrdonnance v-if="this.ordoShow"
+      :firstname="firstnamePatient"
+      :lastname="lastnamePatient"
+    />
+
     <FooterHome />
   </main>
 </template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  name: 'PharmacienPatientOrdo',
+  data() {
+    return {
+      ordonnanceId: '',
+      firstnamePatient: '',
+      lastnamePatient: '',
+      ordoShow: false,
+    };
+  },
+  methods: {
+    getOrdonnance() {
+      console.log("firstname: " + this.firstnamePatient);
+      console.log("lastname: " + this.lastnamePatient);
+      this.ordoShow = true;
+    },
+  },
+};
+</script>
+
 
 <style>
 .patient{

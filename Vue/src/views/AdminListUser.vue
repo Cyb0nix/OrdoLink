@@ -8,8 +8,8 @@
 <template>
   <main  class="h-full bg-white">
     <HeaderAdmin />
-    <section>
-      <p class="mt-2 font-normal text-3xl leading-11 font-bold text-center text-sky-500">Liste Utilisateur</p>
+    <section class="max-w-screen-xl mx-auto flex flex-col justify-center mb-6">
+      <p class="my-6 font-normal text-3xl leading-11 font-bold text-center text-sky-500">Liste des utilisateurs</p>
       <div class="profil">
         <table class="user-table">
           <thead>

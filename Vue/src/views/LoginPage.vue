@@ -78,6 +78,30 @@ export default defineComponent({
     };
   },
   methods: {
+    async routeNext() {
+      let token = localStorage.getItem('token');
+
+      let response = await fetch('https://ordolink.fly.dev/api/users/state', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        },
+      });
+
+      const data = await response.json();
+      console.log("data userType = ", data);
+      
+      if (data.type == 'medecin') {
+        this.$router.push('/medecin/liste-patient');
+      } else if (data.type == 'patient') {
+        this.$router.push('/patient');
+      } else if (data.type == 'pharmacien') {
+        this.$router.push('/pharmacien');
+      } else {
+        this.$router.push('/admin/creer-compte');
+      }
+    },
     async login() {
       let response = await fetch('https://ordolink.fly.dev/api/users/login', {
         method: 'POST',
@@ -93,8 +117,9 @@ export default defineComponent({
 
       if (data.token) {
         localStorage.setItem('token', data.token);
-        // localStorage.setItem('user', JSON.stringify(data.user));
-        this.$router.push('/patient');
+        localStorage.setItem('user', JSON.stringify(data.user_id));
+        localStorage.setItem('type_id', data.type_id);
+        this.routeNext(data.user_id);
       } else {
         this.rep = data.message;
       }

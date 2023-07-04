@@ -1,11 +1,11 @@
 <script setup>
  import HeaderMedecin from '../components/HeaderMedecin.vue';
  import FooterHome from '../components/FooterHome.vue';
-
+ import LigneOrdonnance from '../components/LigneOrdonnance.vue';
 </script>
 
 <template>
-  <main  class="h-full bg-white">
+  <main  class="h-full min-h-screen bg-white">
     <HeaderMedecin />
     
     <section class="grid grid-cols-2 max-w-screen-lg px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
@@ -17,22 +17,22 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <p class="text-sky-500 text-center text-3xl font-inter mb-10">"Photo"</p>
               <div class="relative mb-20">
-                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Nom :</label>
+                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Nom : {{ patient.lastname }}</label>
               </div>
             </div>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <div class="relative mb-20">
-                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Prénom :</label>
+                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Prénom : {{ patient.firstname }}</label>
               </div>
             </div>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <div class="relative mb-20">
-                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Email :</label>
+                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Email : {{ patient.email }}</label>
               </div>
             </div>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <div class="relative mb-40">
-                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Numéro de sécurité social :</label>
+                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Numéro de sécurité social : {{ patient.num_secu }}</label>
               </div>
             </div>
           </form>
@@ -45,32 +45,41 @@
         <div class="border-2 rounded-xl border-sky-200 lg:p-12"> 
            <form action="" class="space-y-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 ">
-              <p class="text-sky-500 text-4xl font-inter flex items-center justify-center -mt-[20px]">Ordonnance valable de "Nom/Prénom"</p>
+              <p class="text-sky-500 text-4xl font-inter flex items-center justify-center -mt-[20px]">Ordonnance valable</p>
             </div>
-            <LigneOrdonnance 
-            v-for="ordonnance in ordonnancesList"
-            v-if="!ordonnance.given"
-            :key="ordonnance.id"
-            :prescription_date="ordonnance.prescription_date"
-            :medecin_id="ordonnance.medecin_id"
-            />
+
+            <div v-for="ordo in ordonnancesList">
+              <ligne-ordonnance
+              v-if="ordo.given == false"
+              :firstname="patient.firstname"
+              :lastname="patient.lastname"
+              :prescription_date="converDate(ordo.prescription_date)"
+              @click="afficherOrdonnance(ordo.ordonnance_id)"
+              />
+            </div>
+            
           </form>
         </div>
       </div>
+      
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2 ml-20 mt-20">
         <div class="border-2 rounded-xl border-sky-200 lg:p-12 w-full"> 
            <form action="" class="space-y-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1 ">
-              <p class="text-sky-500 text-4xl font-inter flex items-center justify-center -mt-[20px]">Historique des ordonnaces de "Nom/Prénom"</p>
+              <p class="text-sky-500 text-4xl font-inter flex items-center justify-center -mt-[20px]">Historique des ordonnaces</p>
             </div>
-            <LigneOrdonnance 
-            v-for="ordonnance in ordonnancesList"
-            v-if="ordonnance.given"
-            :key="ordonnance.id"
-            :prescription_date="ordonnance.prescription_date"
-            :medecin_id="ordonnance.medecin_id"
-            />
-            </form>
+
+            <div v-for="ordo in ordonnancesList">
+              <ligne-ordonnance
+              v-if="ordo.given == true"
+              :firstname="patient.firstname"
+              :lastname="patient.lastname"
+              :prescription_date="converDate(ordo.prescription_date)"
+              @click="afficherOrdonnance(ordo.ordonnance_id)"
+              />
+            </div>
+
+          </form>
         </div>
       </div>
     </section>
@@ -80,54 +89,69 @@
   </main>
 </template>
 
+<script>
+export default {
+  name: 'MedecinListeOrdonnance',
+  data() {
+    return {
+      medecinID: 'c4854e71-8012-4a16-b151-14634bbe72f7',
+      ordonnancesList: [],
+      patient: {
+        firstname: "",
+        lastname: "",
+        email: "",
+        num_secu: "",
+      },
+      
+    };
+  },
+  methods: {
+    async getPatientInfo() {
+      let token = localStorage.getItem('token'); 
+      
+      let response = await fetch('https://ordolink.fly.dev/api/medecins/patients/' + this.medecinID, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": token
+        },
+      });
+      const data = await response.json();
+      console.log(data);
+      this.patient = data.patients.find(p => p.id == this.$route.params.id);
+    },
+    async getOrdonnaceList() {
+      let token = localStorage.getItem('token');
 
+      let response = await fetch('https://ordolink.fly.dev/api/medecins/ordonnaces/'+ this.medecinID, { 
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": token
+        },
+      });
 
-<style>
-.patient{
-width: 800px;
-height: 46px;
-margin: auto;
-display: flex;
-flex-direction: row;
-border-radius: 10px;
-border: 1px solid #B2E2F9;
-background: #FFF;
-}
-.nom{
-  color: #000;
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 2%;
-}
-.histo{
-width: 244px;
-height: 46px;
-flex-shrink: 0;
-border: 1px solid #B2E2F9;
-background: rgba(78, 102, 142, 0.00);
-margin-left: 31.7%;
-margin-top: -1px;
-color: black;
-}
-.create{
-width: 244px;
-height: 46px;
-flex-shrink: 0;
-border: 1px solid #B2E2F9;
-background: rgba(78, 102, 142, 0.00);
-margin-left: 0%;
-margin-top: -1px;
-color: black;
-border-radius: 0 10px 10px 0;
-}
+      const data = await response.json();
+      console.log("data ordonnancesList : ", data);
 
-.pdfimg{
-  width: 4%;
-  height: 80%;
-  margin-left: 52%;
-  margin-top: 0.7%;
-  margin-right: 1%;
-}
-</style>
+      this.ordonnancesList = data.ordonnaces;
+      this.medecinID = data.ordonnaces[0].medecin_id;
+    },
+    converDate(date) {
+      // convertire la date au format 2023-07-03T00:00:00.000Z en 03/07/2023
+      let dateArray = date.split('T');
+      let dateArray2 = dateArray[0].split('-');
+      let dateFinal = dateArray2[2] + '/' + dateArray2[1] + '/' + dateArray2[0];
+      return dateFinal;
+    },
+    afficherOrdonnance(id) {
+      this.$router.push('/ordonnance/' + id);
+    }
+  },
+  mounted() {
+    this.getPatientInfo();
+
+    this.getOrdonnaceList();
+  }
+};
+</script>

@@ -24,7 +24,7 @@
 
             <div class="relative">
                 <input
-                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="Nom"
                   type="fname"
                   id="firstname"
@@ -48,7 +48,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-4">
               <div class="relative">
                 <input
-                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-400"
+                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="Numéro RPPS"
                   type="text"
                   id="rpps"
@@ -59,7 +59,7 @@
 
               <div class="relative">
                 <input
-                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-400"
+                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="Date d'expiration du RPPS"
                   type="date"
                   id="rpps"
@@ -310,7 +310,6 @@
               body: JSON.stringify(this.Medecin)
             });
 
-            console.log("Ca log ouuuuuuuu ? ")
             const data = await (await response).json();
             console.log("data Medecin : ", data)
 

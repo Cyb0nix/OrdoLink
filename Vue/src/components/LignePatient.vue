@@ -1,5 +1,6 @@
 <script setup>
   defineProps({
+    id: String,
     firstname: String,
     lastname: String,
   });
@@ -13,20 +14,37 @@
         </h3>
 
         <div class="grid grid-cols-2 lg:grid-cols-2 ">
-            <RouterLink to="/medecin/historique-ordonnance">
-                <button class="w-full text-black px-2 py-3 text-sm font-medium hover:text-white transition hover:bg-sky-200 focus:outline-none border-x-2 border-sky-200">
-                    Historique des ordonnances
-                </button>
-            </RouterLink>
+              <button type="button" @click="listOdonnane(id)" class="w-full text-black px-2 py-3 text-sm font-medium hover:text-white transition hover:bg-sky-200 focus:outline-none border-x-2 border-sky-200">
+                  Liste des ordonnances
+              </button>
 
-            <RouterLink to="/medecin/ordonnance">
-                <button class="w-full text-black px-2 py-3 text-sm font-medium hover:text-white transition hover:bg-sky-200 focus:outline-none focus:ring">
-                    Créer une ordonnance
-                </button>
-            </RouterLink>
+              <button type="button" @click="createOrdonnance(id)" class="w-full text-black px-2 py-3 text-sm font-medium hover:text-white transition hover:bg-sky-200 focus:outline-none focus:ring">
+                  Créer une ordonnance
+              </button>
         </div>
             
     </div>
     
   </div>
 </template>
+
+<script>
+import { RouterLink } from "vue-router";
+
+export default {
+  name: "LignePatient",
+  components: {
+    RouterLink,
+  },
+  methods: {
+    createOrdonnance(id) {
+      this.$router.push({ name: "medecin-ordonnance", params: {id: id.toString()} });
+    },
+    listOdonnane(id) {
+      this.$router.push({ name: "medecin-liste-ordonnance", params: {id: id.toString()} });
+    },
+  },
+
+
+};
+</script>

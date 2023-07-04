@@ -3,12 +3,13 @@ const medecinRepo = require('../repositories/medecin.repository');
 const patientRepo = require('../repositories/patient.repository');
 
 async function createOrdonnanceAction(request, response) {
+    console.log('[', request.ip, '] ', request.body);
     try {
         const ordonnance_id = await ordonnanceRepo.createOrdonnance(request.body.patient_id, request.body.medecin_id, new Date(Date.now() + 1000 * 3600 * 24).toUTCString());
         if (ordonnance_id != null) {
             for (const element of request.body.prescriptions){
 
-                const prescription_id = await ordonnanceRepo.createPrescription(element.medecine, element.posologie, element.renewale, element.given, ordonnance_id);
+                const prescription_id = await ordonnanceRepo.createPrescription(element.medecine, element.posologie, element.renewale, element.given, ordonnance_id, element.quantity);
                 if (prescription_id != null) {
                     console.log('[', request.ip, '] CREATED Prescription : ', prescription_id);
                 }else{

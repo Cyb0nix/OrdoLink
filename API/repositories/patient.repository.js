@@ -15,11 +15,10 @@ module.exports = {
     }
   },
 
-  async createPatient(patient) {
-    const { num_secu, lastname, surname } = patient;
+  async createPatient(num_secu, lastname, firstname) {
     const query = {
-      text: 'INSERT INTO patient(num_secu, lastname, surname) VALUES($1, $2, $3) RETURNING *',
-      values: [num_secu, lastname, surname],
+      text: 'INSERT INTO patient(num_secu, lastname, firstname) VALUES($1, $2, $3) RETURNING *',
+      values: [num_secu, lastname, firstname],
     };
     try {
       const result = await pool.query(query);
@@ -56,10 +55,10 @@ module.exports = {
     }
   },
   async updatePatient(patient) {
-    const { id, num_secu, lastname, surname } = patient;
+    const { id, num_secu, lastname, firstname } = patient;
     const query = {
-      text: 'UPDATE patient SET num_secu = $1, lastname = $2, surname = $3 WHERE id = $4 RETURNING *',
-      values: [num_secu, lastname, surname, id],
+      text: 'UPDATE patient SET num_secu = $1, lastname = $2, firstname = $3 WHERE id = $4 RETURNING *',
+      values: [num_secu, lastname, firstname, id],
     };
     try {
       const result = await pool.query(query);

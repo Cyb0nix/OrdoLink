@@ -71,7 +71,7 @@
                 <input
                   class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                   placeholder="Mot de passe"
-                  type="password"
+                  type="text"
                   id="password"
                   v-model="patient.password"
                 />
@@ -108,13 +108,14 @@
                   />
                   <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Recherche un patient</label>
                 </div>
-            </div>
+              </div>
 
             <LignePatient 
             v-for="p in patientsList"
             :key="p.id"
             :firstname="p.firstname"
             :lastname="p.lastname"
+            :id="p.id"
             />
 
           </form>
@@ -145,10 +146,6 @@ export default {
     };
   },
   methods: {
-    // async getMedecinId(){
-    //   let token = localStorage.getItem('token');
-
-    // },
     async getPatientsList() {
       let token = localStorage.getItem('token');
 
@@ -160,24 +157,25 @@ export default {
         },
       });
       const data = await response.json();
-      console.log(data);
       this.patientsList = data.patients;
     },
     async createPatient() {
-      let token = localStorage.getItem('token');
-      console.log("patient : ", this.patient);
-      
-      let response =  await fetch('https://ordolink.fly.dev/api/patients/register', {
+      const token = localStorage.getItem('token');
+
+      console.log("patient : ", this.patient)
+
+      let response = fetch('http://ordolink.fly.dev/api/patients/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          "Authorization": token
+          "Authorization": token,
         },
-        body: JSON.stringify(this.patient),
+        body: JSON.stringify(this.patient)
       });
 
-      const data = await response.json();
-      console.log(data);
+      const data = await (await response).json();
+      console.log("data patient : ", data)
+
     }
   },
   mounted() {
