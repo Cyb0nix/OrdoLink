@@ -12,7 +12,7 @@ async function createPatientAction(request, response) {
       const patient_id = await patientRepo.createPatient(request.body.num_secu, request.body.lastname, request.body.firstname);
 
       if (patient_id != null) {
-        const result = await accountTypeRepo.addAccountType(user_id, patient_id, "patient");
+        const result = await accountTypeRepo.createAccountType(user_id, patient_id, "patient");
 
         if (result != null) {
           console.log('[', request.ip, '] CREATED Patient:', patient_id);
@@ -91,7 +91,7 @@ async function deletePatientAction(request, response) {
 async function getPatientOrdonnances(request, response) {
   try {
     const result = await patientRepo.getPatientOrdonnances(request.params.id);
-
+    console.log(result);
     if (result != null) {
       response.status(200).json({ info: "Patient ordonnances found successfully", ordonnances: result });
     } else {

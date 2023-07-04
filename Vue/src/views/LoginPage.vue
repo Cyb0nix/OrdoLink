@@ -117,6 +117,7 @@ export default defineComponent({
 
       if (data.token) {
         localStorage.setItem('token', data.token);
+        localStorage.setItem('type', JSON.stringify(data.type_id));
         localStorage.setItem('user', JSON.stringify(data.user_id));
         this.routeNext(data.user_id);
       } else {
