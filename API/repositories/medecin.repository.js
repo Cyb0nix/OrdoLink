@@ -134,6 +134,21 @@ module.exports = {
             console.log(err);
             return null;
         }
+    },
+
+    async addMedecinPatients(patient_id,medecin_id) {
+        const query = {
+            text: 'INSERT INTO liste_medecin_patient(medecin_id, patient_id) VALUES($1, $2) RETURNING *',
+            values: [medecin_id, patient_id],
+        };
+        try {
+            const result = await pool.query(query);
+            return result.rows[0];
+        }
+        catch (err) {
+            console.log(err);
+            return null;
+        }
     }
 
 
