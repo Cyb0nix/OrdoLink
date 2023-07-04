@@ -12,7 +12,7 @@ Ordolink, votre solution en ligne pour la création rapide et facile d'ordonnanc
 
 Afin de démontrer la viabilité de cette solution, une version de démonstration a été déployée depuis ce dépôt GitHub.  
 La base de données PostgreSQL est déployée sur [neon.tech](https://neon.tech), le back-end sur [Fly.io](https://fly.io) et le front-end sur [GitHub Pages](https://pages.github.com/).  
-URL de l'API (back-end) : <https://online-store.fly.dev/>  
+URL de l'API (back-end) : <https://ordolink.fly.dev/>  
 URL du site web (front-end) : <https://cyb0nix.github.io/OrdoLink>
 
 ## Installation
