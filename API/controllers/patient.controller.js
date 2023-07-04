@@ -23,6 +23,7 @@ async function createPatientAction(request, response) {
           }
         }
         
+        
       }
     } else {
       response.status(400).json({ error: "Invalid request" });
