@@ -1,6 +1,5 @@
-# OnlineStore
+# OrdoLink
 [![](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)](https://firebase.google.com/)
 [![](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
 [![](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)](https://expressjs.com/)
 [![](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)](https://vuejs.org/)
@@ -18,31 +17,16 @@ URL du site web (front-end) : <https://cyb0nix.github.io/OrdoLink>
 ## Installation
 
 Cette application web ayant été réalisée en mode n-tier, cela signifie qu’elle est constituée de trois parties distinctes pouvant ainsi être déployée de manière indépendante (possiblement sur des serveurs différents) :
-- Les bases de données utilisées par l’application (Postgres et Firebase Storage)
+- La bases de données utilisées par l’application (Postgres)
 - Le back-end (API Express.js pour interagir avec les bases de données)
 - Le front-end (site web statique qui interagit avec l’API)
 
 ### Création des bases de données
 
-La première étape du déploiement consiste donc à créer et configurer ces bases de données utilisées par l’application. Elles sont au nombre de deux :
--	Une base de données PostgreSQL pour stocker toutes les données textuelles
--	Un bucket Firebase Storage pour stocker les documents et images
-
-\
-**Étape 1 : Création de la base de données PostgreSQL**
+La première étape du déploiement consiste donc à créer et configurer ces bases de données utilisées par l’application. 
 1. Créez une nouvelle instance PostgreSQL sur l’hébergeur de votre choix (ou votre propre serveur).
 2. Dans cette instance, créez une nouvelle base de données ainsi qu’un nouvel utilisateur ayant tous les droits sur cette base de données.
 3. Conservez le nom de domaine de l’instance PostgreSQL, le nom de la base de donnée ainsi que le nom et le mot de passe de l’utilisateur pour les étapes suivantes.
-
-\
-**Étape 2 : Création du bucket Firebase Storage**
-1. Rendez-vous sur le site Web de Firebase (https://firebase.google.com/) et créez un nouveau compte si vous n'en avez pas déjà un.
-2. Dans la console Firebase, ajoutez votre projet en cliquant sur le bouton "Ajouter un projet" et suivez les instructions pour le configurer.
-3. Une fois le projet créé, accédez à la section "Storage" dans la console Firebase.
-4. Activez le stockage et suivez les instructions pour configurer votre bucket de stockage en mode production.
-5. Enregistrez ensuite votre application web en cliquant sur le bouton “Ajouter une application” et ignorez la partie “Ajouter le SDK firebase”.
-6. Rendez-vous ensuite dans les paramètres de votre projet, partie “comptes de service” et cliquez sur le bouton “Générer une nouvelle clé privée”. 
-7. Conservez le fichier JSON ainsi généré pour les étapes suivantes.
 
 ### Déploiement du back-end
 
