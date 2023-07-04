@@ -75,7 +75,7 @@
 
                     <div>
                       <div class="relative mt-4">
-                        <div class="w-full h-[31px] text-black text-[24px] font-normal text-right">{{medicine.number}} boites</div>
+                        <div class="w-full h-[31px] text-black text-[24px] font-normal text-right">{{medicine.quantity}} boites</div>
                       </div>
                     </div>
 

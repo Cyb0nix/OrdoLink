@@ -15,8 +15,7 @@ module.exports = {
     }
   },
 
-  async createPatient(patient) {
-    const { num_secu, lastname, firstname } = patient;
+  async createPatient(num_secu, lastname, firstname) {
     const query = {
       text: 'INSERT INTO patient(num_secu, lastname, firstname) VALUES($1, $2, $3) RETURNING *',
       values: [num_secu, lastname, firstname],

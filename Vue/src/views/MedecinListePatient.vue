@@ -162,7 +162,9 @@ export default {
     async createPatient() {
       const token = localStorage.getItem('token');
 
-      let response = fetch('http://localhost:3000/api/patients/register', {
+      console.log("patient : ", this.patient)
+
+      let response = fetch('http://ordolink.fly.dev/api/patients/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
