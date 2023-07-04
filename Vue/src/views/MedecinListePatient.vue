@@ -115,6 +115,7 @@
             :key="p.id"
             :firstname="p.firstname"
             :lastname="p.lastname"
+            :id="p.id"
             />
 
           </form>

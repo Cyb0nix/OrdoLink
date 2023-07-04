@@ -3,10 +3,69 @@ import { ref } from 'vue';
 import HeaderMedecin from '../components/HeaderMedecin.vue';
 import FooterHome from '../components/FooterHome.vue';
 
+
 const medications = ref([]); // Reactive array to store medication rows
+
+const prescriptions = ref([{
+  medicine: null,
+  quantity: null,
+  posologie: null,
+  renewale: null,
+  given: null,
+}]);
+
+
+
+const user = ref( {
+        firstname: null,
+        lastname: null,
+        num_secu: null,
+      });
+
+const prescription_date = null;
+const medecin_id = null;
+const patient_id = null;
 
 function addMedicationRow() {
   medications.value.push({});
+  prescriptions.value.push({
+    medicine: null,
+    quantity: null,
+    posologie: null,
+    renewale: null,
+    given: null,
+  });
+}
+
+async function createOrdonnance(id) {
+  let token = localStorage.getItem('token');
+      const patient_id = id;
+      const prescription_date = new Date();
+      const pres = JSON.stringify(prescriptions.value);
+
+      console.log({prescription_date : prescription_date,
+          medecin_id : medecin_id,
+          patient_id : patient_id,
+          prescriptions : pres,});
+
+      
+      let response =  await fetch('http://localhost:3000/api/patients/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": token
+        },
+        body: {
+          prescription_date : prescription_date,
+          medecin_id : medecin_id,
+          patient_id : patient_id,
+          prescriptions : pres,
+        },
+      });
+
+      const data = await response.json();
+      console.log(data);
+  
 }
 
 </script>
@@ -26,42 +85,45 @@ function addMedicationRow() {
     
     <section class="mx-auto max-w-screen-lg px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-        <div class="border-2 rounded-xl border-sky-200 lg:col-span-3 lg:p-12">
+        <div class="border-2 rounded-xl border-sky-300 lg:col-span-3 lg:p-12">
            <form action="" class="space-y-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div  class="relative">
                 <input
-                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
                   placeholder="Nom patient"
                   type="text"
                   id="firstname"
-                  v-model="user.firstname"
+                  v-model="patient.firstname"
+                  disabled
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Nom patient</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Nom patient</label>
               </div>
 
               <div class="relative">
                 <input
-                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
                   placeholder="Prénom patient"
                   type="text"
                   id="lastname"
-                  v-model="user.lastname"
+                  v-model="patient.lastname"
+                  disabled
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Prénom patient</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="lastname">Prénom patient</label>
               </div>
             </div>
             
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="relative">
                 <input
-                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-400"
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
                   placeholder="Numéro de sécurité sociale"
                   type="text"
                   id="NumSecu"
-                  v-model="user.NumSecu"
+                  v-model="patient.num_secu"
+                  disabled
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="date">Numéro de sécurité sociale</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="date">Numéro de sécurité sociale</label>
               </div>
             </div>
             
@@ -70,37 +132,37 @@ function addMedicationRow() {
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div  class="relative">
                 <input
-                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
                   placeholder="Nom médicament 0"
                   type="text"
                   id="medcicine-0"
-                  v-model="user.medcicine"
+                  v-model="prescriptions[0].medcicine"
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Medicament 0</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Medicament 0</label>
               </div>
 
               <div class="relative">
                 <input
-                  class="w-screen-md rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
+                  class="w-screen-md rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
                   placeholder="Quantité"
                   type="number"
                   id="quantity-0"
-                  v-model="user.quantity"
+                  v-model="prescriptions[0].quantity"
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Quantité</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="lastname">Quantité</label>
               </div>
             </div>
             
             <div>
               <div  class="relative">
                 <input
-                  class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                  class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
                   placeholder="Posologie médicament 0"
                   type="text"
                   id="posologie-0"
-                  v-model="user.posologie"
+                  v-model="prescriptions[0].posologie"
                 />
-                <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Posologie</label>
+                <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Posologie</label>
               </div>
             </div>
             
@@ -110,37 +172,37 @@ function addMedicationRow() {
               <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 ">
                 <div class="relative lg:mt-4">
                   <input
-                    class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                    class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-300"
                     :placeholder="`Nom médicament ${index + 1}`"
                     type="text"
                     :id="`medcicine-${index+1}`"
-                    v-model="user.medcicine"
+                    v-model="prescriptions[index+1].medicine"
                   />
-                  <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" :for="`medcicine-${index+1}`">Medicament {{ index + 1 }}</label>
+                  <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" :for="`medcicine-${index+1}`">Medicament {{ index + 1 }}</label>
                 </div>
 
                 <div class="relative lg:mt-4">
                   <input
-                    class="w-screen-md rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
+                    class="w-screen-md rounded-lg border-2 border-sky-300 p-3 text-sm text-black"
                     placeholder="Quantité"
                     type="number"
                     :id="`quantity-${index+1}`"
-                    v-model="user.quantity"
+                    v-model="prescriptions[index+1].quantity"
                   />
-                  <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" :for="`quantity-${index+1}`">Quantité</label>
+                  <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" :for="`quantity-${index+1}`">Quantité</label>
                 </div>
               </div>
 
               <div class="lg:mt-4 lg:mb-4">
                 <div  class="relative">
                   <input
-                    class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-gray-300"
+                    class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-300"
                     :placeholder="`Posologie médicament ${index + 1}`"
                     type="text"
                     :id="`posologie-${index+1}`"
-                    v-model="user.posologie"
+                    v-model="prescriptions[index+1].posologie"
                   />
-                  <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="firstname">Posologie</label>
+                  <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Posologie</label>
                 </div>
               </div>
             </div>
@@ -160,11 +222,11 @@ function addMedicationRow() {
 
             <div class="mt-4">
               <button
-                type="submit"
+                type="button"
                 class="inline-block w-full rounded-lg bg-sky-600 px-5 py-3 font-medium text-white sm:w-auto"
-                @click="addPrescription"
+                @click="createOrdonnance(this.$route.params.id)"
               >
-                Ajouter une ordonnance
+                Créer une ordonnance
               </button>
             </div>
           </form>
@@ -183,31 +245,33 @@ export default {
   name: 'MedecinCreerOrdonnance',
   data() {
     return {
-      user: {
-        firstname: '',
-        lastname: '',
-        NumSecu: '',
+      patient:{
+        firstname: null,
+        lastname: null,
+        num_secu: null,
       },
-      prescriptions: {
-        medcicine: '',
-        quantity: '',
-        posologie: '',
-        renewale: '',
-        // actual date
-        given: '',
-      },
+        
+      
       activePage: null,
     };
   },
   methods: {
-    addMedicationRow() {
-      medications.value.push({});
-    },
-    addPrescription() {
-      console.log('addPrescription');
-      console.log('user = ' + this.user);
-      console.log('prescriptions = ' + this.prescriptions);
-    },
+    async getPatientInfo(){
+      let token = localStorage.getItem('token');
+
+      let response = await fetch('https://ordolink.fly.dev/api/patients/get/'+ this.$route.params.id, { 
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": token
+        },
+      });
+      const data = await response.json();
+      this.patient = data.patient;
+    }
+  },
+  created() {
+    this.getPatientInfo();
   },
 };
 </script>

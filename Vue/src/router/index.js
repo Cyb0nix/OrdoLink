@@ -68,7 +68,7 @@ const router = createRouter({
       // beforeEnter: routGard
     },
     {
-      path: '/medecin/ordonnance',
+      path: '/medecin/ordonnance/:id',
       name: 'medecin-ordonnance',
       component: MedecinOrdonnance,
       // beforeEnter: routGard

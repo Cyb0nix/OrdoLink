@@ -1,5 +1,6 @@
 <script setup>
   defineProps({
+    id: String,
     firstname: String,
     lastname: String,
   });
@@ -19,14 +20,31 @@
                 </button>
             </RouterLink>
 
-            <RouterLink to="/medecin/ordonnance">
-                <button class="w-full text-black px-2 py-3 text-sm font-medium hover:text-white transition hover:bg-sky-200 focus:outline-none focus:ring">
+       
+                <button type="button" @click="createOrdonnance(id)" class="w-full text-black px-2 py-3 text-sm font-medium hover:text-white transition hover:bg-sky-200 focus:outline-none focus:ring">
                     Créer une ordonnance
                 </button>
-            </RouterLink>
         </div>
             
     </div>
     
   </div>
 </template>
+
+<script>
+import { RouterLink } from "vue-router";
+
+export default {
+  name: "LignePatient",
+  components: {
+    RouterLink,
+  },
+  methods: {
+    createOrdonnance(id) {
+      this.$router.push({ name: "medecin-ordonnance", params: {id: id.toString()} });
+    }
+  },
+
+
+};
+</script>
