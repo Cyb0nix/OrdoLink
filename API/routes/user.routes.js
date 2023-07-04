@@ -13,6 +13,7 @@ router.put('/update/:id', checkAuth("all"), userController.updateUserByIdAction)
 router.get('/get/:id', checkAuth('all'), userController.getUserByIdAction);
 router.get('/all', checkAuth('admin'), userController.getAllUsersAction);
 router.get('/state', userController.getUserStateAction);
+router.get('/type/:id', checkAuth('all'), userController.getUserTypeIdAction);
 
 
 module.exports = router;
