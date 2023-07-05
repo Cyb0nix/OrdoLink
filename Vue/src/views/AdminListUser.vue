@@ -14,34 +14,26 @@
         <table class="user-table">
           <thead>
             <tr>
-              <th class="text-sky-500">Prénom</th>
-              <th class="text-sky-500">Nom</th>
-              <th class="text-sky-500">Type d'utilisateur</th>
+              <th class="text-sky-500">ID</th>
               <th class="text-sky-500">Email</th>
-              <th class="text-sky-500">Numéro de téléphone</th>
-              <th class="text-sky-500">Addresse</th>
+              <th class="text-sky-500">Is admin ?</th>
               <th class="text-sky-500">Supprimer</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="user in this.users">
-              <td>{{ user.firstname }}</td>
-              <td>{{ user.lastname}}</td>
-              <td>{{ user.user_id}}</td>
+            <tr v-for="user in this.users" class="text-sky-300">
+              <td>{{ user.id}}</td>
               <td>{{ user.email}}</td>
-              <td>{{ user.phone_number}}</td>
-              <td>{{ user.address }}</td>
+              <td>{{ user.admin}}</td>
               <td>
                 <button class="text-gray-600 transition hover:text-red-600" @click="() => deleteUser(user)">
-                    <span class="sr-only">Delete User</span>
-
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke-width="1.5"
                       stroke="currentColor"
-                      class="h-4 w-4"
+                      class="h-6 w-6"
                     >
                       <path
                         stroke-linecap="round"
@@ -65,25 +57,27 @@
 <script>
 export default {
   name: "AdminListUser",
-  components: {},
-  props: {},
   data() {
     return {
-      users: []
+      users: [],
     };
   },
   methods: {
     async getUsers() {
       const token = localStorage.getItem('token');
-      const response = await fetch(this.$api_url + "users/all", {
+
+      const response = await fetch("http://localhost:3000/api/users/all", {
         method: "GET",
         headers: {
           "Authorization": token
         }
       });
+      console.log("response users = ", response);
       this.users = await response.json();
+      console.log("users", this.users);
     },
     async deleteUser(user) {
+        console.log("user clicked", user);
           const token = localStorage.getItem('token');
           await fetch(this.$api_url + `users/delete/${user.id}`, {
             method: "DELETE",

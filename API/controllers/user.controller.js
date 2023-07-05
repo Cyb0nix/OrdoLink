@@ -95,10 +95,11 @@ async function getUserByIdAction(request, response) {
 
 async function getAllUsersAction(request, response) {
 
-    const products = await productRepo.getAllProducts();
-    if (products != null) {
-        console.log('[', request.ip, '] FETCHED all products');
-        response.status(200).json(products);
+    const users = await userRepo.getAllUsers();
+    console.log("users : ", users);
+    if (users != null) {
+        console.log('[', request.ip, '] FETCHED all users');
+        response.status(200).json(users);
     }
     else {
         response.status(400).json({ error: "invalid request" });
