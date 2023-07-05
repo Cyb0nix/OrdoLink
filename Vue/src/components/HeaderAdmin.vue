@@ -16,15 +16,15 @@
                     <nav aria-label="Global">
                     <ul class="flex items-center gap-16 text-xl">
                         <li @click="rooter('/admin')" :class="{ 'border-b-2 border-sky-500': activePage === '/admin' }">
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="">
+                            <h3 class="text-sky-500 transition hover:text-sky-500/30 cursor-pointer">
                                 Utilisateur
-                            </a>
+                            </h3>
                         </li>
 
                         <li @click="rooter('/admin/creer-compte')" :class="{ 'border-b-2 border-sky-500': activePage === '/admin/creer-compte' }">
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="">
+                            <h3 class="text-sky-500 transition hover:text-sky-500/30 cursor-pointer">
                                 Créer compte
-                            </a>
+                            </h3>
                         </li>
                     </ul>
                     </nav>
