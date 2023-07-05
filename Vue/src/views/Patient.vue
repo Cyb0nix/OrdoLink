@@ -1,15 +1,15 @@
 <script setup>
- import HeaderPatient from '../components/HeaderPatient.vue';
+ import HeaderUsers from '../components/HeaderUsers.vue';
  import FooterHome from '../components/FooterHome.vue';
 </script>
 
 <template>
     <main  class="h-full bg-white">
-        <HeaderPatient />
+        <HeaderUsers />
         <div class="flex flex-col items-center justify-center mt-10 -ml-48">
             <div class="grid grid-cols-2 gap-8 lg:grid-cols-2">
-                <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-10">Vos ordonnaces en cours</p>
-                <div class="relative flex-grow mr-20">
+                <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-4">Vos ordonnaces en cours</p>
+                <!-- <div class="relative flex-grow mr-20">
                     <input
                     class="w-80 rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                     placeholder="Date ou Médecin"
@@ -17,11 +17,11 @@
                     id="Recherche"
                     />
                     <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Recherche une ordonnace</label>
-                </div>
+                </div> -->
             </div>
         </div>
 
-        <section class="mt-4 flex flex-col items-center justify-center">
+        <section class="mt-4 flex flex-col items-center justify-center mb-16">
             <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2">
                 <table class="w-full border-collapse flex flex-col items-center justify-center">
                     <tbody  class="border-2 rounded-xl border-sky-200">
@@ -43,7 +43,7 @@
 
         <div class="flex flex-col items-center justify-center mt-10 -ml-52">
             <div class="grid grid-cols-2 gap-8 lg:grid-cols-2 -ml-20">
-                <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-10 ">Vos ordonnaces passé</p>
+                <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-4 ">Vos ordonnaces passé</p>
             </div>
         </div>
 

@@ -274,7 +274,7 @@
           },
           async getMedcinType() {
             const token = localStorage.getItem('token');
-            let response = fetch('http://ordolink.fly.dev/api/medecins/types', {
+            let response = fetch('https://ordolink.fly.dev/api/medecins/types', {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -301,7 +301,7 @@
             
             const token = localStorage.getItem('token');
 
-            let response = fetch('http://ordolink.fly.dev/api/medecins/register', {
+            let response = fetch('https://ordolink.fly.dev/api/medecins/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -323,7 +323,7 @@
             console.log("user : ", this.user)
 
             const token = localStorage.getItem('token');
-            let response = fetch('http://ordolink.fly.dev/api/pharmaciens/register', {
+            let response = fetch('https://ordolink.fly.dev/api/pharmaciens/register', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

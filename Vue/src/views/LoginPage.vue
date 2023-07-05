@@ -74,7 +74,6 @@ export default defineComponent({
         email: null,
         password: null,
       },
-      rep: "",
     };
   },
   methods: {
@@ -99,7 +98,7 @@ export default defineComponent({
       } else if (data.type == 'pharmacien') {
         this.$router.push('/pharmacien');
       } else {
-        this.$router.push('/admin/creer-compte');
+        this.$router.push('/admin');
       }
     },
     async login() {
@@ -121,8 +120,6 @@ export default defineComponent({
         localStorage.setItem('user', JSON.stringify(data.user_id));
         localStorage.setItem('type_id', data.type_id);
         this.routeNext(data.user_id);
-      } else {
-        this.rep = data.message;
       }
     },
   },
