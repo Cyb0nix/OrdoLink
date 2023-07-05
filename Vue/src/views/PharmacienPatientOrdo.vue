@@ -1,14 +1,14 @@
 <script setup>
  import FooterHome from '../components/FooterHome.vue';
- import HeaderPharmacien from '../components/HeaderPharmacien.vue';
+ import HeaderUsers from '../components/HeaderUsers.vue';
  import AfficherOrdonnance from './AfficherOrdonnance.vue';
 </script>
 
 <template>
-  <main  class="h-full bg-white">
-    <HeaderPharmacien />
-    <section class="flex flex-col items-left justify-center lg:ml-96 mt-12">
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2 ml-14">
+  <main  class="h-full bg-white min-h-screen">
+    <HeaderUsers />
+    <section class="flex flex-col items-left justify-center lg:ml-96 mt-12 ">
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2 ml-14 ">
         <p class="text-sky-500 text-4xl font-inter -mb-[30px] font-bold">Rechercher une ordonnance</p>
         <div class="flex flex-row mb-10">
           <div class="relative flex-grow mr-10">
@@ -58,11 +58,10 @@
     </section>
 
     <AfficherOrdonnance v-if="this.ordoShow"
-      :firstname="firstnamePatient"
-      :lastname="lastnamePatient"
+      :ordoID="ordonnanceId"
     />
 
-    <FooterHome />
+    <FooterHome/>
   </main>
 </template>
 
@@ -81,8 +80,7 @@ export default {
   },
   methods: {
     getOrdonnance() {
-      console.log("firstname: " + this.firstnamePatient);
-      console.log("lastname: " + this.lastnamePatient);
+      console.log("ordonnanceId: " + this.ordonnanceId);
       this.ordoShow = true;
     },
   },

@@ -1,12 +1,12 @@
 <script setup>
- import HeaderMedecin from '../components/HeaderMedecin.vue';
+ import HeaderUsers from '../components/HeaderUsers.vue';
  import FooterHome from '../components/FooterHome.vue';
  import LignePatient from '../components/LignePatient.vue';
 </script>
 
 <template>
   <main  class="h-full bg-white">
-    <HeaderMedecin />
+    <HeaderUsers />
     
     <section class="grid grid-cols-2 max-w-screen-lg px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
 
@@ -99,7 +99,7 @@
            <form action="" class="space-y-4">
               <div class="flex">
                 <p class="flex-grow-0 text-sky-500 mr-[75px] text-4xl font-inter mb-10">Liste des patients</p>
-                <div class="relative flex-grow mr-20">
+                <!-- <div class="relative flex-grow mr-20">
                   <input
                     class="w-3/4 rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
                     placeholder="Nom ou Numéro de sécurité social"
@@ -107,7 +107,7 @@
                     id="Recherche"
                   />
                   <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Recherche un patient</label>
-                </div>
+                </div> -->
               </div>
 
             <LignePatient 
@@ -142,14 +142,16 @@ export default {
         email: '',
         password: '',
         num_secu: '',
+        medecin_id: '',
       },
     };
   },
   methods: {
     async getPatientsList() {
       let token = localStorage.getItem('token');
-
-      let response = await fetch('https://ordolink.fly.dev/api/medecins/patients/c4854e71-8012-4a16-b151-14634bbe72f7', { //mettre l'id du medecin
+      let typeID = localStorage.getItem('type');
+      
+      let response = await fetch('https://localhost:3000/api/medecins/patients/' + typeID, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -163,8 +165,10 @@ export default {
       const token = localStorage.getItem('token');
 
       console.log("patient : ", this.patient)
+      this.patient.medecin_id = localStorage.getItem('type');
+      console.log("medecin_id : ", this.patient.medecin_id)
 
-      let response = fetch('http://ordolink.fly.dev/api/patients/register', {
+      let response = fetch('http://localhost:3000/api/patients/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

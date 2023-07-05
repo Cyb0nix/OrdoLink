@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import HeaderMedecin from '../components/HeaderMedecin.vue';
+import HeaderUsers from '../components/HeaderUsers.vue';
 import FooterHome from '../components/FooterHome.vue';
 
 </script>
 
 <template>
   <main  class="h-full bg-white">
-    <HeaderMedecin />
+    <HeaderUsers />
     
     <div class="flex flex-col items-center justify-center">
       <h1 class="text-3xl font-bold font-poppins text-sky-500 mt-12">
@@ -402,39 +402,42 @@ export default {
       this.patient = data.patient;
     },
 
-  async createOrdonnance(id) {
-  let token = localStorage.getItem('token');
+    async createOrdonnance(id) {
+    let token = localStorage.getItem('token');
 
-  let type_id = localStorage.getItem('type_id');
+    let type_id = localStorage.getItem('type_id');
 
-  const patient_id = id;
+    const patient_id = id;
 
-  const prescription_date = new Date(Date.now() + 1000 * 3600 * 24).toUTCString();
+    const prescription_date = new Date(Date.now() + 1000 * 3600 * 24).toUTCString();
 
-  this.prescriptions = this.prescriptions.filter(element => element.medecine !== null);
+    this.prescriptions = this.prescriptions.filter(element => element.medecine !== null);
 
-  try {
-    let response = await fetch('http://localhost:3000/api/ordonnances/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token,
-      },
-      body: 
-        JSON.stringify({
-        patient_id : patient_id,
-        medecin_id: type_id,
-        prescription_date: prescription_date,
-        prescriptions: this.prescriptions,
-        }),
-    });
+    try {
+      let response = await fetch('http://localhost:3000/api/ordonnances/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': token,
+        },
+        body: 
+          JSON.stringify({
+          patient_id : patient_id,
+          medecin_id: type_id,
+          prescription_date: prescription_date,
+          prescriptions: this.prescriptions,
+          }),
+      });
 
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    };
+
+      this.$router.push('/medecin/liste-patient');
+    
+    }
   },
   created() {
     this.getPatientInfo();
