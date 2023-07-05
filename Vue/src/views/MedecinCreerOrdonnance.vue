@@ -414,7 +414,7 @@ export default {
     this.prescriptions = this.prescriptions.filter(element => element.medecine !== null);
 
     try {
-      let response = await fetch('http://localhost:3000/api/ordonnances/create', {
+      let response = await fetch('http://ordolink.fly.dev/api/ordonnances/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
