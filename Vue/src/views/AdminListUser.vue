@@ -66,7 +66,7 @@ export default {
     async getUsers() {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(this.$api_url + "api/users/all", {
+      const response = await fetch(this.$api_url + "users/all", {
         method: "GET",
         headers: {
           "Authorization": token
