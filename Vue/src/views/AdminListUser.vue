@@ -66,20 +66,19 @@ export default {
     async getUsers() {
       const token = localStorage.getItem('token');
 
-      const response = await fetch(this.$api_url + "api/users/all", {
+      const response = await fetch("https://ordolink.fly.dev/api/users/all", {
         method: "GET",
         headers: {
           "Authorization": token
         }
       });
-      console.log("response users = ", response);
       this.users = await response.json();
-      console.log("users", this.users);
     },
     async deleteUser(user) {
         console.log("user clicked", user);
           const token = localStorage.getItem('token');
-          await fetch(this.$api_url + `users/delete/${user.id}`, {
+
+          await fetch(`https://ordolink.fly.dev/api/users/delete/${user.id}`, {
             method: "DELETE",
             headers: {
               "Authorization": token
