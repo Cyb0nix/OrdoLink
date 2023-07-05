@@ -16,7 +16,7 @@ async function createPatientAction(request, response) {
         const result = await accountTypeRepo.createAccountType(user_id, patient_id, "patient");
 
         if (result != null) {
-          const addpatient = await medecinRepo.addMedecinPatients(request.body.medecin_id, patient_id);
+          const addpatient = await medecinRepo.addMedecinPatients(patient_id,request.body.medecin_id);
           if (addpatient != null) {
             console.log('[', request.ip, '] CREATED Patient:', patient_id);
             response.status(200).json({ info: "Patient created successfully", patient_id: patient_id });

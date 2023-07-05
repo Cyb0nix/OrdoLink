@@ -73,8 +73,18 @@ export default {
     };
   },
   methods: {
+    async getUsers() {
+      const token = localStorage.getItem('token');
+      const response = await fetch(this.$api_url + "users", {
+        method: "GET",
+        headers: {
+          "Authorization": token
+        }
+      });
+      this.users = await response.json();
+    },
     async deleteUser(user) {
-          const token = localStorage.getItem('water_warrior_token');
+          const token = localStorage.getItem('token');
           await fetch(this.$api_url + `users/delete/${user.id}`, {
             method: "DELETE",
             headers: {
@@ -83,7 +93,10 @@ export default {
           });
           this.getUsers();
         },
-  }
+  },
+  mounted() {
+    this.getUsers();
+  },
 }
 </script>
 <style scoped>
