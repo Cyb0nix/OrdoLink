@@ -54,49 +54,49 @@ const router = createRouter({
       path: '/patient',
       name: 'patient',
       component: PatientHome,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     },
     {
       path: '/medecin/liste-ordonnance/:id',
       name: 'medecin-liste-ordonnance',
       component: MedecinListeOrdonnance,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     },
     {
       path: '/medecin/liste-patient',
       name: 'medecin-liste-patient',
       component: MedecinListePatient,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     },
     {
       path: '/medecin/ordonnance/:id',
       name: 'medecin-ordonnance',
       component: MedecinCreerOrdonnance,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     },
     {
       path: '/admin/creer-compte',
       name: 'admin-creer-compte',
       component: AdminCreerCompte,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     },
     {
       path: '/ordonnance/:id',
       name: 'afficher-ordonnance',
       component: AfficherOrdonnance,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     },
     {
       path: '/pharmacien',
       name: 'pharmacien',
       component: Pharmacien,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     },
     {
       path: '/admin',
       name: 'admin-liste-user',
       component: AdminListUser,
-      // beforeEnter: routGard
+      beforeEnter: routGard
     },
   ]
 })
