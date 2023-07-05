@@ -1,11 +1,11 @@
 <script setup>
-  import HeaderAdmin from '../components/HeaderAdmin.vue';
+  import HeaderUsers from '../components/HeaderUsers.vue';
   import FooterHome from '../components/FooterHome.vue';
 </script>
 
 <template>
   <main  class="h-full bg-white">
-    <HeaderAdmin />
+    <HeaderUsers />
     
     <div class="flex flex-col items-center justify-center">
       <h1 class="text-3xl font-bold font-poppins text-sky-500 mt-12">

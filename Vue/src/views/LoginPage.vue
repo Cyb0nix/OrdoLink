@@ -64,8 +64,6 @@
 import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 
-// récupérer un token et le stocker dans le local storage
-
 export default defineComponent({
   name: 'LoginPage',
   data() {
@@ -98,7 +96,7 @@ export default defineComponent({
       } else if (data.type == 'pharmacien') {
         this.$router.push('/pharmacien');
       } else {
-        this.$router.push('/admin');
+        this.$router.push('/admin/creer-compte');
       }
     },
     async login() {
