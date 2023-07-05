@@ -1,12 +1,12 @@
 <script setup>
- import HeaderMedecin from '../components/HeaderMedecin.vue';
+ import HeaderUsers from '../components/HeaderUsers.vue';
  import FooterHome from '../components/FooterHome.vue';
  import LigneOrdonnance from '../components/LigneOrdonnance.vue';
 </script>
 
 <template>
   <main  class="h-full min-h-screen bg-white">
-    <HeaderMedecin />
+    <HeaderUsers />
     
     <section class="grid grid-cols-2 max-w-screen-lg px-4 py-8 sm:py-12 sm:px-6 lg:py-16 lg:px-8">
 

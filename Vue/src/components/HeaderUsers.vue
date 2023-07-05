@@ -12,35 +12,21 @@
                     </div>
                 </div>
 
-                <div class="hidden md:block">
-                    <nav aria-label="Global">
-                    <ul class="flex items-center gap-16 text-xl">
-                        <li @click="rooter('/admin')" :class="{ 'border-b-2 border-sky-500': activePage === '/admin' }">
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="">
-                                Utilisateur
-                            </a>
-                        </li>
-
-                        <li @click="rooter('/admin/creer-compte')" :class="{ 'border-b-2 border-sky-500': activePage === '/admin/creer-compte' }">
-                            <a class="text-sky-500 transition hover:text-sky-500/30" href="">
-                                Créer compte
-                            </a>
-                        </li>
-                    </ul>
-                    </nav>
+                <div>
+                    <h2 class="text-3xl font-bold font-poppins text-sky-500">
+                        OrdoLink
+                    </h2>
                 </div>
-                
                 <div class="flex items-center">
                     <div class="flex-grow"></div> 
                         <button
-                        class="block rounded-lg bg-sky-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-sky-900 focus:outline-none focus:ring"
+                        class="block rounded-lg bg-sky-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
                         type="button"
-                        @click="logout"
+                        @click.prevent="logout"
                         >
-                        Logout
+                        Log out
                         </button>
                 </div>
-               
             </div>
         </div>
     </header>
@@ -50,18 +36,17 @@
     import { defineComponent } from 'vue';
 
     export default defineComponent({
-        name: 'HeaderAdmin',
+        name: 'HeaderMedecin',
+        data () {
+            return {
+                activePage: null,
+            };
+        },
         props: {
             msg: String,
         },
-        data() {
-            return {
-                activePage: this.$route.path,
-            };
-        },
         methods: {
             rooter: function (path) {
-                console.log('path = ' + path);
                 this.$router.push(path);
             },
             async logout() {
@@ -77,5 +62,8 @@
                     this.$router.push('/');
             },
         },
+        mounted() {
+            this.activePage = this.$route.name;
+        },
     });
-</script>
+</script>   

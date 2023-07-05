@@ -97,7 +97,7 @@ async function deletePatientAction(request, response) {
 async function getPatientOrdonnances(request, response) {
   try {
     const result = await patientRepo.getPatientOrdonnances(request.params.id);
-
+    console.log(result);
     if (result != null) {
       response.status(200).json({ info: "Patient ordonnances found successfully", ordonnances: result });
     } else {

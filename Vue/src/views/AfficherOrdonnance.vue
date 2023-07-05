@@ -1,13 +1,11 @@
-  <script setup>
+<script setup>
+  import { defineProps } from 'vue';
   import FooterHome from '../components/FooterHome.vue';
   import HeaderAfficherOrdonnance from '../components/HeaderAfficherOrdonnance.vue';
   
-  // defineProps({
-  //   // ordonnanceID: String,
-  //   firstname: String,
-  //   lastname: String,
-  // });
-  </script>
+  defineProps(['ordoID']);
+</script>
+
 
   <template>
     <main  class="h-full bg-white">
@@ -67,7 +65,7 @@
 
                       <div class="relative mt-4">
                         <div class="relative">
-                          <div class="w-[500px] h-[31px] text-black text-[24px] font-normal">{{medicine.medecine}}</div>
+                          <div class="w-[500px] h-[31px] text-black text-[24px] font-medium">{{medicine.medecine}}</div>
                           <div class="w-[500px] h-[31px] text-black text-[20px] font-light">{{medicine.posologie}}</div>
                         </div>
                       </div>
@@ -111,6 +109,9 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'AfficherOrdonnance',
+  props: {
+    ordoID:String,
+  },
   data() {
     return {
       ordonnanceId: '',
@@ -127,8 +128,9 @@ export default defineComponent({
         this.ordonnanceId = this.$route.params.id;
       }
       else {
-        this.ordonnanceId = 'ff1c2dd7-1a5f-4e4a-affc-293d52f4ed70';
+        this.ordonnanceId = this.ordoID;
       }
+      console.log("ordonnanceId : ", this.ordonnanceId);
     },
     converDate(date) {
       // convertire la date au format 2023-07-03T00:00:00.000Z en 03/07/2023
@@ -160,8 +162,7 @@ export default defineComponent({
   },
   mounted() {
     this.ordonnanceid();
-    this.getOrdonnance();
-    
+    this.getOrdonnance();  
   }
 })
   
