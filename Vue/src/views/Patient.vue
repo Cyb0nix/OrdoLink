@@ -83,18 +83,17 @@ export default defineComponent({
     methods: {
         async getOrdonnanceList() {
             let token = localStorage.getItem('token');
-
-            let response = await fetch('https://localhost:3000/api/patients/ordonnaces/'+ this.patientID, { 
+            let typeID = localStorage.getItem('type');
+            console.log("typeID : ", typeID);
+            let response = await fetch('https://ordolink.fly.dev/api/patients/ordonnaces/'+ typeID, { 
                 method: 'GET',
                 headers: {
                 'Content-Type': 'application/json',
                 "Authorization": token
                 },
             });
-            console.log("response : ", response);
             const data = await response.json();
             console.log("data ordonnancesList : ", data);
-
         },
     },
     mounted() {

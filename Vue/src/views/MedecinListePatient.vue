@@ -150,7 +150,7 @@ export default {
     async getPatientsList() {
       let token = localStorage.getItem('token');
       let typeID = localStorage.getItem('type');
-      
+
       let response = await fetch('https://localhost:3000/api/medecins/patients/' + typeID, {
         method: 'GET',
         headers: {
@@ -159,14 +159,14 @@ export default {
         },
       });
       const data = await response.json();
+      console.log("data getPatientsList : ", data)
       this.patientsList = data.patients;
     },
     async createPatient() {
       const token = localStorage.getItem('token');
 
-      console.log("patient : ", this.patient)
       this.patient.medecin_id = localStorage.getItem('type');
-      console.log("medecin_id : ", this.patient.medecin_id)
+      console.log("this.patient.medecin_id : ", this.patient.medecin_id)
 
       let response = fetch('http://localhost:3000/api/patients/register', {
         method: 'POST',

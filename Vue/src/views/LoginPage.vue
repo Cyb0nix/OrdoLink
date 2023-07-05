@@ -111,13 +111,11 @@ export default defineComponent({
       });
 
       const data = await response.json();
-      console.log("data = ", data);
-      console.log("token login = ", data.token);
 
       if (data.token) {
         localStorage.setItem('token', data.token);
-        localStorage.setItem('type', JSON.stringify(data.type_id));
-        localStorage.setItem('user', JSON.stringify(data.user_id));
+        localStorage.setItem('type', data.type_id);
+        localStorage.setItem('user', data.user_idl);
         localStorage.setItem('type_id', data.type_id);
         this.routeNext(data.user_id);
       }
