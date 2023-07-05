@@ -8,7 +8,7 @@ const { checkAuth } = require('../utils/user.auth');
 router.post('/register',checkAuth("admin"), userController.createUserAction);
 router.post('/login', userController.loginUserAction);
 router.post('/logout', userController.logoutUserAction);
-router.delete('/delete/:id', checkAuth("all"), userController.deleteUserByIdAction);
+router.delete('/delete/:id', checkAuth("admin"), userController.deleteUserByIdAction);
 router.put('/update/:id', checkAuth("all"), userController.updateUserByIdAction);
 router.get('/get/:id', checkAuth('all'), userController.getUserByIdAction);
 router.get('/all', checkAuth('admin'), userController.getAllUsersAction);

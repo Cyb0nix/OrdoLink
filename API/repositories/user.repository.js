@@ -86,6 +86,13 @@ async function getUserTypeId(user_id) {
     catch {return null}
 }
 
+async function getAllUsers() {
+    try {
+        const query = await pool.query('SELECT * FROM users');
+        return query.rows;    
+    }
+    catch {return null}
+}
 
 module.exports = {
     checkExistsUser,
@@ -97,5 +104,6 @@ module.exports = {
     isAdminUser,
     getUserType,
     getUserByToken,
-    getUserTypeId
+    getUserTypeId,
+    getAllUsers
 }
