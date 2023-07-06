@@ -34,6 +34,7 @@ async function routGard(to, from, next) {   //ne marche pas
 
 const router = createRouter({
   history: createWebHistory('/OrdoLink/'),
+  mode: 'hash',
   routes: [
     {
       path: '/',
