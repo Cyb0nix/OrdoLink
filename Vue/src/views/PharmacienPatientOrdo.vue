@@ -10,8 +10,8 @@
     <section class="flex flex-col items-left justify-center lg:ml-96 mt-12 ">
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-1 lg:gap-16 w-[900px] col-start-2 ml-14 ">
         <p class="text-sky-500 text-4xl font-inter -mb-[30px] font-bold">Rechercher une ordonnance</p>
-        <div class="flex flex-row mb-10">
-          <div class="relative flex-grow mr-10">
+        <div class="grid grid-cols-2 gap-8 lg:grid-cols-2 mb-10">
+          <!-- <div class="relative flex-grow mr-10">
             <input
               class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
               placeholder="Nom"
@@ -30,7 +30,7 @@
               v-model="firstnamePatient"
             />
             <label class="absolute left-3 -top-3 bg-white text-sky-200 font-bold text-s px-2" for="firstname">Prénom du patient</label>
-          </div>
+          </div> -->
           <div class="relative flex-grow mr-10">
             <input
               class="w-full rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
@@ -43,9 +43,9 @@
           </div>
 
           <button 
-          type="button"
+          type="submit"
           class="flex items-center justify-center bg-sky-500 rounded-lg w-10 h-10 text-white mt-[5px]"
-          @click="getOrdonnance()"
+          @click="getOrdonnance"
           >
             <img
               src="@/assets/Img/loupe.png"
@@ -73,8 +73,6 @@ export default {
   data() {
     return {
       ordonnanceId: '',
-      firstnamePatient: '',
-      lastnamePatient: '',
       ordoShow: false,
     };
   },
