@@ -83,7 +83,7 @@ module.exports = {
   },
   async getPatientOrdonnances(id) {
     const query = {
-      text: 'SELECT ordonnance_id FROM ordonnance WHERE patient_id = $1',
+      text: 'SELECT * FROM ordonnance WHERE patient_id = $1',
       values: [id],
     };
     try {
