@@ -14,9 +14,26 @@
     <!-- <HeaderAfficherOrdonnance/> -->
     
     <div class="flex flex-col items-left justify-center lg:ml-96">
-      <h1 class="text-3xl font-medium font-poppins text-sky-500 mt-6 lg:pl-14 lg:mb-4">
+      <h1 class="text-3xl font-medium font-poppins text-sky-500 mt-6 lg:pl-14">
         Ordonnance du {{ prescription_date }}
       </h1>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 max-w-6xl">
+        <h1 class="text-2xl font-normal font-poppins text-sky-500 mt-2 lg:pl-14 lg:mb-6">
+          ID: {{ ordonnanceId }}
+        </h1>
+
+        <!-- bouton copier l'ID dans le presse papier -->
+        
+        <button @click="copyID" class="w-[90px] h-[30px] text-sky-500 text-[13px] mt-2 font-medium rounded-lg lg:mb-6 hover:bg-sky-500 border-sky-500 border-2 hover:text-white">
+          Copier l'ID
+        </button>
+
+
+      </div>
+      
+
+
     </div>
     
     <section class="max-w-full min-w-xl px-4 sm:py-12 sm:px-6 lg:py-12 lg:px-8">
@@ -161,7 +178,15 @@ export default defineComponent({
       this.prescription_date = this.converDate(data.ordonnance.prescription_date);
       this.medecin = data.medecin;
       this.patient = data.patient;
-    }
+    },
+    copyID() {
+      const el = document.createElement('textarea');
+      el.value = this.ordonnanceId;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    },
   },
   mounted() {
     this.ordonnanceid();
