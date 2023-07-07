@@ -107,8 +107,9 @@ export default defineComponent({
         },
         async getOrdonnanceList() {
             let token = localStorage.getItem('token');
+            let type = localStorage.getItem('type');
 
-            let response = await fetch('https://ordolink.fly.dev/api/patients/ordonnances/' + this.$route.params.id, { 
+            let response = await fetch('https://ordolink.fly.dev/api/patients/ordonnances/' + type, { 
                 method: 'GET',
                 headers: {
                 'Content-Type': 'application/json',
