@@ -107,9 +107,8 @@ export default defineComponent({
         },
         async getOrdonnanceList() {
             let token = localStorage.getItem('token');
-            let typeID = localStorage.getItem('type');
 
-            let response = await fetch('https://ordolink.fly.dev/api/patients/ordonnances/8b8236b4-fc37-4cae-89bb-115c856cd379', { 
+            let response = await fetch('https://ordolink.fly.dev/api/patients/ordonnances/' + this.$route.params.id, { 
                 method: 'GET',
                 headers: {
                 'Content-Type': 'application/json',
@@ -122,6 +121,7 @@ export default defineComponent({
             console.log("data.ordonnances.length : ", data.ordonnances.length);
 
             for (let i = 0; i < data.ordonnances.length; i++) {
+                console.log("data.ordonnances[i].id : ", data.ordonnances[i].id);
                 const ordonnance = await this.getOrdonnance(data.ordonnances[i].id);
                 this.ordonnanceList.push(ordonnance);
             }
@@ -142,7 +142,7 @@ export default defineComponent({
     },
     mounted() {
         this.getOrdonnanceList();
-        this.getOrdonnance('3856499e-c60b-47f3-a244-2ef2b5690c58');
+        // this.getOrdonnance('3856499e-c60b-47f3-a244-2ef2b5690c58');
     }
 })
 
