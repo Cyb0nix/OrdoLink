@@ -15,7 +15,16 @@
         <div class="border-2 rounded-xl border-sky-200 lg:p-12">
           <form action="" class="space-y-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
-              <p class="text-sky-500 text-center text-3xl font-inter mb-10">"Photo"</p>
+              <div class="flex items-center justify-center mb-6">
+                  <a href="#" class="block shrink-0">
+                      <!-- <span class="sr-only">Profile</span> -->
+                      <img
+                      alt="Man"
+                      src="https://s1.qwant.com/thumbr/474x474/9/3/653d043f1e24615c19edf59968f1dec12a3fdbb8c908c3e8df25b2bcbd8bc5/th.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%3Fid%3DOIP.1LRUIB2OXVePxD5hQm4fqwHaHa%26pid%3DApi&q=0&b=1&p=0&a=0"
+                      class="h-24 w-24 rounded-full object-cover"
+                      />
+                  </a>
+              </div>
               <div class="relative mb-20">
                 <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="name">Nom : {{ patient.lastname }}</label>
               </div>
@@ -27,11 +36,6 @@
             </div>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
               <div class="relative mb-20">
-                <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Email : {{ patient.email }}</label>
-              </div>
-            </div>
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-1">
-              <div class="relative mb-40">
                 <label class="absolute -left-3 top-3 bg-white text-sky-200 font-bold text-lg px-2" for="lastname">Numéro de sécurité social : {{ patient.num_secu }}</label>
               </div>
             </div>
@@ -49,13 +53,15 @@
             </div>
 
             <div v-for="ordo in ordonnancesList">
-              <ligne-ordonnance
-              v-if="ordo.given == false"
-              :firstname="patient.firstname"
-              :lastname="patient.lastname"
-              :prescription_date="converDate(ordo.prescription_date)"
-              @click="afficherOrdonnance(ordo.ordonnance_id)"
-              />
+              <div v-if="ordo.patient_id == patient.id">
+                <ligne-ordonnance
+                  v-if="ordo.given == false"
+                  :firstname="patient.firstname"
+                  :lastname="patient.lastname"
+                  :prescription_date="converDate(ordo.prescription_date)"
+                  @click="afficherOrdonnance(ordo.ordonnance_id)"
+                />
+              </div>
             </div>
             
           </form>
@@ -94,7 +100,6 @@ export default {
   name: 'MedecinListeOrdonnance',
   data() {
     return {
-      medecinID: 'c4854e71-8012-4a16-b151-14634bbe72f7',
       ordonnancesList: [],
       patient: {
         firstname: "",
@@ -108,8 +113,9 @@ export default {
   methods: {
     async getPatientInfo() {
       let token = localStorage.getItem('token'); 
-      
-      let response = await fetch('https://ordolink.fly.dev/api/medecins/patients/' + this.medecinID, {
+      let type = localStorage.getItem('type');
+
+      let response = await fetch('https://ordolink.fly.dev/api/medecins/patients/' + type, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -122,8 +128,9 @@ export default {
     },
     async getOrdonnaceList() {
       let token = localStorage.getItem('token');
+      let type = localStorage.getItem('type');
 
-      let response = await fetch('https://ordolink.fly.dev/api/medecins/ordonnaces/'+ this.medecinID, { 
+      let response = await fetch('https://ordolink.fly.dev/api/medecins/ordonnaces/'+ type, { 
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +142,6 @@ export default {
       console.log("data ordonnancesList : ", data);
 
       this.ordonnancesList = data.ordonnaces;
-      this.medecinID = data.ordonnaces[0].medecin_id;
     },
     converDate(date) {
       // convertire la date au format 2023-07-03T00:00:00.000Z en 03/07/2023

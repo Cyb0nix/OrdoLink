@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import HeaderUsers from '../components/HeaderUsers.vue';
 import FooterHome from '../components/FooterHome.vue';
-
 </script>
 
 <template>
@@ -29,7 +28,6 @@ import FooterHome from '../components/FooterHome.vue';
                   :placeholder="`${ patient.firstname }`"
                   type="text"
                   id="firstname"
-                  v-model="patient.firstname"
                   disabled
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="firstname">Nom patient</label>
@@ -41,7 +39,6 @@ import FooterHome from '../components/FooterHome.vue';
                   :placeholder="`${ patient.lastname }`"
                   type="text"
                   id="lastname"
-                  v-model="patient.lastname"
                   disabled
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="lastname">Prénom patient</label>
@@ -52,10 +49,9 @@ import FooterHome from '../components/FooterHome.vue';
               <div class="relative">
                 <input
                   class="w-full rounded-lg border-2 border-sky-300 p-3 text-sm text-gray-500"
-                  placeholder="Numéro de sécurité sociale"
+                  :placeholder="`${ patient.num_secu }`"
                   type="text"
                   id="NumSecu"
-                  v-model="patient.num_secu"
                   disabled
                 />
                 <label class="absolute left-3 -top-3 bg-white text-sky-300 font-bold text-lg px-2" for="date">Numéro de sécurité sociale</label>
