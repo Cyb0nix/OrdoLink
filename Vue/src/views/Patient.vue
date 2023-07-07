@@ -32,7 +32,7 @@
                         </tr>
 
                         <tr v-for="ordo in ordonnanceList"
-                        @click="afficherOrdonnance(ordo.ordonnance.id)"
+                        @click="afficherOrdonnance(ordo.ordonnance.id)" class="hover:bg-sky-100 cursor-pointer"
                         >
                             <td class="py-6 mx-40 text-center text-black">Ordonnance du {{ converDate(ordo.ordonnance.prescription_date) }}</td>
                             <td class="py-6 mx-40 text-center text-black">{{ ordo.medecin.firstname + ' ' + ordo.medecin.lastname }}</td>

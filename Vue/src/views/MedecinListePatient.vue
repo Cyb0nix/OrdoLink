@@ -110,7 +110,7 @@
                 </div> -->
               </div>
 
-            <LignePatient 
+            <LignePatient class="hover:bg-sky-100 cursor-pointer"
             v-for="p in patientsList"
             :key="p.id"
             :firstname="p.firstname"
