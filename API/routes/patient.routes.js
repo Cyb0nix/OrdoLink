@@ -8,7 +8,7 @@ const { checkAuth } = require('../utils/user.auth');
 router.post('/register',checkAuth("medecin"), patientController.createPatientAction);
 router.delete('/delete/:id', checkAuth("all"), patientController.deletePatientAction);
 router.put('/update/:id', checkAuth("all"), patientController.updatePatientAction);
-router.get('/get/:id', checkAuth('all'), patientController.getPatientByIdAction);
+router.get('/get/:id', patientController.getPatientByIdAction);
 router.get('/all', checkAuth('admin'), patientController.getPatientsAction);
 router.get('/ordonnances/:id', checkAuth('patient'), patientController.getPatientOrdonnances);
 

@@ -179,7 +179,7 @@ export default {
 
       const data = await (await response).json();
       console.log("data patient : ", data)
-
+      this.getPatientsList();
     }
   },
   mounted() {
