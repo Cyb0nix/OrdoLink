@@ -8,7 +8,7 @@
         <HeaderUsers />
         <div class="flex flex-col items-center justify-center mt-10 -ml-96">
             <div class="grid grid-cols-2 gap-8 lg:grid-cols-2">
-                <p class="flex-grow-0 text-sky-500 mr-28 text-4xl font-inter mb-4">Vos ordonnaces</p>
+                <p class="flex-grow-0 text-sky-500 mr-28 text-4xl font-inter mb-4">Vos ordonnances</p>
                 <!-- <div class="relative flex-grow mr-20">
                     <input
                     class="w-80 rounded-lg border-2 border-sky-200 p-3 text-sm text-black"
